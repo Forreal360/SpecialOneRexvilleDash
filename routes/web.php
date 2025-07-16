@@ -6,6 +6,7 @@ use App\Livewire\V1\Panel\Home\HomeComponent;
 use App\Http\Controllers\AuthController;
 use App\Livewire\V1\Panel\Admin\{GetAdminsComponent, CreateAdminComponent, UpdateAdminComponent};
 use App\Livewire\V1\Auth\ForgotPasswordComponent;
+use App\Livewire\V1\Panel\Promotion\GetPromotionsComponent;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -26,6 +27,6 @@ Route::group(["prefix" => "panel", "middleware" => "auth", "as" => "v1.panel."],
     Route::get('/admins/{id}/edit', UpdateAdminComponent::class)->name('admins.edit');
 
     /* ----------------- Promotions ----------------- */
-    /* Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index'); */
+    Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index');
 });
 

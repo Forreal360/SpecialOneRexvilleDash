@@ -12,6 +12,9 @@ return [
     'settings' => 'Configuración',
     'profile' => 'Perfil',
     'logout' => 'Cerrar sesión',
+    'start' => 'Inicio',
+    'end' => 'Fin',
+
 
     // Acciones comunes
     'create' => 'Crear',
@@ -220,6 +223,11 @@ return [
     'filter_active' => 'Activos',
     'filter_inactive' => 'Inactivos',
     'filter_status' => 'Filtrar por estado',
+    'filter_by_date_type' => 'Filtrar por tipo de fecha',
+    'filter_start_date' => 'Fecha de inicio',
+    'filter_end_date' => 'Fecha de fin',
+    'start_date' => 'Fecha de inicio',
+    'end_date' => 'Fecha de fin',
 
     // Paginación
     'previous' => 'Anterior',

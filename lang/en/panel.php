@@ -12,6 +12,9 @@ return [
     'settings' => 'Settings',
     'profile' => 'Profile',
     'logout' => 'Logout',
+    'start' => 'Start',
+    'end' => 'End',
+
 
     // Common actions
     'create' => 'Create',
@@ -220,6 +223,11 @@ return [
     'filter_active' => 'Active',
     'filter_inactive' => 'Inactive',
     'filter_status' => 'Filter by status',
+    'filter_by_date_type' => 'Filter by date type',
+    'filter_start_date' => 'Start date',
+    'filter_end_date' => 'End date',
+    'start_date' => 'Start date',
+    'end_date' => 'End date',
 
     // Pagination
     'previous' => 'Previous',
