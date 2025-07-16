@@ -20,8 +20,12 @@ Route::group(["prefix" => "panel", "middleware" => "auth", "as" => "v1.panel."],
 
     Route::get('/home', HomeComponent::class)->name("home");
 
+    /* ----------------- Admins ----------------- */
     Route::get('/admins', GetAdminsComponent::class)->name('admins.index');
     Route::get('/admins/create', CreateAdminComponent::class)->name('admins.create');
     Route::get('/admins/{id}/edit', UpdateAdminComponent::class)->name('admins.edit');
+
+    /* ----------------- Promotions ----------------- */
+    Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index');
 });
 
