@@ -28,5 +28,6 @@ Route::group(["prefix" => "panel", "middleware" => "auth", "as" => "v1.panel."],
 
     /* ----------------- Promotions ----------------- */
     Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index');
+    Route::get('/promotions/create', \App\Livewire\V1\Panel\Promotion\CreatePromotionComponent::class)->name('promotions.create');
 });
 

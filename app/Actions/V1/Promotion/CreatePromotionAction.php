@@ -7,13 +7,14 @@ namespace App\Actions\V1\Promotion;
 use App\Actions\V1\Action;
 use App\Support\ActionResult;
 use Illuminate\Support\Facades\DB;
+use App\Services\V1\PromotionService;
 
 class CreatePromotionAction extends Action
 {
     /**
      * Constructor - Inject dependencies here
      */
-    public function __construct()
+    public function __construct(private PromotionService $promotionService)
     {
         // Inject services here
         // Example: $this->service = $service;
@@ -27,28 +28,24 @@ class CreatePromotionAction extends Action
      */
     public function handle($data): ActionResult
     {
-        // Validate permissions
-        $this->validatePermissions([
-            // 'permission.name'
-        ]);
 
         // Validate input data
         $validated = $this->validateData($data, [
-            // 'field' => 'required|string|max:255',
-        ], [
-            // 'field.required' => 'El campo es obligatorio',
+            'title' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'image_url' => 'required|string|max:255',
+            'redirect_url' => 'required|string|max:255',
         ]);
+
 
         // Business logic with transaction
         return DB::transaction(function () use ($validated) {
-            // Your business logic here
-            // Example: $result = $this->service->create($validated);
+
+            $this->promotionService->create($validated);
 
             // Return successful result
-            return $this->successResult(
-                data: null, // Replace with your actual result data
-                message: 'Operación completada exitosamente'
-            );
+            return $this->successResult();
         });
     }
 }

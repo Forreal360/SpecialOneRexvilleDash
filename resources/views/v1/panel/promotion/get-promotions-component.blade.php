@@ -9,10 +9,9 @@
 @section('actions')
 <x-buttons.button-module
     icon="plus"
-    href="#" {{-- No existe ruta de creación aún --}}
+    href="{{ route('v1.panel.promotions.create') }}"
     label="{{ __('panel.new_promotion') }}"
     variant="primary"
-    disabled
 />
 @endsection
 
