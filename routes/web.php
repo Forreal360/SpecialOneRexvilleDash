@@ -26,6 +26,6 @@ Route::group(["prefix" => "panel", "middleware" => "auth", "as" => "v1.panel."],
     Route::get('/admins/{id}/edit', UpdateAdminComponent::class)->name('admins.edit');
 
     /* ----------------- Promotions ----------------- */
-    Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index');
+    /* Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index'); */
 });
 
