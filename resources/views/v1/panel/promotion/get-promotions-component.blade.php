@@ -87,37 +87,62 @@
         </x-slot>
         <x-slot name="rows">
             @foreach($promotions as $promotion)
+            @php
+                $timezone = session('timezone') ?? 'UTC';
+
+                $now = \Carbon\Carbon::now();
+                $now = dateToLocal($now, $timezone);
+
+                $start_date = \Carbon\Carbon::parse($promotion->start_date);
+                $start_date = dateToLocal($start_date, $timezone);
+
+                $end_date = \Carbon\Carbon::parse($promotion->end_date);
+                $end_date = dateToLocal($end_date, $timezone);
+
+                $created_at = \Carbon\Carbon::parse($promotion->created_at);
+                $created_at = dateToLocal($created_at, $timezone);
+            @endphp
             <x-table.row>
                 <x-table.cell>
                     {{$promotion->title}}
                 </x-table.cell>
                 <x-table.cell>
-                    {{\Carbon\Carbon::parse($promotion->start_date)->format('d/m/Y')}}
+                    {{$start_date->format('m/d/Y H:i')}}
                 </x-table.cell>
                 <x-table.cell>
-                    {{\Carbon\Carbon::parse($promotion->end_date)->format('d/m/Y')}}
+
+                    {{$end_date->format('m/d/Y H:i')}}
                 </x-table.cell>
                 <x-table.cell>
+                    @if($now->lessThan($end_date))
                     <flux:badge color="{{$promotion->status == 'A' ? 'lime' : 'red'}}">
                         {{$promotion->status == 'A' ? __('panel.active') : __('panel.inactive')}}
                     </flux:badge>
+                    @else
+                    <flux:badge color="red">
+                        {{__('panel.expired')}}
+                    </flux:badge>
+                    @endif
                 </x-table.cell>
                 <x-table.cell>
-                    {{$promotion->created_at ? $promotion->created_at->format('d/m/Y H:i') : ''}}
+                    {{$created_at->format('m/d/Y H:i')}}
                 </x-table.cell>
                 <x-table.cell>
                     <flux:button.group>
-                        {{-- Acciones de activar/desactivar --}}
-                        @if($promotion->status == 'A')
-                        <flux:tooltip content="{{ __('panel.tooltip_deactivate') }}">
-                            <flux:button size="sm" icon="hand-thumb-down" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'I')" wire:confirm="{{ __('panel.confirm_deactivate') }}">
-                            </flux:button>
-                        </flux:tooltip>
-                        @else
-                        <flux:tooltip content="{{ __('panel.tooltip_activate') }}">
-                            <flux:button size="sm" icon="hand-thumb-up" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'A')" wire:confirm="{{ __('panel.confirm_activate') }}">
-                            </flux:button>
-                        </flux:tooltip>
+                        <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.promotions.edit', $promotion->id) }}"></flux:button>
+
+                        @if($now->lessThan($end_date))
+                            @if($promotion->status == 'A')
+                            <flux:tooltip content="{{ __('panel.tooltip_deactivate') }}">
+                                <flux:button size="sm" icon="hand-thumb-down" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'I')" wire:confirm="{{ __('panel.confirm_deactivate') }}">
+                                </flux:button>
+                            </flux:tooltip>
+                            @else
+                            <flux:tooltip content="{{ __('panel.tooltip_activate') }}">
+                                <flux:button size="sm" icon="hand-thumb-up" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'A')" wire:confirm="{{ __('panel.confirm_activate') }}">
+                                </flux:button>
+                            </flux:tooltip>
+                            @endif
                         @endif
                     </flux:button.group>
                 </x-table.cell>

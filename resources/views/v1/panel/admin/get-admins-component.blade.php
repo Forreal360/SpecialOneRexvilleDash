@@ -78,6 +78,11 @@
         </x-slot>
         <x-slot name="rows">
             @foreach($admins as $admin)
+            @php
+                $timezone = session('timezone') ?? 'UTC';
+                $created_at = \Carbon\Carbon::parse($admin->created_at);
+                $created_at = dateToLocal($created_at, $timezone);
+            @endphp
             <x-table.row>
                 <x-table.cell>
                     {{$admin->name}} {{$admin->last_name}}
@@ -91,7 +96,7 @@
                     </flux:badge>
                 </x-table.cell>
                 <x-table.cell>
-                    {{$admin->created_at->format('d/m/Y H:i')}}
+                    {{$created_at->format('m/d/Y H:i')}}
                 </x-table.cell>
                 <x-table.cell>
 

@@ -34,9 +34,18 @@ class CreatePromotionAction extends Action
             'title' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'image_url' => 'required|string|max:255',
+            'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'redirect_url' => 'required|string|max:255',
         ]);
+
+        $file = $data['file'];
+        $file_name = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/promotions', $file_name);
+
+        $path = 'promotions/' . $file_name;
+
+        unset($validated['file']);
+        $validated['image_url'] = $path;
 
 
         // Business logic with transaction

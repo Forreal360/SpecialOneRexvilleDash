@@ -74,5 +74,6 @@
     @stack('scripts')
     {{-- Scripts extra por sección --}}
     @yield('scripts')
+
 </body>
 </html>

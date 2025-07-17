@@ -76,6 +76,11 @@ class GetPromotionsComponent extends Component
         }
     }
 
+    public function resetFilters()
+    {
+        $this->reset();
+    }
+
     public function render()
     {
         $promotions = Promotion::query()
@@ -87,11 +92,12 @@ class GetPromotionsComponent extends Component
             ->when($this->status, function ($query) {
                 $query->where('status', $this->status);
             })
-            ->when($this->filter_start_date, function ($query) {
-                $query->where($this->date_type, '>=', $this->filter_start_date);
-            })
-            ->when($this->filter_end_date, function ($query) {
-                $query->where($this->date_type, '<=', $this->filter_end_date);
+            ->when($this->filter_start_date && $this->filter_end_date, function ($query) {
+                $start_date = $this->filter_start_date . ' ' . '00:00:00';
+                $end_date = $this->filter_end_date . ' ' . '23:59:59';
+                $start_date = dateToUTC($start_date, session('timezone'));
+                $end_date = dateToUTC($end_date, session('timezone'));
+                $query->whereBetween($this->date_type, [$start_date, $end_date]);
             })
             ->orderBy($this->sortBy, $this->sortDirection)
             ->paginate($this->perPage);

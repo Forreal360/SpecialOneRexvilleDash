@@ -36,3 +36,10 @@
         </div>
     </form>
 </div>
+
+@script('custom-js')
+<script>
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    $wire.set('timezone', timezone);
+</script>
+@endscript

@@ -76,6 +76,11 @@ return [
     'select_option' => 'Select option',
     'required_field' => 'Required field',
     'leave_blank_to_keep_current' => 'leave blank to keep current',
+    'image' => 'Image',
+    'title' => 'Title',
+    'start_date' => 'Start date',
+    'end_date' => 'End date',
+    'redirect_url' => 'Redirect URL',
 
     // Tables
     'actions' => 'Actions',
@@ -89,6 +94,8 @@ return [
     'of' => 'of',
     'entries' => 'entries',
     'per_page' => 'per page',
+    'expired' => 'Expired',
+    'reset_filters' => 'Reset filters',
 
     // Administrators
     'admin' => 'Administrator',

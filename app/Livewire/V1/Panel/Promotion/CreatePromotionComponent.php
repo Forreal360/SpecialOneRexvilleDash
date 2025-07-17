@@ -7,15 +7,16 @@ namespace App\Livewire\V1\Panel\Promotion;
 use Livewire\Component;
 use App\Actions\V1\Promotion\CreatePromotionAction;
 use App\Livewire\Concerns\HandlesActionResults;
+use Livewire\WithFileUploads;
 
 class CreatePromotionComponent extends Component
 {
-    use HandlesActionResults;
+    use HandlesActionResults, WithFileUploads;
 
     public $title;
     public $start_date;
     public $end_date;
-    public $image_url;
+    public $file;
     public $redirect_url;
     public $status;
 
@@ -33,11 +34,22 @@ class CreatePromotionComponent extends Component
 
     public function createPromotion()
     {
+
+        $this->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+
+        $start_date = $this->start_date . ' ' . '00:00:00';
+        $start_date = dateToUTC($start_date, session('timezone'));
+        $end_date = $this->end_date . ' ' . '23:59:59';
+        $end_date = dateToUTC($end_date, session('timezone'));
+
         $result = $this->executeAction($this->createPromotionAction, [
             'title' => $this->title,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'image_url' => $this->image_url,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'file' => $this->file,
             'redirect_url' => $this->redirect_url,
             'status' => $this->status,
         ], true);

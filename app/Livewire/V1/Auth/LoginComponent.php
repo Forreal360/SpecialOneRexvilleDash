@@ -15,6 +15,7 @@ class LoginComponent extends Component
 
     public $email;
     public $password;
+    public $timezone;
 
     private $loginWithEmailAction;
 
@@ -36,9 +37,11 @@ class LoginComponent extends Component
 
     public function login()
     {
+
         $result = $this->executeAction($this->loginWithEmailAction, [
             'email' => $this->email,
-            'password' => $this->password
+            'password' => $this->password,
+            'timezone' => $this->timezone
         ], true);
 
         if ($result->isSuccess()){

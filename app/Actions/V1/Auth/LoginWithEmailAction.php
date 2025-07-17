@@ -35,6 +35,7 @@ class LoginWithEmailAction extends Action
         $validated = $this->validateData($data, [
             "email" => "required|email",
             "password" => "required",
+            "timezone" => "required",
         ], [
             // 'field.required' => 'El campo es obligatorio',
         ]);
@@ -54,6 +55,8 @@ class LoginWithEmailAction extends Action
         }
 
         auth()->login($user);
+
+        session()->put('timezone', $validated['timezone']);
 
         return $this->successResult(
             data: $user, // Replace with your actual result data

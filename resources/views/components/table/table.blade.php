@@ -1,11 +1,22 @@
 @props(['perPageOptions' => [5, 10, 20, 50, 100], 'currentPerPage' => 10, 'searchPlaceholder' => 'Buscar', 'data' => null, 'search' => ''])
 
 <div>
-    <div class="px-6 pb-6 border-b border-gray-200 dark:border-zinc-700">
+    <div class="px-6 pb-3 border-b border-gray-200 dark:border-zinc-700">
         <div class="flex flex-col sm:flex-row sm:items-center gap-4 w-full">
             <x-table.filters>
                 {{$filters}}
             </x-table.filters>
+        </div>
+        <div class="flex mt-3">
+            <flux:button
+                size="sm"
+                variant="danger"
+                class="ml-0"
+                wire:click="resetFilters"
+                icon="arrow-path"
+            >
+                {{ __('panel.reset_filters') }}
+            </flux:button>
         </div>
     </div>
     <div class="px-6 py-4  border-gray-200 dark:border-zinc-700">

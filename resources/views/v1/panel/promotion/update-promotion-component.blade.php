@@ -12,19 +12,17 @@
 @endsection
 
 <x-containers.card-container>
-    <form wire:submit.prevent="createPromotion">
+    <form wire:submit.prevent="updatePromotion">
         <div class="flex-1 space-y-6">
 
-            <x-forms.form-field label="{{ __('panel.image') }}*" for="file" :error="$errors->first('file')">
+            <x-forms.form-field label="{{ __('panel.image') }}" for="title" :error="$errors->first('file')">
                 <flux:input
                     type="file"
                     id="image"
                     wire:model="file"
                     placeholder="Título de la promoción"
-                    error="{{ $errors->first('file') }}"
+                        error="{{ $errors->first('file') }}"
                 />
-
-
             </x-forms.form-field>
 
             <x-forms.form-field label="{{ __('panel.title') }}*" for="title" :error="$errors->first('title')">
@@ -35,14 +33,17 @@
                     error="{{ $errors->first('title') }}"
                 />
             </x-forms.form-field>
+
             <x-forms.form-field label="{{ __('panel.start_date') }}*" for="start_date" :error="$errors->first('start_date')">
                 <flux:input
                     id="start_date"
                     wire:model="start_date"
                     type="date"
+                    value="{{ $start_date }}"
                     error="{{ $errors->first('start_date') }}"
                 />
             </x-forms.form-field>
+
             <x-forms.form-field label="{{ __('panel.end_date') }}*" for="end_date" :error="$errors->first('end_date')">
                 <flux:input
                     id="end_date"
@@ -74,7 +75,7 @@
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                 >
-                    <span wire:loading.remove>{{ __('panel.create_promotion') }}</span>
+                    <span wire:loading.remove>{{ __('panel.update_promotion') }}</span>
                     <span wire:loading>{{ __('panel.loading') }}</span>
                 </flux:button>
             </div>

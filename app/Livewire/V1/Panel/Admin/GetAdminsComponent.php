@@ -31,6 +31,11 @@ class GetAdminsComponent extends \Livewire\Component
         'status' => 'nullable|in:active,inactive',
     ];
 
+    public function resetFilters()
+    {
+        $this->reset();
+    }
+
     public function updatingSearch()
     {
         $this->resetPage();

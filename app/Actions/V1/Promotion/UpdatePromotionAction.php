@@ -7,13 +7,14 @@ namespace App\Actions\V1\Promotion;
 use App\Actions\V1\Action;
 use App\Support\ActionResult;
 use Illuminate\Support\Facades\DB;
+use App\Services\V1\PromotionService;
 
 class UpdatePromotionAction extends Action
 {
     /**
      * Constructor - Inject dependencies here
      */
-    public function __construct()
+    public function __construct(private PromotionService $promotionService)
     {
         // Inject services here
         // Example: $this->service = $service;
@@ -27,22 +28,29 @@ class UpdatePromotionAction extends Action
      */
     public function handle($data): ActionResult
     {
-        // Validate permissions
-        $this->validatePermissions([
-            // 'permission.name'
+        $validated = $this->validateData($data, [
+            'title' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'file' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'redirect_url' => 'required|string|max:255',
         ]);
 
-        // Validate input data
-        $validated = $this->validateData($data, [
-            // 'field' => 'required|string|max:255',
-        ], [
-            // 'field.required' => 'El campo es obligatorio',
-        ]);
+        $file = $data['file'];
+        if ($file) {
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/promotions', $file_name);
+
+            $path = 'promotions/' . $file_name;
+
+            unset($validated['file']);
+            $validated['image_url'] = $path;
+        }
 
         // Business logic with transaction
-        return DB::transaction(function () use ($validated) {
-            // Your business logic here
-            // Example: $result = $this->service->create($validated);
+        return DB::transaction(function () use ($validated, $data) {
+
+            $this->promotionService->update((int) $data['id'], $validated);
 
             // Return successful result
             return $this->successResult(
