@@ -5,7 +5,7 @@ use App\Livewire\V1\Auth\LoginComponent;
 use App\Livewire\V1\Panel\Home\HomeComponent;
 use App\Http\Controllers\AuthController;
 use App\Livewire\V1\Panel\Admin\{GetAdminsComponent, CreateAdminComponent, UpdateAdminComponent};
-use App\Livewire\V1\Auth\ForgotPasswordComponent;
+use App\Livewire\V1\Auth\{ForgotPasswordComponent, ResetPasswordComponent};
 use App\Livewire\V1\Panel\Promotion\{GetPromotionsComponent, CreatePromotionComponent, UpdatePromotionComponent};
 use App\Http\Controllers\V1\Dev\TestController;
 
@@ -19,8 +19,10 @@ Route::get('/login', LoginComponent::class)->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', ForgotPasswordComponent::class)->name('password.request');
+Route::get('/reset-password/{token}', ResetPasswordComponent::class)->name('password.reset');
 
-Route::group(["prefix" => "v1/panel", "middleware" => "auth", "as" => "v1.panel."], function () {
+
+Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.panel."], function () {
 
     Route::get('/home', HomeComponent::class)->name("home");
 
