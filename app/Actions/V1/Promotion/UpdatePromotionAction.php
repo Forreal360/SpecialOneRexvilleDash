@@ -30,8 +30,8 @@ class UpdatePromotionAction extends Action
     {
         $validated = $this->validateData($data, [
             'title' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'start_date' => 'required',
+            'end_date' => 'required',
             'file' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'redirect_url' => 'required|string|max:255',
         ]);

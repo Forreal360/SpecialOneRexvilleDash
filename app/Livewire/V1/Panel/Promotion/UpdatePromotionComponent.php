@@ -8,6 +8,7 @@ use App\Actions\V1\Promotion\UpdatePromotionAction;
 use App\Services\V1\PromotionService;
 use App\Livewire\Concerns\HandlesActionResults;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 
 class UpdatePromotionComponent extends Component
 {
@@ -35,10 +36,10 @@ class UpdatePromotionComponent extends Component
 
         $this->title = $promotion->title;
         $this->start_date = \Carbon\Carbon::parse($promotion->start_date)->format('Y-m-d H:i:s');
-        $this->start_date = dateToLocal($this->start_date, session('timezone'))->format('Y-m-d');
+        $this->start_date = dateToLocal($this->start_date, session('timezone'))->format('m/d/Y');
 
         $this->end_date = \Carbon\Carbon::parse($promotion->end_date)->format('Y-m-d H:i:s');
-        $this->end_date = dateToLocal($this->end_date, session('timezone'))->format('Y-m-d');
+        $this->end_date = dateToLocal($this->end_date, session('timezone'))->format('m/d/Y');
         $this->redirect_url = $promotion->redirect_url;
         $this->status = $promotion->status;
     }
@@ -56,10 +57,16 @@ class UpdatePromotionComponent extends Component
 
     public function updatePromotion()
     {
-
         $this->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
+            'start_date' => [
+                'required',
+                Rule::date()->format('m/d/Y'),
+            ],
+            'end_date' => [
+                'required',
+                Rule::date()->format('m/d/Y'),
+                'after:start_date'
+            ],
         ]);
 
         $start_date = $this->start_date . ' ' . '00:00:00';
