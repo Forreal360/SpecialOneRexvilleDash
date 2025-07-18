@@ -33,15 +33,25 @@
                 </flux:select>
             </flux:field>
 
-            <flux:field class="w-full">
-                <flux:label>{{ __('panel.filter_start_date') }}</flux:label>
-                <flux:input type="date" max="2999-12-31" size="sm" class="w-full" wire:model.live="filter_start_date"/>
-            </flux:field>
+            <x-forms.flatpickr-date
+                name="filter_start_date"
+                wire:model.live="filter_start_date"
+                size="sm"
+                label="{{ __('panel.filter_start_date') }}"
+                dateFormat="m/d/Y"
+                placeholder="{{ __('panel.filter_start_date') }}"
+                locale="{{ app()->getLocale() }}"
+            />
 
-            <flux:field class="w-full">
-                <flux:label>{{ __('panel.filter_end_date') }}</flux:label>
-                <flux:input type="date" max="2999-12-31" size="sm" class="w-full" wire:model.live="filter_end_date" />
-            </flux:field>
+            <x-forms.flatpickr-date
+                name="filter_end_date"
+                wire:model.live="filter_end_date"
+                size="sm"
+                label="{{ __('panel.filter_end_date') }}"
+                dateFormat="m/d/Y"
+                placeholder="{{ __('panel.filter_end_date') }}"
+                locale="{{ app()->getLocale() }}"
+            />
 
             <flux:field class="w-full">
                 <flux:label>{{ __('panel.status') }}</flux:label>

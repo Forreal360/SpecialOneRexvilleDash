@@ -36,19 +36,25 @@
                 />
             </x-forms.form-field>
             <x-forms.form-field label="{{ __('panel.start_date') }}*" for="start_date" :error="$errors->first('start_date')">
-                <flux:input
-                    id="start_date"
+                <x-forms.flatpickr-date
+                    name="start_date"
                     wire:model="start_date"
-                    type="date"
+                    dateFormat="m/d/Y"
+                    placeholder="{{ __('panel.start_date') }}"
+                    minDate="today"
                     error="{{ $errors->first('start_date') }}"
+                    required
                 />
             </x-forms.form-field>
             <x-forms.form-field label="{{ __('panel.end_date') }}*" for="end_date" :error="$errors->first('end_date')">
-                <flux:input
-                    id="end_date"
+                <x-forms.flatpickr-date
+                    name="end_date"
                     wire:model="end_date"
-                    type="date"
+                    dateFormat="m/d/Y"
+                    placeholder="{{ __('panel.end_date') }}"
+                    minDate="today"
                     error="{{ $errors->first('end_date') }}"
+                    required
                 />
             </x-forms.form-field>
 
