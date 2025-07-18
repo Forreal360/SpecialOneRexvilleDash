@@ -4,11 +4,11 @@
     <flux:brand href="#" logo="{{asset('assets/images/logo.png')}}" name="Hyundai de Rexville" class="px-2 hidden dark:flex" />
 
     <flux:navlist variant="outline">
-        <flux:navlist.item icon="home" wire:navigate href="{{ route('v1.panel.home') }}" :current="request()->is('v1/panel/home')">{{ __('panel.home') }}</flux:navlist.item>
+        <flux:navlist.item icon="home"  href="{{ route('v1.panel.home') }}" :current="request()->is('v1/panel/home')">{{ __('panel.home') }}</flux:navlist.item>
 
-        <flux:navlist.item icon="users" wire:navigate href="{{ route('v1.panel.admins.index') }}" :current="request()->is('v1/panel/admins')">{{ __('panel.admins') }}</flux:navlist.item>
+        <flux:navlist.item icon="users"  href="{{ route('v1.panel.admins.index') }}" :current="request()->is('v1/panel/admins')">{{ __('panel.admins') }}</flux:navlist.item>
 
-        <flux:navlist.item icon="ticket" wire:navigate href="{{ route('v1.panel.promotions.index') }}" :current="request()->is('v1/panel/promotions')">{{ __('panel.promotions') }}</flux:navlist.item>
+        <flux:navlist.item icon="ticket" href="{{ route('v1.panel.promotions.index') }}" :current="request()->is('v1/panel/promotions')">{{ __('panel.promotions') }}</flux:navlist.item>
 
 
 

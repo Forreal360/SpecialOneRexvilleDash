@@ -82,6 +82,15 @@ return [
     'end_date' => 'Fecha de fin',
     'redirect_url' => 'URL de redirección',
 
+    // Upload component
+    'click_to_select_image' => 'Haz clic para seleccionar una imagen',
+    'file_selected' => 'Archivo seleccionado',
+    'change_file' => 'Cambiar archivo',
+    'select_image' => 'Seleccionar imagen',
+    'uploading_file' => 'Subiendo archivo...',
+    'file_ready' => 'Archivo listo',
+    'upload_area_text' => 'Haz clic para seleccionar una imagen',
+
     // Tablas
     'actions' => 'Acciones',
     'created_at' => 'Fecha de creación',

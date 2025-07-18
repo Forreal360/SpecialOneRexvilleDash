@@ -69,7 +69,7 @@ class UpdateAdminComponent extends Component
 
         if ($updateAdminResult->isSuccess()) {
             session()->flash('success', __('panel.admin_updated_successfully'));
-            return $this->redirect(route('v1.panel.admins.index'), navigate: true);
+            return $this->redirect(route('v1.panel.admins.index'));
         }
 
         session()->flash('error', __('panel.error_updating_admin'));
@@ -77,6 +77,6 @@ class UpdateAdminComponent extends Component
 
     public function cancel()
     {
-        return $this->redirect(route('v1.panel.admins.index'), navigate: true);
+        return $this->redirect(route('v1.panel.admins.index'));
     }
 }

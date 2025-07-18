@@ -42,7 +42,7 @@ class CreateAdminComponent extends Component
 
         if ($createAdminResult->isSuccess()) {
             session()->flash('success', __('panel.admin_created_successfully'));
-            return $this->redirect(route('v1.panel.admins.index'), navigate: true);
+            return redirect()->route('v1.panel.admins.index');
         }
 
         session()->flash('error', __('panel.error_creating_admin'));

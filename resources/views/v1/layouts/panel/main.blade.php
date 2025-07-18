@@ -43,8 +43,7 @@
 
     </flux:main>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="{{ asset('assets/lib/cropper/cropper.min.js') }}"></script>
-    <script src="{{ asset('assets/lib/cropper/image-cropper.js') }}"></script>
+
     @fluxScripts
 
     {{-- Livewire scripts --}}

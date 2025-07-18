@@ -82,6 +82,15 @@ return [
     'end_date' => 'End date',
     'redirect_url' => 'Redirect URL',
 
+    // Upload component
+    'click_to_select_image' => 'Click to select an image',
+    'file_selected' => 'File selected',
+    'change_file' => 'Change file',
+    'select_image' => 'Select image',
+    'uploading_file' => 'Uploading file...',
+    'file_ready' => 'File ready',
+    'upload_area_text' => 'Click to select an image',
+
     // Tables
     'actions' => 'Actions',
     'created_at' => 'Created at',
