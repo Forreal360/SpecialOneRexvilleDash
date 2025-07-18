@@ -23,6 +23,43 @@
 
     <div class="flex-1 flex justify-center items-center">
         <div class="w-80 max-w-80 space-y-6">
+            <div class="flex justify-end">
+                <flux:dropdown x-data="{
+                    currentLocale: '{{ app()->getLocale() }}',
+                    changeLanguage(locale) {
+                        this.currentLocale = locale;
+
+                        // Pequeño delay para mostrar el cambio visual
+                        setTimeout(() => {
+                            // Construir la nueva URL manteniendo los parámetros existentes
+                            let url = new URL(window.location);
+                            url.searchParams.set('lang', locale);
+
+                            // Redirigir a la nueva URL
+                            window.location.href = url.toString();
+                        }, 150);
+                    }
+                }" align="end">
+                    <flux:button variant="subtle" square class="group" aria-label="Language"
+                        title="{{ __('panel.change_language') }}">
+                        <flux:icon.language variant="mini" class="text-zinc-500 dark:text-white ml-1" />
+                    </flux:button>
+                    <flux:menu>
+                        <flux:menu.item x-on:click="changeLanguage('es')"
+                            :class="{ 'bg-blue-50 dark:bg-blue-900  /20': currentLocale === 'es' }"
+                            class="flex items-center justify-between">
+                            <span>🇪🇸 Español</span>
+                            <flux:icon x-show="currentLocale === 'es'" name="check" class="w-4 h-4 text-blue-500" />
+                        </flux:menu.item>
+                        <flux:menu.item x-on:click="changeLanguage('en')"
+                            :class="{ 'bg-blue-50 dark:bg-blue-900/20': currentLocale === 'en' }"
+                            class="flex items-center justify-between">
+                            <span>🇺🇸 English</span>
+                            <flux:icon x-show="currentLocale === 'en'" name="check" class="w-4 h-4 text-blue-500" />
+                        </flux:menu.item>
+                    </flux:menu>
+                </flux:dropdown>
+            </div>
             <div class="flex justify-center">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="Hyundai de Rexville" class="w-50 ">
             </div>
@@ -49,15 +86,15 @@
             </div>
 
             <div class="mb-6 italic font-base text-3xl xl:text-4xl">
-                Bienvenido a la plataforma de Hyundai de Rexville
+                {{ __('auth.welcome_platform') }}
             </div>
 
             <div class="flex gap-4">
                 <flux:avatar src="https://fluxui.dev/img/demo/user.png" size="xl" />
 
                 <div class="flex flex-col justify-center font-medium">
-                    <div class="text-lg">Romina Navas</div>
-                    <div class="text-zinc-300">Presidente de Hyundai de Rexville</div>
+                    <div class="text-lg">{{ __('auth.president_name') }}</div>
+                    <div class="text-zinc-300">{{ __('auth.president_title') }}</div>
                 </div>
             </div>
         </div>

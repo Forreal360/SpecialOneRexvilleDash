@@ -1,12 +1,12 @@
 <div>
-    <flux:heading class="text-center" size="xl">Recuperar contraseña</flux:heading>
+    <flux:heading class="text-center" size="xl">{{ __('auth.recover_password') }}</flux:heading>
 
     <form wire:submit.prevent="sendResetLink" class="space-y-4 mt-6">
         <div class="flex flex-col gap-6">
             <flux:input
-                label="Email"
+                label="{{ __('auth.email') }}"
                 type="email"
-                placeholder="email@example.com"
+                placeholder="{{ __('auth.email_placeholder') }}"
                 wire:model.defer="email"
                 :invalid="$errors->has('email')"
             />
@@ -18,7 +18,7 @@
                 type="submit"
                 wire:loading.attr="disabled"
             >
-                Enviar enlace
+                {{ __('auth.send_reset_link') }}
             </flux:button>
         </div>
     </form>
@@ -30,6 +30,6 @@
     @endif
 
     <div class="mt-6 text-center">
-        <a href="{{ route('login') }}" class="text-accent hover:underline">Volver al login</a>
+        <a href="{{ route('login') }}" class="text-accent hover:underline">{{ __('auth.back_to_login') }}</a>
     </div>
 </div>

@@ -46,7 +46,7 @@ class LoginComponent extends Component
 
 
         if ($result->isSuccess()){
-            return $this->redirect(route('v1.panel.home'), navigate:true);
+            return $this->redirect(route('v1.panel.home'));
         }
     }
 }

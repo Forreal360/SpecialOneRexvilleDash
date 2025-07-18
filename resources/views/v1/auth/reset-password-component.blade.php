@@ -1,30 +1,30 @@
 <div>
-    <flux:heading class="text-center" size="xl">Restablecer contraseña</flux:heading>
+    <flux:heading class="text-center" size="xl">{{ __('auth.reset_password') }}</flux:heading>
 
     <form wire:submit.prevent="resetPassword" class="space-y-4 mt-6">
         <div class="flex flex-col gap-6">
             <flux:input
-                label="Email"
+                label="{{ __('auth.email') }}"
                 type="email"
-                placeholder="email@example.com"
+                placeholder="{{ __('auth.email_placeholder') }}"
                 wire:model.defer="email"
                 :invalid="$errors->has('email')"
             />
 
 
             <flux:input
-                label="Nueva contraseña"
+                label="{{ __('auth.new_password') }}"
                 type="password"
-                placeholder="Tu nueva contraseña"
+                placeholder="{{ __('auth.new_password_placeholder') }}"
                 wire:model.defer="password"
                 :invalid="$errors->has('password')"
             />
 
 
             <flux:input
-                label="Confirmar contraseña"
+                label="{{ __('auth.confirm_password') }}"
                 type="password"
-                placeholder="Confirma tu nueva contraseña"
+                placeholder="{{ __('auth.confirm_password_placeholder') }}"
                 wire:model.defer="password_confirmation"
                 :invalid="$errors->has('password_confirmation')"
             />
@@ -36,7 +36,7 @@
                 type="submit"
                 wire:loading.attr="disabled"
             >
-                Restablecer contraseña
+                {{ __('auth.reset_password') }}
             </flux:button>
         </div>
     </form>
@@ -48,6 +48,6 @@
     @endif
 
     <div class="mt-6 text-center">
-        <a href="{{ route('login') }}" class="text-accent hover:underline">Volver al login</a>
+        <a href="{{ route('login') }}" class="text-accent hover:underline">{{ __('auth.back_to_login') }}</a>
     </div>
 </div>
