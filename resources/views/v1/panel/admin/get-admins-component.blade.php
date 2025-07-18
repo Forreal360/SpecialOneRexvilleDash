@@ -24,7 +24,7 @@
         :perPageOptions="$perPageOptions"
         :currentPerPage="$perPage"
         :search="$search"
-        searchPlaceholder="Buscar administradores..."
+        searchPlaceholder="{{ __('panel.search_admins_placeholder') }}"
     >
 
         <x-slot name="filters">

@@ -35,7 +35,6 @@ class CreatePromotionComponent extends Component
     public function createPromotion()
     {
 
-        dd($this->start_date, $this->end_date);
         $this->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',

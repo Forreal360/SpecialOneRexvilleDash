@@ -19,7 +19,7 @@
                     }, 150);
                 }
             }" align="end">
-                <flux:button variant="subtle" square class="group" aria-label="Language" title="{{ __('panel.change_language') }}">
+                <flux:button variant="subtle" square class="group" aria-label="{{ __('panel.language_selector') }}" title="{{ __('panel.change_language') }}">
                     <flux:icon.language variant="mini" class="text-zinc-500 dark:text-white ml-1" />
                 </flux:button>
                 <flux:menu>
@@ -42,28 +42,28 @@
                 </flux:menu>
             </flux:dropdown>
             <flux:dropdown x-data align="end">
-                <flux:button variant="subtle" square class="group" aria-label="Preferred color scheme">
+                <flux:button variant="subtle" square class="group" aria-label="{{ __('panel.color_scheme_selector') }}">
                     <flux:icon.sun x-show="$flux.appearance === 'light'" variant="mini" class="text-zinc-500 dark:text-white" />
                     <flux:icon.moon x-show="$flux.appearance === 'dark'" variant="mini" class="text-zinc-500 dark:text-white" />
                     <flux:icon.moon x-show="$flux.appearance === 'system' && $flux.dark" variant="mini" />
                     <flux:icon.sun x-show="$flux.appearance === 'system' && ! $flux.dark" variant="mini" />
                 </flux:button>
                 <flux:menu>
-                    <flux:menu.item icon="sun" x-on:click="$flux.appearance = 'light'">Light</flux:menu.item>
-                    <flux:menu.item icon="moon" x-on:click="$flux.appearance = 'dark'">Dark</flux:menu.item>
+                    <flux:menu.item icon="sun" x-on:click="$flux.appearance = 'light'">{{ __('panel.light_mode') }}</flux:menu.item>
+                    <flux:menu.item icon="moon" x-on:click="$flux.appearance = 'dark'">{{ __('panel.dark_mode') }}</flux:menu.item>
                 </flux:menu>
             </flux:dropdown>
             <flux:dropdown align="end">
-                <flux:button variant="subtle" square class="group relative" aria-label="Notifications">
+                <flux:button variant="subtle" square class="group relative" aria-label="{{ __('panel.notifications_selector') }}">
                     <flux:icon.bell variant="mini" class="text-zinc-500 dark:text-white" />
                     <flux:badge variant="danger" size="sm" class="absolute -top-1 -right-1" >2</flux:badge>
                 </flux:button>
                 <flux:menu class="p-0">
                     <div class="p-4 border-b border-zinc-200 dark:border-zinc-700">
                         <div class="flex items-center justify-between">
-                            <flux:heading size="sm">Notificaciones</flux:heading>
+                            <flux:heading size="sm">{{ __('panel.notifications') }}</flux:heading>
                             <flux:button variant="subtle" size="xs" class="text-xs">
-                                Marcar todas como leídas
+                                {{ __('panel.mark_all_as_read') }}
                             </flux:button>
                         </div>
                     </div>
@@ -71,11 +71,11 @@
                     <div class="max-h-80 overflow-y-auto">
                         @php
                             $notifications = [
-                                ['id' => 1, 'title' => 'Nuevo pedido recibido', 'message' => 'Pedido #12345 ha sido recibido', 'time' => '2 min', 'read' => false, 'type' => 'order'],
-                                ['id' => 2, 'title' => 'Actualización del sistema', 'message' => 'El sistema se actualizará en 30 minutos', 'time' => '1 hora', 'read' => false, 'type' => 'system'],
-                                ['id' => 3, 'title' => 'Cliente registrado', 'message' => 'Juan Pérez se ha registrado en la plataforma', 'time' => '3 horas', 'read' => true, 'type' => 'user'],
-                                ['id' => 4, 'title' => 'Stock bajo', 'message' => 'El producto Laptop HP tiene stock bajo', 'time' => '5 horas', 'read' => true, 'type' => 'inventory'],
-                                ['id' => 5, 'title' => 'Backup completado', 'message' => 'El backup diario se completó exitosamente', 'time' => '1 día', 'read' => true, 'type' => 'system']
+                                ['id' => 1, 'title' => __('panel.new_order_received'), 'message' => __('panel.order_received_message', ['order_id' => '12345']), 'time' => '2 min', 'read' => false, 'type' => 'order'],
+                                ['id' => 2, 'title' => __('panel.system_update'), 'message' => __('panel.system_update_message', ['time' => '30 minutos']), 'time' => '1 hora', 'read' => false, 'type' => 'system'],
+                                ['id' => 3, 'title' => __('panel.client_registered'), 'message' => __('panel.client_registered_message', ['name' => 'Juan Pérez']), 'time' => '3 horas', 'read' => true, 'type' => 'user'],
+                                ['id' => 4, 'title' => __('panel.low_stock'), 'message' => __('panel.low_stock_message', ['product' => 'Laptop HP']), 'time' => '5 horas', 'read' => true, 'type' => 'inventory'],
+                                ['id' => 5, 'title' => __('panel.backup_completed'), 'message' => __('panel.backup_completed_message'), 'time' => '1 día', 'read' => true, 'type' => 'system']
                             ];
                         @endphp
 
@@ -123,7 +123,7 @@
 
                     <div class="p-4 border-t border-zinc-200 dark:border-zinc-700">
                         <flux:button variant="subtle" class="w-full" size="sm">
-                            Ver todas las notificaciones
+                            {{ __('panel.view_all_notifications') }}
                         </flux:button>
                     </div>
                 </flux:menu>
@@ -131,7 +131,7 @@
             <flux:dropdown position="top" align="end" >
                 <flux:profile avatar="https://fluxui.dev/img/demo/user.png"/>
                 <flux:menu>
-                                            <flux:menu.item icon="user">{{ __('panel.welcome') }}, Romina</flux:menu.item>
+                                            <flux:menu.item icon="user">{{ __('panel.welcome') }}, {{auth()->user()->name}}</flux:menu.item>
                     <flux:menu.separator />
                     <form method="POST" action="{{ route('logout') }}" class="m-0">
                         @csrf

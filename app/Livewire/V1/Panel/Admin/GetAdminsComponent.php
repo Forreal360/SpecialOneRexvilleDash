@@ -66,7 +66,7 @@ class GetAdminsComponent extends \Livewire\Component
         $admins = Admin::query()
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
-                    $q->where('name', 'like', '%' . $this->search . '%')
+                    $q->whereRaw("CONCAT(name, ' ', last_name) LIKE ?", ['%' . $this->search . '%'])
                       ->orWhere('email', 'like', '%' . $this->search . '%');
                 });
             })
