@@ -1,7 +1,7 @@
 <div>
-    <flux:heading class="text-center" size="xl">Recuperar contraseña</flux:heading>
+    <flux:heading class="text-center" size="xl">Restablecer contraseña</flux:heading>
 
-    <form wire:submit.prevent="sendResetLink" class="space-y-4 mt-6">
+    <form wire:submit.prevent="resetPassword" class="space-y-4 mt-6">
         <div class="flex flex-col gap-6">
             <flux:input
                 label="Email"
@@ -12,13 +12,31 @@
             />
 
 
+            <flux:input
+                label="Nueva contraseña"
+                type="password"
+                placeholder="Tu nueva contraseña"
+                wire:model.defer="password"
+                :invalid="$errors->has('password')"
+            />
+
+
+            <flux:input
+                label="Confirmar contraseña"
+                type="password"
+                placeholder="Confirma tu nueva contraseña"
+                wire:model.defer="password_confirmation"
+                :invalid="$errors->has('password_confirmation')"
+            />
+
+
             <flux:button
                 variant="primary"
                 class="w-full"
                 type="submit"
                 wire:loading.attr="disabled"
             >
-                Enviar enlace
+                Restablecer contraseña
             </flux:button>
         </div>
     </form>

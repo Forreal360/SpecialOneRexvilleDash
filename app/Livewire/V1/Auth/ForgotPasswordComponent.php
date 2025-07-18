@@ -21,7 +21,7 @@ class ForgotPasswordComponent extends Component
             'email' => 'required|email|exists:admins,email',
         ]);
 
-        Password::sendResetLink(['email' => $this->email]); // Comentado por ahora
+        Password::broker('admins')->sendResetLink(['email' => $this->email]);
         session()->flash('status', 'Si el correo existe, se enviará un enlace de recuperación.');
     }
 }
