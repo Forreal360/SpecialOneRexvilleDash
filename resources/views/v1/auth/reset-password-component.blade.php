@@ -10,9 +10,7 @@
                 wire:model.defer="email"
                 :invalid="$errors->has('email')"
             />
-            @error('email')
-                <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
-            @enderror
+
 
             <flux:input
                 label="Nueva contraseña"
@@ -21,9 +19,7 @@
                 wire:model.defer="password"
                 :invalid="$errors->has('password')"
             />
-            @error('password')
-                <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
-            @enderror
+
 
             <flux:input
                 label="Confirmar contraseña"
@@ -32,9 +28,7 @@
                 wire:model.defer="password_confirmation"
                 :invalid="$errors->has('password_confirmation')"
             />
-            @error('password_confirmation')
-                <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
-            @enderror
+
 
             <flux:button
                 variant="primary"

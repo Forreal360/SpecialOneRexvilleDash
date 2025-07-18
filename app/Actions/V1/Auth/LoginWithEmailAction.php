@@ -54,7 +54,7 @@ class LoginWithEmailAction extends Action
             ]);
         }
 
-        auth()->login($user);
+        auth()->guard('admin')->login($user);
 
         session()->put('timezone', $validated['timezone']);
 

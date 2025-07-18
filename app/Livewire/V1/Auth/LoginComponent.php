@@ -44,6 +44,7 @@ class LoginComponent extends Component
             'timezone' => $this->timezone
         ], true);
 
+
         if ($result->isSuccess()){
             return $this->redirect(route('v1.panel.home'), navigate:true);
         }
