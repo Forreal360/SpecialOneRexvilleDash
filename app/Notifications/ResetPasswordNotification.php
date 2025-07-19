@@ -76,25 +76,24 @@ class ResetPasswordNotification extends Notification
             ], false));
         }
 
-        return $this->buildMailMessage($url);
+        return $this->buildMailMessage($url, $notifiable);
     }
 
     /**
      * Get the reset password notification mail message for the given URL.
      *
      * @param  string  $url
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    protected function buildMailMessage($url): MailMessage
+    protected function buildMailMessage($url, $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject(Lang::get('Restablecer Contraseña'))
-            ->greeting('Hola ' . ($this->notifiable->name ?? 'Usuario'))
-            ->line(Lang::get('Has recibido este correo porque recibimos una solicitud de restablecimiento de contraseña para tu cuenta.'))
-            ->action(Lang::get('Restablecer Contraseña'), $url)
-            ->line(Lang::get('Este enlace de restablecimiento de contraseña expirará en :count minutos.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line(Lang::get('Si no solicitaste un restablecimiento de contraseña, no es necesario realizar ninguna acción.'))
-            ->salutation('Saludos, ' . config('app.name'));
+            ->view('v1.mails.auth.reset-password-email', [
+                'url' => $url,
+                'notifiable' => $notifiable
+            ]);
     }
 
     /**

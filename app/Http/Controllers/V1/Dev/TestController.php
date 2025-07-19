@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Password;
 class TestController extends Controller
 {
     public function index(){
-
+        return view('v1.layouts.mails.main');
         $admin = Admin::where('email', 'joanmilla21@gmail.com')->first();
 
         //send password reset notification
