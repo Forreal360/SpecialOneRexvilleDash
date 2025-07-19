@@ -60,7 +60,7 @@ trait HandlesActionResults
 
     public function executeAction($action, array $data = [], bool $isForm = false)
     {
-
+        $this->resetErrorBag();
         $result = $action->execute($data);
 
         if ($isForm) {

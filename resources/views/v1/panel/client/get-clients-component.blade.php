@@ -30,22 +30,22 @@
         <x-slot name="filters">
             <flux:field class="w-full">
                 <flux:label>{{ __('panel.name') }}</flux:label>
-                <flux:input wire:model.live="name" size="sm" placeholder="{{ __('panel.name') }}" />
+                <flux:input wire:model.live="name" size="sm" placeholder="{{ __('panel.name') }}" clearable/>
             </flux:field>
 
             <flux:field class="w-full">
                 <flux:label>{{ __('panel.email') }}</flux:label>
-                <flux:input wire:model.live="email" size="sm" placeholder="{{ __('panel.email') }}" />
+                <flux:input wire:model.live="email" size="sm" placeholder="{{ __('panel.email') }}" clearable/>
             </flux:field>
 
             <flux:field class="w-full">
                 <flux:label>{{ __('panel.phone') }}</flux:label>
-                <flux:input wire:model.live="phone" size="sm" placeholder="{{ __('panel.phone') }}" />
+                <flux:input wire:model.live="phone" size="sm" placeholder="{{ __('panel.phone') }}" clearable/>
             </flux:field>
 
             <flux:field class="w-full">
                 <flux:label>{{ __('panel.license_number') }}</flux:label>
-                <flux:input wire:model.live="license_number" size="sm" placeholder="{{ __('panel.license_number') }}" />
+                <flux:input wire:model.live="license_number" size="sm" placeholder="{{ __('panel.license_number') }}" clearable/>
             </flux:field>
 
             <flux:field class="w-full">

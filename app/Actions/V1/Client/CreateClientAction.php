@@ -32,11 +32,10 @@ class CreateClientAction extends Action
             "name" => "required|string|max:255",
             "last_name" => "required|string|max:255",
             "email" => "required|email|unique:clients,email",
-            "phone_code" => "required|string|max:5",
-            "phone" => "required|string|max:20",
+            "phone_code" => "required|numeric|min_digits:1|max_digits:5",
+            "phone" => "required|numeric|min_digits:1|max_digits:10",
             "license_number" => "required|string|max:255",
-            "profile_photo" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
-            "status" => "required|in:active,inactive",
+            "status" => "required|in:A,I",
         ]);
 
         $randomPassword = Str::random(10);
@@ -44,7 +43,7 @@ class CreateClientAction extends Action
 
         return DB::transaction(function () use ($validated) {
 
-            $client = $this->clientService->create($validated);
+            $this->clientService->create($validated);
 
             return $this->successResult();
         });

@@ -79,6 +79,7 @@ return [
     'required_field' => 'Required field',
     'leave_blank_to_keep_current' => 'leave blank to keep current',
     'image' => 'Image',
+    'profile_photo' => 'Profile Photo',
     'title' => 'Title',
     'start_date' => 'Start date',
     'end_date' => 'End date',

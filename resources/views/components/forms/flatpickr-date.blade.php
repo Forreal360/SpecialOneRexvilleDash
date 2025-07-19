@@ -50,6 +50,7 @@
 
     <flux:input
         type="text"
+        clearable
         id="{{ $id }}"
         name="{{ $name }}"
         placeholder="{{ $placeholder }}"

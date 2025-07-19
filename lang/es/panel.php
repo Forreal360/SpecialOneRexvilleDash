@@ -79,6 +79,7 @@ return [
     'required_field' => 'Campo requerido',
     'leave_blank_to_keep_current' => 'dejar en blanco para mantener la actual',
     'image' => 'Imagen',
+    'profile_photo' => 'Foto de perfil',
     'title' => 'Título',
     'start_date' => 'Fecha de inicio',
     'end_date' => 'Fecha de fin',

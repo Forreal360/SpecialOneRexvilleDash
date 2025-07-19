@@ -8,7 +8,7 @@ use App\Http\Controllers\V1\Dev\TestController;
 use App\Livewire\V1\Panel\Admin\{GetAdminsComponent, CreateAdminComponent, UpdateAdminComponent};
 use App\Livewire\V1\Auth\{ForgotPasswordComponent, ResetPasswordComponent};
 use App\Livewire\V1\Panel\Promotion\{GetPromotionsComponent, CreatePromotionComponent, UpdatePromotionComponent};
-use App\Livewire\V1\Panel\Client\{GetClientsComponent};
+use App\Livewire\V1\Panel\Client\{GetClientsComponent, CreateClientComponent, UpdateClientComponent};
 
 Route::get('/test', [TestController::class, 'index'])->name('test');
 
@@ -39,10 +39,6 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
 
     /* ----------------- Clients ----------------- */
     Route::get('/clients', GetClientsComponent::class)->name('clients.index');
-    Route::get('/clients/create', function(){
-        return true;
-    })->name('clients.create');
-    Route::get('/clients/{id}/edit', function(){
-        return true;
-    })->name('clients.edit');
+    Route::get('/clients/create', CreateClientComponent::class)->name('clients.create');
+    Route::get('/clients/{id}/edit', UpdateClientComponent::class)->name('clients.edit');
 });
