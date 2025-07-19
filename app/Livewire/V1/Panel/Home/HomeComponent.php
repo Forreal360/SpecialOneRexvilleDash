@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Admin;
 use App\Models\Client;
 use App\Models\Promotion;
-use App\Models\Vehicle;
+use App\Models\ClientVehicle;
 
 
 class HomeComponent extends Component
@@ -30,7 +30,7 @@ class HomeComponent extends Component
             ],
             [
                 'title' => trans('panel.total_vehicles'),
-                'value' => Vehicle::count()
+                'value' => ClientVehicle::count()
             ],
         ];
     }
