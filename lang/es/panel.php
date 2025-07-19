@@ -62,6 +62,8 @@ return [
     'password' => 'Contraseña',
     'password_confirmation' => 'Confirmar contraseña',
     'phone' => 'Teléfono',
+    'phone_code' => 'Código de país',
+    'license_number' => 'Número de licencia',
     'address' => 'Dirección',
     'city' => 'Ciudad',
     'state' => 'Estado',
@@ -233,8 +235,6 @@ return [
     'confirm_delete' => '¿Estás seguro de que quieres eliminar este elemento?',
     'confirm_activate' => '¿Estás seguro de que quieres activar este elemento?',
     'confirm_deactivate' => '¿Estás seguro de que quieres desactivar este elemento?',
-    'confirm_admin_deactivate' => '¿Estás seguro de querer desactivar este administrador?',
-    'confirm_admin_activate' => '¿Estás seguro de querer activar este administrador?',
 
     // Tooltips
     'tooltip_edit' => 'Editar',
@@ -242,8 +242,6 @@ return [
     'tooltip_view' => 'Ver detalles',
     'tooltip_activate' => 'Activar',
     'tooltip_deactivate' => 'Desactivar',
-    'tooltip_admin_deactivate' => 'Desactivar administrador',
-    'tooltip_admin_activate' => 'Activar administrador',
 
     // Breadcrumbs
     'breadcrumb_home' => 'Inicio',

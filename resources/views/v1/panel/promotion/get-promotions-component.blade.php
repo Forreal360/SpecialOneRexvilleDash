@@ -150,12 +150,12 @@
                         @if($now->lessThan($end_date))
                             @if($promotion->status == 'A')
                             <flux:tooltip content="{{ __('panel.tooltip_deactivate') }}">
-                                <flux:button size="sm" icon="hand-thumb-down" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'I')" wire:confirm="{{ __('panel.confirm_deactivate') }}">
+                                <flux:button size="sm" icon="hand-thumb-down" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'I')" wire:confirm="{{ __('panel.confirm_deactivate') }} {{ __('panel.promotion') }}">
                                 </flux:button>
                             </flux:tooltip>
                             @else
                             <flux:tooltip content="{{ __('panel.tooltip_activate') }}">
-                                <flux:button size="sm" icon="hand-thumb-up" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'A')" wire:confirm="{{ __('panel.confirm_activate') }}">
+                                <flux:button size="sm" icon="hand-thumb-up" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$promotion->id}}, 'A')" wire:confirm="{{ __('panel.confirm_activate') }} {{ __('panel.promotion') }}">
                                 </flux:button>
                             </flux:tooltip>
                             @endif

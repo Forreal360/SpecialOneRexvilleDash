@@ -81,49 +81,23 @@ class UpdateClientAction extends Action
      */
     public function handle($data): ActionResult
     {
-        // Obtener el usuario autenticado
-        $user = auth()->user();
+        $validated = $this->validateData($data, [
+            "id" => "required|exists:clients,id",
+            "name" => "required|string|max:255",
+            "last_name" => "required|string|max:255",
+            "email" => "required|email|unique:clients,email," . $data['id'],
+            "phone_code" => "required|string|max:5",
+            "phone" => "required|string|max:20",
+            "license_number" => "required|string|max:255",
+        ]);
 
-        if (!$user) {
-            throw new ValidationErrorException([
-                'auth' => [trans('auth.failed')]
-            ]);
-        }
+        return DB::transaction(function () use ($validated) {
 
-        // Validar solo los campos que se pueden actualizar
-        $rules = [
-            'email' => ['sometimes', 'required', 'email', Rule::unique('clients')->ignore($user->id)],
-            'phone_code' => 'sometimes|required|string|max:5',
-            'phone' => 'sometimes|required|string|max:15',
-            'license_number' => 'sometimes|required|string|max:255',
-        ];
+            $this->clientService->update((int) $validated['id'], $validated);
 
-        $validated = $this->validateData($data, $rules);
+            return $this->successResult();
 
-        // Business logic with transaction
-        return DB::transaction(function () use ($validated, $user) {
-            // $validated ya solo contiene los campos enviados (gracias a 'sometimes')
-            if (empty($validated)) {
-                throw new ValidationErrorException([
-                    'fields' => [trans('validation.no_fields_sent')]
-                ]);
-            }
-
-            // Actualizar usuario con los campos validados
-            $updatedUser = $this->clientService->update($user->id, $validated);
-
-            if (!$updatedUser) {
-                throw new ValidationErrorException([
-                    'update' => [trans('validation.error')]
-                ]);
-            }
-
-            // Return successful result
-            return $this->successResult(
-                data: [
-                    'client' => new ClientResource($updatedUser)
-                ]
-            );
         });
+
     }
 }

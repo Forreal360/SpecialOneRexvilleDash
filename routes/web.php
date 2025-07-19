@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\V1\Auth\LoginComponent;
 use App\Livewire\V1\Panel\Home\HomeComponent;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\V1\Dev\TestController;
 use App\Livewire\V1\Panel\Admin\{GetAdminsComponent, CreateAdminComponent, UpdateAdminComponent};
 use App\Livewire\V1\Auth\{ForgotPasswordComponent, ResetPasswordComponent};
 use App\Livewire\V1\Panel\Promotion\{GetPromotionsComponent, CreatePromotionComponent, UpdatePromotionComponent};
-use App\Http\Controllers\V1\Dev\TestController;
+use App\Livewire\V1\Panel\Client\{GetClientsComponent};
 
 Route::get('/test', [TestController::class, 'index'])->name('test');
 
@@ -35,4 +36,13 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
     Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index');
     Route::get('/promotions/create', CreatePromotionComponent::class)->name('promotions.create');
     Route::get('/promotions/{id}/edit', UpdatePromotionComponent::class)->name('promotions.edit');
+
+    /* ----------------- Clients ----------------- */
+    Route::get('/clients', GetClientsComponent::class)->name('clients.index');
+    Route::get('/clients/create', function(){
+        return true;
+    })->name('clients.create');
+    Route::get('/clients/{id}/edit', function(){
+        return true;
+    })->name('clients.edit');
 });

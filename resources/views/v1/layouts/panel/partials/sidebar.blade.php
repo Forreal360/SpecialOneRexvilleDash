@@ -10,6 +10,8 @@
 
         <flux:navlist.item icon="ticket" href="{{ route('v1.panel.promotions.index') }}" :current="request()->is('*panel/promotions*')">{{ __('panel.promotions') }}</flux:navlist.item>
 
+        <flux:navlist.item icon="users" href="{{ route('v1.panel.clients.index') }}" :current="request()->is('*panel/clients*')">{{ __('panel.clients') }}</flux:navlist.item>
+
 
 
         {{-- <flux:navlist.group expandable heading="Favorites" class="hidden lg:grid">

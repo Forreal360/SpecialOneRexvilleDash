@@ -62,6 +62,8 @@ return [
     'password' => 'Password',
     'password_confirmation' => 'Confirm Password',
     'phone' => 'Phone',
+    'phone_code' => 'Country Code',
+    'license_number' => 'License Number',
     'address' => 'Address',
     'city' => 'City',
     'state' => 'State',
@@ -233,8 +235,6 @@ return [
     'confirm_delete' => 'Are you sure you want to delete this item?',
     'confirm_activate' => 'Are you sure you want to activate this item?',
     'confirm_deactivate' => 'Are you sure you want to deactivate this item?',
-    'confirm_admin_deactivate' => 'Are you sure you want to deactivate this administrator?',
-    'confirm_admin_activate' => 'Are you sure you want to activate this administrator?',
 
     // Tooltips
     'tooltip_edit' => 'Edit',
@@ -242,8 +242,6 @@ return [
     'tooltip_view' => 'View details',
     'tooltip_activate' => 'Activate',
     'tooltip_deactivate' => 'Deactivate',
-    'tooltip_admin_deactivate' => 'Deactivate administrator',
-    'tooltip_admin_activate' => 'Activate administrator',
 
     // Breadcrumbs
     'breadcrumb_home' => 'Home',
