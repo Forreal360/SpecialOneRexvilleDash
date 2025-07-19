@@ -36,15 +36,9 @@ class UpdatePromotionAction extends Action
             'redirect_url' => 'required|string|max:255',
         ]);
 
-        $file = $data['file'];
-        if ($file) {
-            $file_name = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/promotions', $file_name);
-
-            $path = 'promotions/' . $file_name;
-
+        if ($validated['file']) {
+            $validated['image_path'] = $validated['file'];
             unset($validated['file']);
-            $validated['image_url'] = $path;
         }
 
         // Business logic with transaction

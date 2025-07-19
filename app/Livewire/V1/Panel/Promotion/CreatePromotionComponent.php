@@ -54,6 +54,7 @@ class CreatePromotionComponent extends Component
             'status' => $this->status,
         ], true);
 
+        dd($result);
         if ($result->isSuccess()) {
             session()->flash('success', __('panel.promotion_created_successfully'));
             return $this->redirect(route('v1.panel.promotions.index'));

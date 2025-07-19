@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
 class Promotion extends Model
@@ -14,7 +16,7 @@ class Promotion extends Model
         'title',
         'start_date',
         'end_date',
-        'image_url',
+        'image_path',
         'redirect_url',
         'status',
     ];
@@ -33,6 +35,14 @@ class Promotion extends Model
         return $this->status === 'A'
             && $this->start_date <= now()
             && $this->end_date >= now();
+    }
+
+    public function imagePath(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value == null ? null : Storage::disk('s3')->temporaryUrl($value, Carbon::now()->addMinutes(120)),
+            set: fn ($value) => $value == null ? null : Storage::disk('s3')->put('/promotions', $value),
+        );
     }
 
 }

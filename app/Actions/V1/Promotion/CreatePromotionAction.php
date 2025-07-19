@@ -8,6 +8,7 @@ use App\Actions\V1\Action;
 use App\Support\ActionResult;
 use Illuminate\Support\Facades\DB;
 use App\Services\V1\PromotionService;
+use Illuminate\Support\Facades\Storage;
 
 class CreatePromotionAction extends Action
 {
@@ -38,15 +39,10 @@ class CreatePromotionAction extends Action
             'redirect_url' => 'required|string|max:255',
         ]);
 
-        $file = $data['file'];
-        $file_name = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/promotions', $file_name);
 
-        $path = 'promotions/' . $file_name;
+        $validated['image_path'] = $validated['file'];
 
         unset($validated['file']);
-        $validated['image_url'] = $path;
-
 
         // Business logic with transaction
         return DB::transaction(function () use ($validated) {

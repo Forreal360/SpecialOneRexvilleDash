@@ -70,6 +70,9 @@
                 :currentSortDirection="$sortDirection"
             >{{ __('panel.name') }}</x-table.colum>
             <x-table.colum
+                sortable="false"
+            >{{ __('panel.image') }}</x-table.colum>
+            <x-table.colum
                 sortable="true"
                 sortField="start_date"
                 :currentSortBy="$sortBy"
@@ -115,6 +118,9 @@
             <x-table.row>
                 <x-table.cell>
                     {{$promotion->title}}
+                </x-table.cell>
+                <x-table.cell>
+                    <flux:button icon="photo" icon:variant="outline" class="cursor-pointer" href="{{$promotion->image_path}}" target="_blank"></flux:button>
                 </x-table.cell>
                 <x-table.cell>
                     {{$start_date->format('m/d/Y H:i')}}

@@ -48,6 +48,6 @@
     @endif
 
     <div class="mt-6 text-center">
-        <a href="{{ route('login') }}" class="text-accent hover:underline">{{ __('auth.back_to_login') }}</a>
+        <a href="{{ route('login') }}" class="text-accent hover:underline dark:text-zinc-200">{{ __('auth.back_to_login') }}</a>
     </div>
 </div>
