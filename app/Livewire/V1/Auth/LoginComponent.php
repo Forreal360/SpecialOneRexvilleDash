@@ -25,7 +25,7 @@ class LoginComponent extends Component
 
     public function mount()
     {
-        if(auth()->check()) {
+        if(auth()->guard('admin')->check()) {
             return redirect()->route('v1.panel.home');
         }
     }
