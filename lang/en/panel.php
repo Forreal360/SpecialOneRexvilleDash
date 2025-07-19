@@ -84,9 +84,11 @@ return [
 
     // Upload component
     'click_to_select_image' => 'Click to select an image',
+    'click_to_select_file' => 'Click to select a file',
     'file_selected' => 'File selected',
     'change_file' => 'Change file',
     'select_image' => 'Select image',
+    'select_file' => 'Select file',
     'uploading_file' => 'Uploading file...',
     'file_ready' => 'File ready',
     'upload_area_text' => 'Click to select an image',
