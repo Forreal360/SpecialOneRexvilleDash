@@ -41,6 +41,11 @@ class LoginWithEmailAction extends Action
         ]);
 
         $user = $this->adminService->findBy("email", $validated['email']);
+        if ($user->status != "A") {
+            throw new ValidationErrorException([
+                'email' => [trans('auth.failed')]
+            ]);
+        }
 
         if (!$user) {
             throw new ValidationErrorException([

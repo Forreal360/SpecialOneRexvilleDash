@@ -91,6 +91,7 @@ return [
     'select_file' => 'Seleccionar archivo',
     'uploading_file' => 'Subiendo archivo...',
     'file_ready' => 'Archivo listo',
+    'drop_file_here' => 'Suelta el archivo aquí',
     'upload_area_text' => 'Haz clic para seleccionar una imagen',
 
     // Tablas

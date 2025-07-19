@@ -91,6 +91,7 @@ return [
     'select_file' => 'Select file',
     'uploading_file' => 'Uploading file...',
     'file_ready' => 'File ready',
+    'drop_file_here' => 'Drop file here',
     'upload_area_text' => 'Click to select an image',
 
     // Tables

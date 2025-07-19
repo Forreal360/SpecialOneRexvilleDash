@@ -2,12 +2,14 @@
 
 El componente `x-forms.file-upload` es un componente reutilizable para la subida de archivos con Livewire y Alpine.js que incluye:
 
-- Interfaz de arrastrar y soltar personalizada
-- Barra de progreso durante la subida
-- Validación de tipos de archivo
-- Mensajes de estado personalizables
-- Soporte para modo oscuro
-- Integración con Livewire
+- **Drag and Drop**: Arrastra y suelta archivos directamente en el área
+- **Clic para seleccionar**: Selección tradicional de archivos por clic
+- **Interfaz visual dinámica**: Cambia de apariencia durante el drag and drop
+- **Barra de progreso** durante la subida
+- **Validación de tipos de archivo**
+- **Mensajes de estado personalizables**
+- **Soporte para modo oscuro**
+- **Integración completa con Livewire**
 
 ## Uso Básico
 
@@ -39,6 +41,7 @@ El componente `x-forms.file-upload` es un componente reutilizable para la subida
 | `fileReadyText` | string | `__('panel.file_ready')` | Texto cuando el archivo está listo |
 | `fileSelectedText` | string | `__('panel.file_selected')` | Texto cuando se selecciona un archivo |
 | `clickToSelectText` | string | `__('panel.click_to_select_file')` | Texto instructivo |
+| `dropText` | string | `__('panel.drop_file_here')` | Texto durante el drag and drop |
 | `error` | string | null | Mensaje de error a mostrar |
 | `required` | boolean | false | Si el campo es requerido |
 | `wireModel` | string | null | Modelo de Livewire para el campo |
@@ -90,6 +93,36 @@ El componente `x-forms.file-upload` es un componente reutilizable para la subida
 
 **Nota:** Solo necesitas enviar estos parámetros si quieres personalizar los textos. Por defecto, el componente usa las traducciones del sistema.
 
+## Funcionalidad Drag and Drop
+
+El componente soporta tanto la selección tradicional por clic como el arrastrar y soltar archivos:
+
+### Estados Visuales
+
+1. **Estado normal**: Muestra el ícono de carpeta y texto instructivo
+2. **Drag over**: Cambia a ícono de descarga y texto "Suelta el archivo aquí"
+3. **Archivo seleccionado**: Muestra el nombre del archivo y botón "Cambiar archivo"
+
+**Nota**: El área mantiene una altura fija de 140px para evitar cambios de tamaño durante las transiciones.
+
+### Comportamiento
+
+- **Arrastrar archivo**: El área cambia visualmente para indicar que puede soltar
+- **Soltar archivo**: Automáticamente selecciona el archivo y dispara el evento de cambio
+- **Validación**: Respeta el atributo `accept` para filtrar tipos de archivo
+- **Compatibilidad**: Funciona en todos los navegadores modernos
+
+### Personalización del Texto de Drop
+
+```blade
+<x-forms.file-upload
+    name="document"
+    wireModel="document"
+    accept=".pdf,.doc,.docx"
+    dropText="Suelta tu documento aquí"
+/>
+```
+
 ## Integración con Livewire
 
 El componente está diseñado para trabajar con Livewire y incluye:
@@ -119,13 +152,17 @@ class CreatePromotionComponent extends Component
 
 ## Características
 
+- **Drag and Drop**: Arrastra archivos directamente al área de subida
+- **Doble funcionalidad**: Clic para seleccionar + Drag and Drop
+- **Feedback visual**: Cambia de apariencia durante el drag and drop
+- **Altura fija**: Mantiene 140px de altura para evitar cambios de tamaño
 - **Responsive**: Se adapta a diferentes tamaños de pantalla
 - **Accesible**: Incluye atributos ARIA y navegación por teclado
 - **Personalizable**: Todos los textos y estilos son configurables
 - **Modo Oscuro**: Soporte completo para temas oscuros
 - **Validación**: Integración con el sistema de validación de Laravel
 - **Progreso**: Barra de progreso visual durante la subida
-- **Estados**: Múltiples estados visuales (vacío, seleccionado, subiendo, listo, error)
+- **Estados**: Múltiples estados visuales (vacío, seleccionado, subiendo, listo, error, drag over)
 
 ## Dependencias
 
