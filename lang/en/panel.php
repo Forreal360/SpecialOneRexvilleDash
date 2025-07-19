@@ -110,6 +110,10 @@ return [
     'per_page' => 'per page',
     'expired' => 'Expired',
     'reset_filters' => 'Reset filters',
+    'show_per_page' => 'Show',
+    'loading_data' => 'Loading data...',
+    'no_results_for_search' => 'No results found matching ":search"',
+    'no_data_available' => 'No data available or no results found',
 
     // Administrators
     'admin' => 'Administrator',

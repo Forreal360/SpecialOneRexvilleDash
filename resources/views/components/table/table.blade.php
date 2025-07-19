@@ -21,7 +21,7 @@
     </div>
     <div class="px-6 py-4  border-gray-200 dark:border-zinc-700">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <flux:select wire:model.live="perPage" size="sm" placeholder="Mostrar" class="w-full sm:w-32">
+            <flux:select wire:model.live="perPage" size="sm" placeholder="{{ __('panel.show_per_page') }}" class="w-full sm:w-32">
                 @foreach($perPageOptions as $option)
                     <flux:select.option value="{{ $option }}">{{ $option }}</flux:select.option>
                 @endforeach
@@ -54,14 +54,14 @@
 
 
         <div wire:loading class="bg-white divide-y divide-gray-200 dark:divide-zinc-700 dark:bg-zinc-800 w-full">
-            <div class="flex items-center justify-center space-x-2 py-3">
+            <div class="flex items-center justify-center space-x-2 py-12">
                 <flux:icon.loading />
-                <span class="text-sm text-gray-600 dark:text-zinc-400">Cargando datos...</span>
+                <span class="text-sm text-gray-600 dark:text-zinc-400">{{ __('panel.loading_data') }}</span>
             </div>
         </div>
 
         <!-- Empty state -->
-        <div wire:loading.remove>
+        {{-- <div wire:loading.remove>
             @if($data && $data->isEmpty())
             <div class="text-center py-12">
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,6 +75,19 @@
                         No hay datos disponibles
                     @endif
                 </p>
+            </div>
+            @endif
+        </div> --}}
+
+        <div wire:loading.remove class="bg-white divide-y divide-gray-200 dark:divide-zinc-700 dark:bg-zinc-800 w-full">
+            @if($data && $data->isEmpty())
+            <div class="flex items-center justify-center space-x-2 py-12">
+                <flux:icon.document-text class="text-gray-600 dark:text-zinc-400" size="lg" />
+                @if($search)
+                    <span class="text-sm text-gray-600 dark:text-zinc-400">{{ __('panel.no_results_for_search', ['search' => $search]) }}</span>
+                @else
+                    <span class="text-sm text-gray-600 dark:text-zinc-400">{{ __('panel.no_data_available') }}</span>
+                @endif
             </div>
             @endif
         </div>

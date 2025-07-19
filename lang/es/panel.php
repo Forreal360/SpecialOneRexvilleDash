@@ -110,6 +110,10 @@ return [
     'per_page' => 'por página',
     'expired' => 'Expirado',
     'reset_filters' => 'Limpiar filtros',
+    'show_per_page' => 'Mostrar',
+    'loading_data' => 'Cargando datos...',
+    'no_results_for_search' => 'No se encontraron resultados que coincidan con ":search"',
+    'no_data_available' => 'No hay datos disponibles o no se encontraron resultados',
 
     // Administradores
     'admin' => 'Administrador',
