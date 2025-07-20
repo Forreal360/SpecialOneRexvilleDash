@@ -28,13 +28,15 @@ class CreateVehicleAction extends Action
 
         $validated = $this->validateData($data, [
             'client_id' => 'required|exists:clients,id',
-            'year' => 'required|integer',
-            'make_id' => 'required|exists:makes,id',
-            'model_id' => 'required|exists:models,id',
-            'vin' => 'required|string',
+            'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'make_id' => 'required|exists:vehicle_makes,id',
+            'model_id' => 'required|exists:vehicle_models,id',
+            'vin' => 'required|string|max:255',
             'buy_date' => 'required|date',
-            'insurance' => 'required|string',
+            'insurance' => 'required|string|max:255',
+            'status' => 'required|in:A,I',
         ]);
+
 
         return DB::transaction(function () use ($validated) {
 

@@ -12,12 +12,14 @@ class ClientVehicle extends Model
     protected $table = 'client_vehicles';
 
     protected $fillable = [
-        'user_id',
+        'client_id',
         'year',
-        'model',
+        'model_id',
         'vin',
         'buy_date',
         'insurance',
+        'make_id',
+        'status',
     ];
 
     public function client(): BelongsTo
