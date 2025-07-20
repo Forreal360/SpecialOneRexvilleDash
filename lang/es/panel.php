@@ -84,6 +84,19 @@ return [
     'start_date' => 'Fecha de inicio',
     'end_date' => 'Fecha de fin',
     'redirect_url' => 'URL de redirección',
+    
+    // Campos específicos de vehículos
+    'make' => 'Marca',
+    'model' => 'Modelo',
+    'year' => 'Año',
+    'buy_date' => 'Fecha de compra',
+    'vin' => 'VIN',
+    'insurance' => 'Seguro',
+    'select_make' => 'Seleccionar marca',
+    'select_model' => 'Seleccionar modelo',
+    'all_makes' => 'Todas las marcas',
+    'all_models' => 'Todos los modelos',
+    'select_make_first' => 'Seleccionar marca primero',
 
     // Upload component
     'click_to_select_image' => 'Haz clic para seleccionar una imagen',

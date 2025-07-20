@@ -84,6 +84,19 @@ return [
     'start_date' => 'Start date',
     'end_date' => 'End date',
     'redirect_url' => 'Redirect URL',
+    
+    // Vehicle specific fields
+    'make' => 'Make',
+    'model' => 'Model',
+    'year' => 'Year',
+    'buy_date' => 'Purchase Date',
+    'vin' => 'VIN',
+    'insurance' => 'Insurance',
+    'select_make' => 'Select make',
+    'select_model' => 'Select model',
+    'all_makes' => 'All makes',
+    'all_models' => 'All models',
+    'select_make_first' => 'Select make first',
 
     // Upload component
     'click_to_select_image' => 'Click to select an image',

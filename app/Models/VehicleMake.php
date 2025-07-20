@@ -9,6 +9,8 @@ class VehicleMake extends Model
 {
     use HasFactory;
 
+    protected $table = 'vehicle_makes';
+
     protected $fillable = [
         'name',
         'vpic_id',
