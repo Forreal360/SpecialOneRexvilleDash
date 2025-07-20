@@ -217,6 +217,7 @@ return [
     'vehicle_list' => 'Vehicle list',
     'search_vehicles' => 'Search vehicles...',
     'vehicle_details' => 'Vehicle details',
+    'tooltip_vehicles' => 'View vehicles',
 
     // Promotions
     'promotion' => 'Promotion',

@@ -217,7 +217,7 @@ return [
     'vehicle_list' => 'Lista de vehículos',
     'search_vehicles' => 'Buscar vehículos...',
     'vehicle_details' => 'Detalles del vehículo',
-
+    'tooltip_vehicles' => 'Ver vehículos',
     // Promociones
     'promotion' => 'Promoción',
     'promotions' => 'Promociones',

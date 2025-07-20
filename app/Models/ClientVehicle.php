@@ -29,4 +29,14 @@ class ClientVehicle extends Model
     {
         return $this->hasMany(ClientService::class);
     }
+
+    public function make(): BelongsTo
+    {
+        return $this->belongsTo(VehicleMake::class);
+    }
+
+    public function model(): BelongsTo
+    {
+        return $this->belongsTo(VehicleModel::class);
+    }
 }

@@ -9,6 +9,7 @@ use App\Livewire\V1\Panel\Admin\{GetAdminsComponent, CreateAdminComponent, Updat
 use App\Livewire\V1\Auth\{ForgotPasswordComponent, ResetPasswordComponent};
 use App\Livewire\V1\Panel\Promotion\{GetPromotionsComponent, CreatePromotionComponent, UpdatePromotionComponent};
 use App\Livewire\V1\Panel\Client\{GetClientsComponent, CreateClientComponent, UpdateClientComponent};
+use App\Livewire\V1\Panel\Client\Vehicle\GetVehiclesComponent;
 
 Route::get('/test', [TestController::class, 'index'])->name('test');
 
@@ -41,4 +42,13 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
     Route::get('/clients', GetClientsComponent::class)->name('clients.index');
     Route::get('/clients/create', CreateClientComponent::class)->name('clients.create');
     Route::get('/clients/{id}/edit', UpdateClientComponent::class)->name('clients.edit');
+
+    /* ----------------- Vehicles ----------------- */
+    Route::get('/clients/{clientId}/vehicles', GetVehiclesComponent::class)->name('vehicles.index');
+    Route::get('/clients/{clientId}/vehicles/create', function ($clientId) {
+        return true;
+    })->name('vehicles.create');
+    Route::get('/clients/{clientId}/vehicles/{id}/edit', function ($clientId, $id) {
+        return true;
+    })->name('vehicles.edit');
 });
