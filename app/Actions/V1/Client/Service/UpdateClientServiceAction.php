@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Actions\V1\Client\Service;
+
+use App\Actions\V1\Action;
+use App\Support\ActionResult;
+use Illuminate\Support\Facades\DB;
+use App\Services\V1\ClientServiceService;
+
+class UpdateClientServiceAction extends Action
+{
+
+    public function __construct(private ClientServiceService $clientServiceService)
+    {
+
+    }
+
+    /**
+     * Handle the action logic
+     *
+     * @param array|object $data
+     * @return ActionResult
+     */
+    public function handle($data): ActionResult
+    {
+
+        $validated = $this->validateData($data, [
+            'client_service_id' => 'required|exists:client_services,id',
+            'client_id' => 'required|exists:clients,id',
+            'vehicle_id' => 'required|exists:client_vehicles,id',
+            'service_id' => 'required|exists:vehicle_services,id',
+            'date' => 'required|date',
+        ]);
+
+        return DB::transaction(function () use ($validated) {
+
+            $this->clientServiceService->update((int) $validated['client_service_id'], $validated);
+
+            return $this->successResult();
+        });
+    }
+} 

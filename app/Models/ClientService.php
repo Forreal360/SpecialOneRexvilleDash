@@ -28,6 +28,6 @@ class ClientService extends Model
     }
     public function service(): BelongsTo
     {
-        return $this->belongsTo(VehicleService::class);
+        return $this->belongsTo(VehicleService::class, 'service_id');
     }
 }

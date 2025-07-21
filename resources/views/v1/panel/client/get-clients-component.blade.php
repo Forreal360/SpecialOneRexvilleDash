@@ -169,6 +169,10 @@
                                 </svg>
                             </flux:button>
                         </flux:tooltip>
+
+                        <flux:tooltip content="{{ __('panel.tooltip_services') }}">
+                            <flux:button size="sm" icon="wrench-screwdriver" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.client-services.index', $client->id) }}"></flux:button>
+                        </flux:tooltip>
                     </flux:button.group>
 
 

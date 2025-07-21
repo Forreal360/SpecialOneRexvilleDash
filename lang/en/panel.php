@@ -231,6 +231,8 @@ return [
     'search_vehicles' => 'Search vehicles...',
     'vehicle_details' => 'Vehicle details',
     'tooltip_vehicles' => 'View vehicles',
+    'tooltip_services' => 'View services',
+    'tooltip_vehicle_services' => 'View services for this vehicle',
 
     // Vehicle Services
     'vehicle_services' => 'Vehicle Services',
@@ -250,6 +252,30 @@ return [
     'vehicle_service_details' => 'Vehicle service details',
     'vehicle_service_name_placeholder' => 'e.g: Oil change, General inspection...',
     'breadcrumb_vehicle_services' => 'Vehicle Services',
+
+    // Client Services
+    'client_services' => 'Client Services',
+    'client_service' => 'Client Service',
+    'new_client_service' => 'New client service',
+    'create_client_service' => 'Create client service',
+    'edit_client_service' => 'Edit client service',
+    'update_client_service' => 'Update client service',
+    'client_service_created_successfully' => 'Client service created successfully',
+    'client_service_updated_successfully' => 'Client service updated successfully',
+    'error_creating_client_service' => 'Error creating client service',
+    'error_updating_client_service' => 'Error updating client service',
+    'client_service_management' => 'Client service management',
+    'client_service_list' => 'Client service list',
+    'search_client_services' => 'Search client services...',
+    'client_service_details' => 'Client service details',
+    'breadcrumb_client_services' => 'Client Services',
+    'service_date' => 'Service date',
+    'select_service' => 'Select service',
+    'select_vehicle' => 'Select vehicle',
+    'all_services' => 'All services',
+    'all_vehicles' => 'All vehicles',
+    'date_from' => 'Date from',
+    'date_to' => 'Date to',
 
     // Promotions
     'promotion' => 'Promotion',

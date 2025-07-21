@@ -231,6 +231,8 @@ return [
     'search_vehicles' => 'Buscar vehículos...',
     'vehicle_details' => 'Detalles del vehículo',
     'tooltip_vehicles' => 'Ver vehículos',
+    'tooltip_services' => 'Ver servicios',
+    'tooltip_vehicle_services' => 'Ver servicios de este vehículo',
 
     // Servicios de vehículos
     'vehicle_services' => 'Servicios de vehículos',
@@ -250,6 +252,30 @@ return [
     'vehicle_service_details' => 'Detalles del servicio de vehículo',
     'vehicle_service_name_placeholder' => 'Ej: Cambio de aceite, Revisión general...',
     'breadcrumb_vehicle_services' => 'Servicios de vehículos',
+
+    // Servicios de clientes
+    'client_services' => 'Servicios de clientes',
+    'client_service' => 'Servicio de cliente',
+    'new_client_service' => 'Nuevo servicio de cliente',
+    'create_client_service' => 'Crear servicio de cliente',
+    'edit_client_service' => 'Editar servicio de cliente',
+    'update_client_service' => 'Actualizar servicio de cliente',
+    'client_service_created_successfully' => 'Servicio de cliente creado correctamente',
+    'client_service_updated_successfully' => 'Servicio de cliente actualizado correctamente',
+    'error_creating_client_service' => 'Error al crear el servicio de cliente',
+    'error_updating_client_service' => 'Error al actualizar el servicio de cliente',
+    'client_service_management' => 'Gestión de servicios de clientes',
+    'client_service_list' => 'Lista de servicios de clientes',
+    'search_client_services' => 'Buscar servicios de clientes...',
+    'client_service_details' => 'Detalles del servicio de cliente',
+    'breadcrumb_client_services' => 'Servicios de clientes',
+    'service_date' => 'Fecha del servicio',
+    'select_service' => 'Seleccionar servicio',
+    'select_vehicle' => 'Seleccionar vehículo',
+    'all_services' => 'Todos los servicios',
+    'all_vehicles' => 'Todos los vehículos',
+    'date_from' => 'Fecha desde',
+    'date_to' => 'Fecha hasta',
 
     // Promociones
     'promotion' => 'Promoción',

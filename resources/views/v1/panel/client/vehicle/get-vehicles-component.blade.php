@@ -185,6 +185,10 @@
                             </flux:tooltip>
                         @endif
 
+                        <flux:tooltip content="{{ __('panel.tooltip_vehicle_services') }}">
+                            <flux:button size="sm" icon="wrench-screwdriver" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.client-services.index', ['clientId' => $clientId, 'vehicle_id' => $vehicle->id]) }}"></flux:button>
+                        </flux:tooltip>
+
                     </flux:button.group>
                 </x-table.cell>
             </x-table.row>
