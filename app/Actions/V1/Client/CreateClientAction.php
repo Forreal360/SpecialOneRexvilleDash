@@ -43,7 +43,11 @@ class CreateClientAction extends Action
 
         return DB::transaction(function () use ($validated) {
 
-            $this->clientService->create($validated);
+            $client = $this->clientService->create($validated);
+
+
+            #send email to client
+            $client->notify(new ClientRegisterNotification($client, $randomPassword));
 
             return $this->successResult();
         });
