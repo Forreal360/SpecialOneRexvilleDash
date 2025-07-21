@@ -9,7 +9,7 @@ use App\Support\ActionResult;
 use Illuminate\Support\Facades\DB;
 use App\Services\V1\ClientVehicleService;
 
-class CreateVehicleAction extends Action
+class UpdateVehicleAction extends Action
 {
 
     public function __construct(private ClientVehicleService $clientVehicleService)
@@ -27,6 +27,7 @@ class CreateVehicleAction extends Action
     {
 
         $validated = $this->validateData($data, [
+            'vehicle_id' => 'required|exists:client_vehicles,id',
             'client_id' => 'required|exists:clients,id',
             'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
             'make_id' => 'required|exists:vehicle_makes,id',
@@ -34,19 +35,20 @@ class CreateVehicleAction extends Action
             'vin' => 'required|string|max:255',
             'buy_date' => 'required|date',
             'insurance' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|in:A,I',
         ]);
 
-        $validated['image_path'] = $validated['image'];
-        unset($validated['image']);
-
+        if (isset($validated['image'])) {
+            $validated['image_path'] = $validated['image'];
+            unset($validated['image']);
+        }
 
         return DB::transaction(function () use ($validated) {
 
-            $this->clientVehicleService->create($validated);
+            $this->clientVehicleService->update((int) $validated['vehicle_id'], $validated);
 
             return $this->successResult();
         });
     }
-}
+} 

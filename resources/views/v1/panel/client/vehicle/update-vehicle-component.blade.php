@@ -1,11 +1,11 @@
 @section('title', __('panel.vehicles'))
-@section('description', __('panel.create_vehicle'))
+@section('description', __('panel.edit_vehicle'))
 
 @section('breadcrumbs')
 <flux:breadcrumbs.item href="{{route('v1.panel.home')}}" separator="slash">{{ __('panel.breadcrumb_home') }}</flux:breadcrumbs.item>
 <flux:breadcrumbs.item href="{{route('v1.panel.clients.index')}}" separator="slash">{{ __('panel.breadcrumb_clients') }}</flux:breadcrumbs.item>
 <flux:breadcrumbs.item href="{{route('v1.panel.vehicles.index', $clientId)}}" separator="slash">{{ __('panel.breadcrumb_vehicles') }}</flux:breadcrumbs.item>
-<flux:breadcrumbs.item separator="slash">{{ __('panel.breadcrumb_create') }}</flux:breadcrumbs.item>
+<flux:breadcrumbs.item separator="slash">{{ __('panel.breadcrumb_edit') }}</flux:breadcrumbs.item>
 @endsection
 
 @section('actions')
@@ -13,16 +13,15 @@
 @endsection
 
 <x-containers.card-container>
-    <form wire:submit.prevent="createVehicle">
+    <form wire:submit.prevent="updateVehicle">
         <div class="flex-1 space-y-6">
 
-            <x-forms.form-field label="{{ __('panel.image') }}*" for="image" :error="$errors->first('image')">
+            <x-forms.form-field label="{{ __('panel.image') }}" for="image" :error="$errors->first('image')">
                 <x-forms.file-upload
                     name="image"
                     wireModel="image"
                     accept="image/*"
                     :error="$errors->first('image')"
-                    required
                 />
             </x-forms.form-field>
 
@@ -116,10 +115,10 @@
                     type="submit"
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
-                    wire:target="createVehicle"
+                    wire:target="updateVehicle"
                 >
-                    <span wire:loading.remove wire:target="createVehicle">{{ __('panel.create_vehicle') }}</span>
-                    <span wire:loading wire:target="createVehicle">{{ __('panel.loading') }}</span>
+                    <span wire:loading.remove wire:target="updateVehicle">{{ __('panel.update_vehicle') }}</span>
+                    <span wire:loading wire:target="updateVehicle">{{ __('panel.loading') }}</span>
                 </flux:button>
             </div>
         </div>

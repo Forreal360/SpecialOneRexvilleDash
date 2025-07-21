@@ -81,6 +81,12 @@
         <x-slot name="colums">
 
             <x-table.colum
+                sortable="false"
+            >
+                {{ __('panel.image') }}
+            </x-table.colum>
+
+            <x-table.colum
                 sortable="true"
                 sortField="year"
                 :currentSortBy="$sortBy"
@@ -140,8 +146,13 @@
                 $timezone = session('timezone') ?? 'UTC';
                 $created_at = \Carbon\Carbon::parse($vehicle->created_at);
                 $created_at = dateToLocal($created_at, $timezone);
+
+                $buy_date = \Carbon\Carbon::parse($vehicle->buy_date);
             @endphp
             <x-table.row>
+                <x-table.cell>
+                    <flux:button icon="photo" icon:variant="outline" class="cursor-pointer" href="{{$vehicle->image_path}}" target="_blank"></flux:button>
+                </x-table.cell>
                 <x-table.cell>
                     {{$vehicle->year}}
                 </x-table.cell>
@@ -155,7 +166,7 @@
                     {{$vehicle->vin}}
                 </x-table.cell>
                 <x-table.cell>
-                    {{$vehicle->buy_date}}
+                    {{$buy_date->format('m/d/Y')}}
                 </x-table.cell>
                 <x-table.cell>
                     {{$vehicle->insurance}}
