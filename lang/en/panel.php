@@ -232,6 +232,25 @@ return [
     'vehicle_details' => 'Vehicle details',
     'tooltip_vehicles' => 'View vehicles',
 
+    // Vehicle Services
+    'vehicle_services' => 'Vehicle Services',
+    'vehicle_service' => 'Vehicle Service',
+    'new_vehicle_service' => 'New vehicle service',
+    'create_vehicle_service' => 'Create vehicle service',
+    'edit_vehicle_service' => 'Edit vehicle service',
+    'update_vehicle_service' => 'Update vehicle service',
+    'vehicle_service_created_successfully' => 'Vehicle service created successfully',
+    'vehicle_service_updated_successfully' => 'Vehicle service updated successfully',
+    'vehicle_service_status_updated' => 'Service status updated successfully',
+    'error_creating_vehicle_service' => 'Error creating vehicle service',
+    'error_updating_vehicle_service' => 'Error updating vehicle service',
+    'vehicle_service_management' => 'Vehicle service management',
+    'vehicle_service_list' => 'Vehicle service list',
+    'search_vehicle_services' => 'Search vehicle services...',
+    'vehicle_service_details' => 'Vehicle service details',
+    'vehicle_service_name_placeholder' => 'e.g: Oil change, General inspection...',
+    'breadcrumb_vehicle_services' => 'Vehicle Services',
+
     // Promotions
     'promotion' => 'Promotion',
     'promotions' => 'Promotions',

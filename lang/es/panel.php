@@ -231,6 +231,26 @@ return [
     'search_vehicles' => 'Buscar vehículos...',
     'vehicle_details' => 'Detalles del vehículo',
     'tooltip_vehicles' => 'Ver vehículos',
+
+    // Servicios de vehículos
+    'vehicle_services' => 'Servicios de vehículos',
+    'vehicle_service' => 'Servicio de vehículo',
+    'new_vehicle_service' => 'Nuevo servicio de vehículo',
+    'create_vehicle_service' => 'Crear servicio de vehículo',
+    'edit_vehicle_service' => 'Editar servicio de vehículo',
+    'update_vehicle_service' => 'Actualizar servicio de vehículo',
+    'vehicle_service_created_successfully' => 'Servicio de vehículo creado correctamente',
+    'vehicle_service_updated_successfully' => 'Servicio de vehículo actualizado correctamente',
+    'vehicle_service_status_updated' => 'Estado del servicio actualizado correctamente',
+    'error_creating_vehicle_service' => 'Error al crear el servicio de vehículo',
+    'error_updating_vehicle_service' => 'Error al actualizar el servicio de vehículo',
+    'vehicle_service_management' => 'Gestión de servicios de vehículos',
+    'vehicle_service_list' => 'Lista de servicios de vehículos',
+    'search_vehicle_services' => 'Buscar servicios de vehículos...',
+    'vehicle_service_details' => 'Detalles del servicio de vehículo',
+    'vehicle_service_name_placeholder' => 'Ej: Cambio de aceite, Revisión general...',
+    'breadcrumb_vehicle_services' => 'Servicios de vehículos',
+
     // Promociones
     'promotion' => 'Promoción',
     'promotions' => 'Promociones',
