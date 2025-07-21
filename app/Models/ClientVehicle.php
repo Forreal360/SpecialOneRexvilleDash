@@ -54,5 +54,7 @@ class ClientVehicle extends Model
             set: fn ($value) => $value == null ? null : Storage::disk('s3')->put('/client_vehicles', $value),
         );
     }
+    
+
 
 }

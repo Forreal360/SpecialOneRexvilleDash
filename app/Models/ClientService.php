@@ -14,7 +14,7 @@ class ClientService extends Model
         'client_id',
         'vehicle_id',
         'date',
-        'name',
+        'service_id',
     ];
 
     public function client(): BelongsTo
@@ -25,5 +25,9 @@ class ClientService extends Model
     public function vehicle(): BelongsTo
     {
         return $this->belongsTo(ClientVehicle::class);
+    }
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(VehicleService::class);
     }
 }
