@@ -33,6 +33,10 @@ class CreateClientServiceAction extends Action
             'date' => 'required|date',
         ]);
 
+        $date = \Carbon\Carbon::createFromFormat('m/d/Y', $validated['date']);
+        $validated['date'] = $date->format('Y-m-d');
+
+
         return DB::transaction(function () use ($validated) {
 
             $this->clientServiceService->create($validated);
