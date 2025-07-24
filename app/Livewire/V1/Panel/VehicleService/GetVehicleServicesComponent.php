@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Livewire\V1\Panel\VehicleService;
 
+use App\Models\VehicleService;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\VehicleService;
+use Flux\Flux;
 
 class GetVehicleServicesComponent extends Component
 {
@@ -26,18 +25,15 @@ class GetVehicleServicesComponent extends Component
         'sortDirection' => ['except' => 'asc'],
     ];
 
-    protected function rules()
-    {
-        return [
-            'perPage' => 'in:5,10,20,50,100',
-            'search' => 'nullable|string|max:255',
-            'status' => 'nullable|in:A,I',
-        ];
-    }
+    protected $rules = [
+        'perPage' => 'in:5,10,20,50,100',
+        'search' => 'nullable|string|max:255',
+        'status' => 'nullable|in:A,I',
+    ];
 
     public function resetFilters()
     {
-        $this->reset(['search', 'perPage', 'status', 'sortBy', 'sortDirection']);
+        $this->reset();
     }
 
     public function updatingSearch()
@@ -71,28 +67,26 @@ class GetVehicleServicesComponent extends Component
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%');
             })
-            ->when($this->status, function ($query) {
+            ->when($this->status !== '', function ($query) {
                 $query->where('status', $this->status);
             })
             ->orderBy($this->sortBy, $this->sortDirection)
             ->paginate($this->perPage);
 
         $statusOptions = [
-            'A' => 'Activo',
-            'I' => 'Inactivo',
+            'A' => __('panel.active'),
+            'I' => __('panel.inactive'),
         ];
 
         $perPageOptions = [5, 10, 20, 50, 100];
 
-        return view('v1.panel.vehicle-service.get-vehicle-services-component', 
-            compact('vehicleServices', 'statusOptions', 'perPageOptions'));
+        return view('v1.panel.vehicle-service.get-vehicle-services-component', compact('vehicleServices', 'statusOptions', 'perPageOptions'));
     }
 
     public function updateStatus($id, $status)
     {
         VehicleService::find($id)->update(['status' => $status]);
-        session()->flash('success', __('panel.vehicle_service_status_updated'));
+        
+        Flux::toast(__('panel.status_updated_successfully'));
     }
-
-
-} 
+}

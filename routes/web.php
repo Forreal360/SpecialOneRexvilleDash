@@ -11,6 +11,7 @@ use App\Livewire\V1\Panel\Promotion\{GetPromotionsComponent, CreatePromotionComp
 use App\Livewire\V1\Panel\Client\{GetClientsComponent, CreateClientComponent, UpdateClientComponent};
 use App\Livewire\V1\Panel\Client\Vehicle\{GetVehiclesComponent, CreateVehicleComponent, UpdateVehicleComponent};
 use App\Livewire\V1\Panel\Client\Service\{GetClientServicesComponent, CreateClientServiceComponent, UpdateClientServiceComponent};
+use App\Livewire\V1\Panel\VehicleService\{GetVehicleServicesComponent, CreateVehicleServiceComponent, UpdateVehicleServiceComponent};
 
 
 Route::get('/test', [TestController::class, 'index'])->name('test');
@@ -55,5 +56,9 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
     Route::get('/clients/{clientId}/services/create', CreateClientServiceComponent::class)->name('client-services.create');
     Route::get('/clients/{clientId}/services/{id}/edit', UpdateClientServiceComponent::class)->name('client-services.edit');
 
+    /* ----------------- Vehicle Services ----------------- */
+    Route::get('/vehicle-services', GetVehicleServicesComponent::class)->name('vehicle-services.index');
+    Route::get('/vehicle-services/create', CreateVehicleServiceComponent::class)->name('vehicle-services.create');
+    Route::get('/vehicle-services/{id}/edit', UpdateVehicleServiceComponent::class)->name('vehicle-services.edit');
 
 });

@@ -249,6 +249,7 @@ return [
     'vehicle_service_management' => 'Gestión de servicios de vehículos',
     'vehicle_service_list' => 'Lista de servicios de vehículos',
     'search_vehicle_services' => 'Buscar servicios de vehículos...',
+    'search_vehicle_services_placeholder' => 'Buscar servicios de vehículos...',
     'vehicle_service_details' => 'Detalles del servicio de vehículo',
     'vehicle_service_name_placeholder' => 'Ej: Cambio de aceite, Revisión general...',
     'breadcrumb_vehicle_services' => 'Servicios de vehículos',

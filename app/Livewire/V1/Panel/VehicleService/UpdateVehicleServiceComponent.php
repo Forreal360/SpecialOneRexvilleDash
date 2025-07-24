@@ -1,39 +1,39 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Livewire\V1\Panel\VehicleService;
 
 use Livewire\Component;
 use App\Actions\V1\VehicleService\UpdateVehicleServiceAction;
 use App\Livewire\Concerns\HandlesActionResults;
-use App\Models\VehicleService;
+use App\Services\V1\VehicleServiceService;
 
 class UpdateVehicleServiceComponent extends Component
 {
     use HandlesActionResults;
 
-    public $vehicleServiceId;
-    public $name = '';
-    public $status = 'A';
+    public $vehicle_service_id;
+    public $name;
+    public $status;
 
     private $updateVehicleServiceAction;
+    private $vehicleServiceService;
+
+    public function boot(UpdateVehicleServiceAction $updateVehicleServiceAction, VehicleServiceService $vehicleServiceService)
+    {
+        $this->updateVehicleServiceAction = $updateVehicleServiceAction;
+        $this->vehicleServiceService = $vehicleServiceService;
+    }
 
     public function mount($id)
     {
-        $this->vehicleServiceId = $id;
+        $this->vehicle_service_id = $id;
         $this->loadVehicleService();
     }
 
-    public function boot(UpdateVehicleServiceAction $updateVehicleServiceAction)
+    public function loadVehicleService()
     {
-        $this->updateVehicleServiceAction = $updateVehicleServiceAction;
-    }
+        $vehicleService = $this->vehicleServiceService->findByIdOrFail($this->vehicle_service_id);
 
-    private function loadVehicleService()
-    {
-        $vehicleService = VehicleService::findOrFail($this->vehicleServiceId);
-        
         $this->name = $vehicleService->name;
         $this->status = $vehicleService->status;
     }
@@ -45,17 +45,24 @@ class UpdateVehicleServiceComponent extends Component
 
     public function updateVehicleService()
     {
-        $result = $this->executeAction($this->updateVehicleServiceAction, [
-            'vehicle_service_id' => $this->vehicleServiceId,
+        $data = [
+            'id' => $this->vehicle_service_id,
             'name' => $this->name,
             'status' => $this->status,
-        ], true);
+        ];
 
-        if ($result->isSuccess()) {
+        $updateVehicleServiceResult = $this->executeAction($this->updateVehicleServiceAction, $data, true);
+
+        if ($updateVehicleServiceResult->isSuccess()) {
             session()->flash('success', __('panel.vehicle_service_updated_successfully'));
             return $this->redirect(route('v1.panel.vehicle-services.index'));
         }
 
         session()->flash('error', __('panel.error_updating_vehicle_service'));
     }
-} 
+
+    public function cancel()
+    {
+        return $this->redirect(route('v1.panel.vehicle-services.index'));
+    }
+}

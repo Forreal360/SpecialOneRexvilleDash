@@ -249,6 +249,7 @@ return [
     'vehicle_service_management' => 'Vehicle service management',
     'vehicle_service_list' => 'Vehicle service list',
     'search_vehicle_services' => 'Search vehicle services...',
+    'search_vehicle_services_placeholder' => 'Search vehicle services...',
     'vehicle_service_details' => 'Vehicle service details',
     'vehicle_service_name_placeholder' => 'e.g: Oil change, General inspection...',
     'breadcrumb_vehicle_services' => 'Vehicle Services',
