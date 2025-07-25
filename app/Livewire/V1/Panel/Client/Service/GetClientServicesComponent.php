@@ -52,7 +52,7 @@ class GetClientServicesComponent extends Component
     public function mount($clientId)
     {
         $this->clientId = $clientId;
-        
+
         // Auto-select vehicle if passed as query parameter
         if (request()->has('vehicle_id')) {
             $this->vehicle_id = request()->query('vehicle_id');
@@ -119,10 +119,17 @@ class GetClientServicesComponent extends Component
             ->when($this->vehicle_id, function ($query) {
                 $query->where('vehicle_id', $this->vehicle_id);
             })
+            ->when(($this->date_from && $this->date_to), function ($query) {
+                $date_from = $this->date_from . ' ' . '00:00:00';
+                $date_to = $this->date_to . ' ' . '23:59:59';
+                $date_from = dateToUTC($date_from, session('timezone'))->format('Y-m-d');
+                $date_to = dateToUTC($date_to, session('timezone'))->format('Y-m-d');
+                $query->whereBetween('date', [$date_from, $date_to]);
+            })
             ->when($this->service_id, function ($query) {
                 $query->where('service_id', $this->service_id);
             })
-            
+
             ->orderBy($this->sortBy, $this->sortDirection)
             ->paginate($this->perPage);
 
@@ -139,7 +146,7 @@ class GetClientServicesComponent extends Component
 
         $perPageOptions = [5, 10, 20, 50, 100];
 
-        return view('v1.panel.client.service.get-client-services-component', 
+        return view('v1.panel.client.service.get-client-services-component',
             compact('clientServices', 'vehicles', 'services', 'perPageOptions'));
     }
-} 
+}

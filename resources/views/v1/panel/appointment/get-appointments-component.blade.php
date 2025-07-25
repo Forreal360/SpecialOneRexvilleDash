@@ -133,7 +133,7 @@
             <x-slot name="rows">
                 @foreach($appointments as $appointment)
                     @php
-                        $timezone = session('timezone') ?? 'UTC';
+                        $timezone = 'America/Puerto_Rico';
                         $appointmentDateTime = \Carbon\Carbon::parse($appointment->appointment_datetime);
                         $appointmentDateTime = dateToLocal($appointmentDateTime, $timezone);
                     @endphp
