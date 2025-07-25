@@ -49,6 +49,7 @@
             </div>
         </div>
     </div>
+
     <x-containers.card-container>
         <x-table.table
             :data="$appointments"

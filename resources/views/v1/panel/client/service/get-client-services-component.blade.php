@@ -71,14 +71,6 @@
         </x-slot>
 
         <x-slot name="colums">
-            <x-table.colum
-                sortable="true"
-                sortField="id"
-                :currentSortBy="$sortBy"
-                :currentSortDirection="$sortDirection"
-            >
-                ID
-            </x-table.colum>
 
             <x-table.colum
                 sortable="true"
@@ -117,22 +109,20 @@
                     $created_at = \Carbon\Carbon::parse($clientService->created_at);
                     $created_at = dateToLocal($created_at, $timezone);
                     $service_date = \Carbon\Carbon::parse($clientService->date);
-                    $service_date = dateToLocal($service_date, $timezone);
                 @endphp
                 <x-table.row>
-                    <x-table.cell>{{ $clientService->id }}</x-table.cell>
-                    
+
                     <x-table.cell>
-                        {{ $clientService->vehicle->year }} 
-                        {{ $clientService->vehicle->make->name }} 
+                        {{ $clientService->vehicle->year }}
+                        {{ $clientService->vehicle->make->name }}
                         {{ $clientService->vehicle->model->name }} <br>
                         {{ $clientService->vehicle->vin }}
                     </x-table.cell>
-                    
+
                     <x-table.cell>{{ $clientService->service->name }}</x-table.cell>
-                    
+
                     <x-table.cell>{{ $service_date->format('m/d/Y') }}</x-table.cell>
-                    
+
                     <x-table.cell>
                         <flux:button.group>
                             <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.client-services.edit', [$clientId, $clientService->id]) }}"></flux:button>
@@ -144,4 +134,4 @@
 
     </x-table.table>
 
-</x-containers.card-container> 
+</x-containers.card-container>
