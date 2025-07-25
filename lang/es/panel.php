@@ -84,7 +84,7 @@ return [
     'start_date' => 'Fecha de inicio',
     'end_date' => 'Fecha de fin',
     'redirect_url' => 'URL de redirección',
-    
+
     // Campos específicos de vehículos
     'make' => 'Marca',
     'model' => 'Modelo',
@@ -373,4 +373,56 @@ return [
     'success_deleted' => 'Eliminado correctamente',
     'success_created' => 'Creado correctamente',
     'change_language' => 'Cambiar idioma',
+
+    // Appointments / Agendamientos
+    'appointments' => 'Agendamientos',
+    'appointment' => 'Agendamiento',
+    'appointment_management' => 'Gestión de Agendamientos',
+    'appointment_information' => 'Información del Agendamiento',
+    'appointment_datetime' => 'Fecha y Hora',
+    'appointment_date' => 'Fecha',
+    'appointment_time' => 'Hora',
+    'appointment_status_pending' => 'Pendiente',
+    'appointment_status_confirmed' => 'Confirmado',
+    'appointment_status_cancelled' => 'Cancelado',
+    'appointment_status_completed' => 'Completado',
+    'appointment_notes_placeholder' => 'Notas adicionales sobre el agendamiento...',
+    'breadcrumb_appointments' => 'Agendamientos',
+    'search_appointments_placeholder' => 'Buscar por cliente, servicio o notas...',
+    'all_statuses' => 'Todos los estados',
+    'date_from' => 'Fecha desde',
+    'date_to' => 'Fecha hasta',
+    'reset_filters' => 'Limpiar filtros',
+    'client_information' => 'Información del Cliente',
+    'vehicle_information' => 'Información del Vehículo',
+    'service_information' => 'Información del Servicio',
+    'current_status' => 'Estado Actual',
+    'update_appointment' => 'Actualizar Agendamiento',
+    'update_appointment_details' => 'Actualizar Detalles del Agendamiento',
+    'updating' => 'Actualizando...',
+    'timezone' => 'Zona Horaria',
+
+    // Actions
+    'confirm_appointment' => 'Confirmar Agendamiento',
+    'cancel_appointment' => 'Cancelar Agendamiento',
+    'complete_appointment' => 'Completar Agendamiento',
+    'edit_appointment' => 'Editar Agendamiento',
+    'confirm' => 'Confirmar',
+    'confirming' => 'Confirmando...',
+    'cancelling' => 'Cancelando...',
+    'completing' => 'Completando...',
+
+    // Messages
+    'confirm_appointment_message' => '¿Está seguro de que desea confirmar este agendamiento?',
+    'cancel_appointment_message' => '¿Está seguro de que desea cancelar este agendamiento?',
+    'complete_appointment_message' => '¿Está seguro de que desea marcar este agendamiento como completado?',
+    'cancellation_reason' => 'Motivo de Cancelación',
+    'cancellation_reason_placeholder' => 'Ingrese el motivo de la cancelación (opcional)...',
+    'completion_notes' => 'Notas de Finalización',
+    'completion_notes_placeholder' => 'Ingrese notas sobre la finalización del servicio (opcional)...',
+
+    // Success messages
+    'appointment_confirmed_successfully' => 'Agendamiento confirmado exitosamente',
+    'appointment_cancelled_successfully' => 'Agendamiento cancelado exitosamente',
+    'appointment_completed_successfully' => 'Agendamiento completado exitosamente',
 ];

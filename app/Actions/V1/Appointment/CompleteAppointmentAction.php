@@ -1,0 +1,83 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Actions\V1\Appointment;
+
+use App\Actions\V1\Action;
+use App\Support\ActionResult;
+use Illuminate\Support\Facades\DB;
+use App\Services\V1\AppointmentService;
+
+class CompleteAppointmentAction extends Action
+{
+    /**
+     * Constructor - Inject dependencies here
+     */
+    public function __construct(private AppointmentService $appointmentService)
+    {
+        //
+    }
+
+    /**
+     * Handle the action logic
+     *
+     * @param array|object $data
+     * @return ActionResult
+     */
+    public function handle($data): ActionResult
+    {
+        // Validate input data
+        $validated = $this->validateData($data, [
+            'id' => 'required|integer|exists:appointments,id',
+            'completion_notes' => 'nullable|string|max:1000',
+        ], [
+            'id.required' => 'El ID del agendamiento es obligatorio',
+            'id.exists' => 'El agendamiento no existe',
+            'completion_notes.max' => 'Las notas de finalización no pueden tener más de 1000 caracteres',
+        ]);
+
+        // Business logic with transaction
+        return DB::transaction(function () use ($validated) {
+            // Find the appointment
+            $appointment = $this->appointmentService->findByIdOrFail($validated['id']);
+
+            // Check if appointment can be completed (only confirmed can be completed)
+            if ($appointment->status !== 'confirmed') {
+                return $this->errorResult(
+                    message: 'Solo se pueden completar agendamientos confirmados',
+                    statusCode: 400
+                );
+            }
+
+            // Prepare update data
+            $updateData = ['status' => 'completed'];
+
+            // Add completion notes if provided
+            if (!empty($validated['completion_notes'])) {
+                $currentNotes = $appointment->notes ?? '';
+                $completionNote = "COMPLETADO: " . $validated['completion_notes'];
+                $updateData['notes'] = $currentNotes ? $currentNotes . "\n\n" . $completionNote : $completionNote;
+            }
+
+            // Update the appointment
+            $updated = $this->appointmentService->update($validated['id'], $updateData);
+
+            if (!$updated) {
+                return $this->errorResult(
+                    message: 'Error al completar el agendamiento',
+                    statusCode: 500
+                );
+            }
+
+            // Get updated appointment with relationships
+            $updatedAppointment = $this->appointmentService->findByIdOrFail($validated['id']);
+            $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'service']);
+
+            return $this->successResult(
+                data: $updatedAppointment,
+                message: 'Agendamiento completado exitosamente'
+            );
+        });
+    }
+}

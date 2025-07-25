@@ -84,7 +84,7 @@ return [
     'start_date' => 'Start date',
     'end_date' => 'End date',
     'redirect_url' => 'Redirect URL',
-    
+
     // Vehicle specific fields
     'make' => 'Make',
     'model' => 'Model',
@@ -373,4 +373,56 @@ return [
     'success_deleted' => 'Deleted successfully',
     'success_created' => 'Created successfully',
     'change_language' => 'Change language',
+
+    // Appointments
+    'appointments' => 'Appointments',
+    'appointment' => 'Appointment',
+    'appointment_management' => 'Appointment Management',
+    'appointment_information' => 'Appointment Information',
+    'appointment_datetime' => 'Date & Time',
+    'appointment_date' => 'Date',
+    'appointment_time' => 'Time',
+    'appointment_status_pending' => 'Pending',
+    'appointment_status_confirmed' => 'Confirmed',
+    'appointment_status_cancelled' => 'Cancelled',
+    'appointment_status_completed' => 'Completed',
+    'appointment_notes_placeholder' => 'Additional notes about the appointment...',
+    'breadcrumb_appointments' => 'Appointments',
+    'search_appointments_placeholder' => 'Search by client, service or notes...',
+    'all_statuses' => 'All statuses',
+    'date_from' => 'Date from',
+    'date_to' => 'Date to',
+    'reset_filters' => 'Reset filters',
+    'client_information' => 'Client Information',
+    'vehicle_information' => 'Vehicle Information',
+    'service_information' => 'Service Information',
+    'current_status' => 'Current Status',
+    'update_appointment' => 'Update Appointment',
+    'update_appointment_details' => 'Update Appointment Details',
+    'updating' => 'Updating...',
+    'timezone' => 'Timezone',
+
+    // Actions
+    'confirm_appointment' => 'Confirm Appointment',
+    'cancel_appointment' => 'Cancel Appointment',
+    'complete_appointment' => 'Complete Appointment',
+    'edit_appointment' => 'Edit Appointment',
+    'confirm' => 'Confirm',
+    'confirming' => 'Confirming...',
+    'cancelling' => 'Cancelling...',
+    'completing' => 'Completing...',
+
+    // Messages
+    'confirm_appointment_message' => 'Are you sure you want to confirm this appointment?',
+    'cancel_appointment_message' => 'Are you sure you want to cancel this appointment?',
+    'complete_appointment_message' => 'Are you sure you want to mark this appointment as completed?',
+    'cancellation_reason' => 'Cancellation Reason',
+    'cancellation_reason_placeholder' => 'Enter the reason for cancellation (optional)...',
+    'completion_notes' => 'Completion Notes',
+    'completion_notes_placeholder' => 'Enter notes about service completion (optional)...',
+
+    // Success messages
+    'appointment_confirmed_successfully' => 'Appointment confirmed successfully',
+    'appointment_cancelled_successfully' => 'Appointment cancelled successfully',
+    'appointment_completed_successfully' => 'Appointment completed successfully',
 ];
