@@ -425,4 +425,14 @@ return [
     'appointment_confirmed_successfully' => 'Appointment confirmed successfully',
     'appointment_cancelled_successfully' => 'Appointment cancelled successfully',
     'appointment_completed_successfully' => 'Appointment completed successfully',
+
+    // Email notifications
+    'appointment_status_updated' => 'Appointment status updated',
+    'appointment_status_change_subject' => 'Your appointment update',
+    'appointment_details' => 'Appointment details',
+    'previous_status' => 'Previous status',
+    'current_status' => 'Current status',
+    'appointment_confirmed_message' => 'Your appointment has been confirmed. We look forward to seeing you at the scheduled date and time.',
+    'appointment_cancelled_message' => 'Your appointment has been cancelled. If you need to reschedule, please contact us.',
+    'appointment_completed_message' => 'Thank you for visiting us! Your service has been completed successfully.',
 ];

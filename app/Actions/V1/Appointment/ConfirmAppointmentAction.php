@@ -8,6 +8,7 @@ use App\Actions\V1\Action;
 use App\Support\ActionResult;
 use Illuminate\Support\Facades\DB;
 use App\Services\V1\AppointmentService;
+use App\Notifications\AppointmentStatusChangedNotification;
 
 class ConfirmAppointmentAction extends Action
 {
@@ -48,6 +49,9 @@ class ConfirmAppointmentAction extends Action
                 );
             }
 
+            // Store previous status for notification
+            $previousStatus = $appointment->status;
+
             // Confirm the appointment
             $confirmed = $this->appointmentService->confirm($validated['id']);
 
@@ -61,6 +65,21 @@ class ConfirmAppointmentAction extends Action
             // Get updated appointment with relationships
             $updatedAppointment = $this->appointmentService->findByIdOrFail($validated['id']);
             $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'service']);
+
+            // Send notification to client about status change
+            try {
+                $updatedAppointment->client->notify(
+                    new AppointmentStatusChangedNotification($updatedAppointment, $previousStatus, 'confirmed')
+                );
+            } catch (\Exception $e) {
+                // Log the error but don't fail the action
+                \Log::warning('Failed to send appointment status notification', [
+                    'appointment_id' => $validated['id'],
+                    'previous_status' => $previousStatus,
+                    'new_status' => 'confirmed',
+                    'error' => $e->getMessage()
+                ]);
+            }
 
             return $this->successResult(
                 data: $updatedAppointment,
