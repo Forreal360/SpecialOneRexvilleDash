@@ -74,6 +74,7 @@ class UpdateAppointmentComponent extends Component
 
         // Set form fields
         $appointmentDateTime = Carbon::parse($this->appointment->appointment_datetime);
+        $appointmentDateTime = dateToLocal($appointmentDateTime, "America/Puerto_Rico");
         $this->appointment_date = $appointmentDateTime->format('Y-m-d');
         $this->appointment_time = $appointmentDateTime->format('H:i');
         $this->timezone = $this->appointment->timezone;
@@ -96,8 +97,12 @@ class UpdateAppointmentComponent extends Component
         // Combine date and time
         $appointmentDateTime = Carbon::createFromFormat(
             'Y-m-d H:i',
-            $this->appointment_date . ' ' . $this->appointment_time
-        )->toDateTimeString();
+            $this->appointment_date . ' ' . $this->appointment_time,
+            "America/Puerto_Rico"
+        );
+
+        $appointmentDateTime = dateToUTC($appointmentDateTime, "America/Puerto_Rico");
+
 
         $result = $this->executeAction($this->updateAppointmentAction, [
             'id' => $this->appointmentId,
@@ -105,6 +110,7 @@ class UpdateAppointmentComponent extends Component
             'timezone' => $this->timezone,
             'notes' => $this->notes,
         ], true);
+
 
         if ($result->isSuccess()) {
             return redirect()->route('v1.panel.appointments.index')

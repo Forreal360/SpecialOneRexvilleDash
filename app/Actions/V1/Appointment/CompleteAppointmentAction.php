@@ -9,6 +9,7 @@ use App\Support\ActionResult;
 use Illuminate\Support\Facades\DB;
 use App\Services\V1\AppointmentService;
 use App\Actions\V1\Client\Service\CreateClientServiceAction;
+use App\Notifications\AppointmentStatusChangedNotification;
 
 class CompleteAppointmentAction extends Action
 {
@@ -52,6 +53,9 @@ class CompleteAppointmentAction extends Action
                     statusCode: 400
                 );
             }
+
+            // Store previous status for notification
+            $previousStatus = $appointment->status;
 
             // Prepare update data
             $updateData = ['status' => 'completed'];
@@ -99,6 +103,21 @@ class CompleteAppointmentAction extends Action
             // Get updated appointment with relationships
             $updatedAppointment = $this->appointmentService->findByIdOrFail($validated['id']);
             $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'service']);
+
+            // Send notification to client about status change
+            try {
+                $updatedAppointment->client->notify(
+                    new AppointmentStatusChangedNotification($updatedAppointment, $previousStatus, 'completed')
+                );
+            } catch (\Exception $e) {
+                // Log the error but don't fail the action
+                \Log::warning('Failed to send appointment status notification', [
+                    'appointment_id' => $validated['id'],
+                    'previous_status' => $previousStatus,
+                    'new_status' => 'completed',
+                    'error' => $e->getMessage()
+                ]);
+            }
 
             return $this->successResult(
                 data: $updatedAppointment,

@@ -425,4 +425,14 @@ return [
     'appointment_confirmed_successfully' => 'Agendamiento confirmado exitosamente',
     'appointment_cancelled_successfully' => 'Agendamiento cancelado exitosamente',
     'appointment_completed_successfully' => 'Agendamiento completado exitosamente',
+
+    // Email notifications
+    'appointment_status_updated' => 'Estado de agendamiento actualizado',
+    'appointment_status_change_subject' => 'Actualización de tu agendamiento',
+    'appointment_details' => 'Detalles del agendamiento',
+    'previous_status' => 'Estado anterior',
+    'current_status' => 'Estado actual',
+    'appointment_confirmed_message' => 'Tu agendamiento ha sido confirmado. Te esperamos en la fecha y hora programada.',
+    'appointment_cancelled_message' => 'Tu agendamiento ha sido cancelado. Si necesitas reagendar, puedes contactarnos.',
+    'appointment_completed_message' => '¡Gracias por visitarnos! Tu servicio ha sido completado exitosamente.',
 ];

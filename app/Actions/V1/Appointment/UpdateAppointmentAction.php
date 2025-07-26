@@ -34,20 +34,12 @@ class UpdateAppointmentAction extends Action
             'appointment_datetime' => 'required|date|after:now',
             'timezone' => 'nullable|string|max:50',
             'notes' => 'nullable|string|max:1000',
-        ], [
-            'id.required' => 'El ID del agendamiento es obligatorio',
-            'id.exists' => 'El agendamiento no existe',
-            'appointment_datetime.required' => 'La fecha y hora del agendamiento es obligatoria',
-            'appointment_datetime.date' => 'La fecha y hora debe tener un formato válido',
-            'appointment_datetime.after' => 'La fecha y hora debe ser en el futuro',
-            'timezone.max' => 'La zona horaria no puede tener más de 50 caracteres',
-            'notes.max' => 'Las notas no pueden tener más de 1000 caracteres',
         ]);
 
         // Business logic with transaction
         return DB::transaction(function () use ($validated) {
             // Find the appointment
-            $appointment = $this->appointmentService->findByIdOrFail($validated['id']);
+            $appointment = $this->appointmentService->findByIdOrFail((int)$validated['id']);
 
             // Check if appointment can be updated (only pending and confirmed can be updated)
             if (!in_array($appointment->status, ['pending', 'confirmed'])) {
@@ -69,7 +61,7 @@ class UpdateAppointmentAction extends Action
             }
 
             // Update the appointment
-            $updatedAppointment = $this->appointmentService->update($validated['id'], $updateData);
+            $updatedAppointment = $this->appointmentService->update((int)$validated['id'], $updateData);
 
             if (!$updatedAppointment) {
                 return $this->errorResult(

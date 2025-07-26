@@ -44,12 +44,14 @@ abstract class Action
                 statusCode: $e->getStatusCode()
             );
         } catch (\Exception $e) {
+            dd($e);
             $this->logError($e, $data);
             return $this->errorResult(
                 message: $e->getMessage(),
                 statusCode: 500
             );
         }catch(Throwable $e){
+            dd($e);
             $this->logError($e, $data);
             return $this->errorResult(
                 message: $e->getMessage(),
