@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\V1\ClientService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Notifications\ClientRegisterNotification;
 
 class CreateClientAction extends Action
 {
@@ -41,7 +42,7 @@ class CreateClientAction extends Action
         $randomPassword = Str::random(10);
         $validated['password'] = Hash::make($randomPassword);
 
-        return DB::transaction(function () use ($validated) {
+        return DB::transaction(function () use ($validated, $randomPassword) {
 
             $client = $this->clientService->create($validated);
 
