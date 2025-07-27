@@ -69,4 +69,12 @@ class Admin extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    /**
+     * Get ticket messages for the admin.
+     */
+    public function ticketMessages()
+    {
+        return $this->morphMany(TicketMessage::class, 'fromeable');
+    }
 }

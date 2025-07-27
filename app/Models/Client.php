@@ -65,4 +65,20 @@ class Client extends Authenticatable
     {
         return $this->hasMany(SocialAccount::class);
     }
+
+    /**
+     * Get tickets for the client.
+     */
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    /**
+     * Get ticket messages for the client.
+     */
+    public function ticketMessages()
+    {
+        return $this->morphMany(TicketMessage::class, 'fromeable');
+    }
 }

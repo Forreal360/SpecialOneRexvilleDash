@@ -16,6 +16,8 @@
 
         <flux:navlist.item icon="calendar" href="{{ route('v1.panel.appointments.index') }}" :current="request()->is('*panel/appointments*')">{{ __('panel.appointments') }}</flux:navlist.item>
 
+        <flux:navlist.item icon="chat-bubble-left-right" href="{{ route('v1.panel.tickets.index') }}" :current="request()->is('*panel/tickets*')">{{ __('panel.tickets') }}</flux:navlist.item>
+
 
 
         {{-- <flux:navlist.group expandable heading="Favorites" class="hidden lg:grid">

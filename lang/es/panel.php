@@ -8,6 +8,7 @@ return [
     'services' => 'Servicios',
     'promotions' => 'Promociones',
     'vehicles' => 'Vehículos',
+    'tickets' => 'Tickets de Soporte',
     'reports' => 'Reportes',
     'settings' => 'Configuración',
     'profile' => 'Perfil',
@@ -44,6 +45,9 @@ return [
     'pending' => 'Pendiente',
     'completed' => 'Completado',
     'cancelled' => 'Cancelado',
+    'open' => 'Abierto',
+    'in_progress' => 'En Progreso',
+    'closed' => 'Cerrado',
 
     // Mensajes
     'success' => 'Éxito',
@@ -433,6 +437,21 @@ return [
     'previous_status' => 'Estado anterior',
     'current_status' => 'Estado actual',
     'appointment_confirmed_message' => 'Tu agendamiento ha sido confirmado. Te esperamos en la fecha y hora programada.',
+
+    // Tickets
+    'ticket' => 'Ticket',
+    'tickets_management' => 'Gestión de tickets de soporte',
+    'ticket_subject' => 'Asunto del ticket',
+    'ticket_status' => 'Estado del ticket',
+    'ticket_messages' => 'Mensajes',
+    'ticket_conversation' => 'Conversación',
+    'send_message' => 'Enviar mensaje',
+    'close_ticket' => 'Cerrar ticket',
+    'ticket_closed' => 'Ticket cerrado',
+    'ticket_closed_successfully' => 'Ticket cerrado exitosamente',
+    'message_sent_successfully' => 'Mensaje enviado exitosamente',
+    'no_messages' => 'No hay mensajes en este ticket aún.',
+    'ticket_closed_no_messages' => 'Este ticket está cerrado. No se pueden enviar más mensajes.',
     'appointment_cancelled_message' => 'Tu agendamiento ha sido cancelado. Si necesitas reagendar, puedes contactarnos.',
     'appointment_completed_message' => '¡Gracias por visitarnos! Tu servicio ha sido completado exitosamente.',
 ];

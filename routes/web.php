@@ -13,6 +13,7 @@ use App\Livewire\V1\Panel\Client\Vehicle\{GetVehiclesComponent, CreateVehicleCom
 use App\Livewire\V1\Panel\Client\Service\{GetClientServicesComponent, CreateClientServiceComponent, UpdateClientServiceComponent};
 use App\Livewire\V1\Panel\VehicleService\{GetVehicleServicesComponent, CreateVehicleServiceComponent, UpdateVehicleServiceComponent};
 use App\Livewire\V1\Panel\Appointment\{GetAppointmentsComponent, UpdateAppointmentComponent};
+use App\Livewire\V1\Panel\Ticket\{GetTicketsComponent, ViewTicketComponent};
 
 Route::get('/test', [TestController::class, 'index'])->name('test');
 
@@ -64,4 +65,8 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
     /* ----------------- Appointments ----------------- */
     Route::get('/appointments', GetAppointmentsComponent::class)->name('appointments.index');
     Route::get('/appointments/{id}/edit', UpdateAppointmentComponent::class)->name('appointments.edit');
+
+    /* ----------------- Tickets ----------------- */
+    Route::get('/tickets', GetTicketsComponent::class)->name('tickets.index');
+    Route::get('/tickets/{ticketId}/view', ViewTicketComponent::class)->name('tickets.view');
 });
