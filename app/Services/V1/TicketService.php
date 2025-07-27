@@ -55,6 +55,10 @@ class TicketService extends Service
             return false;
         }
 
+        $ticket->new_message_from_support = "N";
+        $ticket->new_message_from_client = "N";
+        $ticket->save();
+
         return $ticket->update(['status' => 'closed']);
     }
 
@@ -68,6 +72,12 @@ class TicketService extends Service
     public function updateTicketStatus(int $ticketId, string $status): bool
     {
         $ticket = Ticket::find($ticketId);
+
+        if ($status == "closed") {
+            $ticket->new_message_from_support = "N";
+            $ticket->new_message_from_client = "N";
+            $ticket->save();
+        }
 
         if (!$ticket) {
             return false;
@@ -89,6 +99,7 @@ class TicketService extends Service
     {
         $ticket = Ticket::find($ticketId);
         $ticket->new_message_from_support = "Y";
+        $ticket->new_message_from_client = "N";
         $ticket->save();
 
         if (!$ticket || $ticket->isClosed()) {

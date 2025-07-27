@@ -105,9 +105,9 @@ class GetTicketsComponent extends Component
         $clients = Client::orderBy('name')->get();
 
         $statusOptions = [
-            'open' => 'Abierto',
-            'in_progress' => 'En Progreso',
-            'closed' => 'Cerrado',
+            'open' => __('panel.open'),
+            'in_progress' => __('panel.in_progress'),
+            'closed' => __('panel.closed'),
         ];
 
         $perPageOptions = [5, 10, 20, 50, 100];

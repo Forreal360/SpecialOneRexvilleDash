@@ -1,21 +1,21 @@
-@section('title', 'Ticket #' . $ticket->id)
+@section('title', __('panel.ticket_number') . $ticket->id)
 @section('description', $ticket->subject)
 
 @section('breadcrumbs')
 <flux:breadcrumbs.item href="{{route('v1.panel.home')}}" separator="slash">{{ __('panel.breadcrumb_home') }}</flux:breadcrumbs.item>
-<flux:breadcrumbs.item href="{{route('v1.panel.tickets.index')}}" separator="slash">Tickets</flux:breadcrumbs.item>
-<flux:breadcrumbs.item separator="slash">Ticket #{{ $ticket->id }}</flux:breadcrumbs.item>
+<flux:breadcrumbs.item href="{{route('v1.panel.tickets.index')}}" separator="slash">{{ __('panel.tickets') }}</flux:breadcrumbs.item>
+<flux:breadcrumbs.item separator="slash">{{ __('panel.ticket_number') }}{{ $ticket->id }}</flux:breadcrumbs.item>
 @endsection
 
 @section('actions')
 @if($ticket->status !== 'closed')
     <flux:button
         wire:click="closeTicket"
-        wire:confirm="¿Estás seguro de que quieres cerrar este ticket?"
+        wire:confirm="{{ __('panel.confirm_close_ticket') }}"
         variant="danger"
         icon="x-mark"
     >
-        Cerrar Ticket
+        {{ __('panel.close_ticket_button') }}
     </flux:button>
 @endif
 @endsection
@@ -29,15 +29,15 @@
                 <div>
                     <div class="mt-0 space-y-1">
                         <p class="text-sm text-gray-600">
-                            <span class="font-medium">Cliente:</span>
+                            <span class="font-medium">{{ __('panel.client_label') }}</span>
                             {{ $ticket->client->name }} {{ $ticket->client->last_name }}
                         </p>
                         <p class="text-sm text-gray-600">
-                            <span class="font-medium">Email:</span>
+                            <span class="font-medium">{{ __('panel.email_label') }}</span>
                             {{ $ticket->client->email }}
                         </p>
                         <p class="text-sm text-gray-600">
-                            <span class="font-medium">Creado:</span>
+                            <span class="font-medium">{{ __('panel.created_label') }}</span>
                             {{ $ticket->created_at->format('d/m/Y H:i') }}
                         </p>
                     </div>
@@ -50,9 +50,9 @@
                             'closed' => 'bg-gray-100 text-gray-800'
                         ];
                         $statusLabels = [
-                            'open' => 'Abierto',
-                            'in_progress' => 'En Progreso',
-                            'closed' => 'Cerrado'
+                            'open' => __('panel.open'),
+                            'in_progress' => __('panel.in_progress'),
+                            'closed' => __('panel.closed')
                         ];
                     @endphp
                     <span class="inline-flex px-3 py-1 text-sm font-semibold rounded-full {{ $statusClasses[$ticket->status] ?? 'bg-gray-100 text-gray-800' }}">
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <flux:separator class="mb-4" />
-            <h3 class="text-lg font-medium text-gray-900 mb-4">Conversación</h3>
+            <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('panel.conversation') }}</h3>
 
             <!-- Mensajes -->
             <div class="space-y-4 mb-6 max-h-96 min-h-96 overflow-y-auto">
@@ -93,7 +93,7 @@
                 @empty
                     <div class="text-center py-8">
                         <div class="text-gray-400 text-sm">
-                            No hay mensajes en este ticket aún.
+                            {{ __('panel.no_messages') }}
                         </div>
                     </div>
                 @endforelse
@@ -106,7 +106,7 @@
                         <div>
                             <flux:textarea
                                 wire:model="newMessage"
-                                placeholder="Escribe tu respuesta..."
+                                placeholder="{{ __('panel.write_response') }}"
                                 rows="3"
                                 class="w-full"
                             />
@@ -118,18 +118,17 @@
                         <div class="flex justify-end">
                             <flux:button
                                 type="submit"
-                                variant="primary"
                                 icon="paper-airplane"
 
                             >
-                                Enviar Mensaje
+                                {{ __('panel.send_message_button') }}
                             </flux:button>
                         </div>
                     </form>
                 </div>
             @else
                 <div class="border-t pt-4 text-center text-sm text-gray-500">
-                    Este ticket está cerrado. No se pueden enviar más mensajes.
+                    {{ __('panel.ticket_closed_no_messages') }}
                 </div>
             @endif
         </div>
