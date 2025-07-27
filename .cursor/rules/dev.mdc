@@ -349,6 +349,7 @@ class CreateClienteComponent extends Component
 8. **Implementar loading states** en formularios
 9. **Manejar errores** apropiadamente con el trait HandlesActionResults
 10. **Usar breadcrumbs** para navegación clara
+11. **Errores en acciones**: es importante que en la accion cuando hay un error, utilizar ValidationErrorException y no utlizar try catch si no es necesario porque ya la clase Action ya tiene un bloque de manejo de errores.
 
 ## Comandos Útiles
 
