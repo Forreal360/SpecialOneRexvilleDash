@@ -28,15 +28,15 @@
             <div class="flex items-start justify-between mb-4">
                 <div>
                     <div class="mt-0 space-y-1">
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-400">
                             <span class="font-medium">{{ __('panel.client_label') }}</span>
                             {{ $ticket->client->name }} {{ $ticket->client->last_name }}
                         </p>
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-400">
                             <span class="font-medium">{{ __('panel.email_label') }}</span>
                             {{ $ticket->client->email }}
                         </p>
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-400">
                             <span class="font-medium">{{ __('panel.created_label') }}</span>
                             {{ $ticket->created_at->format('d/m/Y H:i') }}
                         </p>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <flux:separator class="mb-4" />
-            <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('panel.conversation') }}</h3>
+            <h3 class="text-lg font-medium text-gray-900 mb-4 dark:text-gray-100">{{ __('panel.conversation') }}</h3>
 
             <!-- Mensajes -->
             <div class="space-y-4 mb-6 max-h-96 min-h-96 overflow-y-auto">
@@ -71,8 +71,8 @@
                             <div class="flex items-start space-x-2 {{ $message->isFromAdmin() ? 'flex-row-reverse space-x-reverse' : '' }}">
                                 <!-- Avatar -->
                                 <div class="flex-shrink-0">
-                                    <div class="w-8 h-8 rounded-full {{ $message->isFromAdmin() ? 'bg-blue-500' : 'bg-gray-400' }} flex items-center justify-center">
-                                        <span class="text-xs font-medium text-white">
+                                    <div class="w-8 h-8 rounded-full {{ $message->isFromAdmin() ? 'bg-blue-500' : 'bg-gray-400 dark:bg-gray-600' }} flex items-center justify-center">
+                                        <span class="text-xs font-medium text-white dark:text-gray-300">
                                             {{ substr($message->fromeable->name, 0, 1) }}
                                         </span>
                                     </div>
@@ -80,7 +80,7 @@
 
                                 <!-- Mensaje -->
                                 <div class="flex-1">
-                                    <div class="px-4 py-2 rounded-lg {{ $message->isFromAdmin() ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-900' }}">
+                                    <div class="px-4 py-2 rounded-lg {{ $message->isFromAdmin() ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100' }}">
                                         <p class="text-sm">{{ $message->message }}</p>
                                     </div>
                                     <div class="mt-1 text-xs text-gray-500 {{ $message->isFromAdmin() ? 'text-right' : 'text-left' }}">
