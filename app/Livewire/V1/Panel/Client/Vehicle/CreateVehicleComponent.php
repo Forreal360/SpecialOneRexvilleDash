@@ -10,6 +10,7 @@ use App\Livewire\Concerns\HandlesActionResults;
 use App\Models\VehicleMake;
 use App\Models\VehicleModel;
 use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 class CreateVehicleComponent extends Component
 {
@@ -57,6 +58,9 @@ class CreateVehicleComponent extends Component
 
     public function createVehicle()
     {
+
+        $this->buy_date = Carbon::parse($this->buy_date)->format('Y-m-d');
+
         $result = $this->executeAction($this->createVehicleAction, [
             'client_id' => $this->clientId,
             'year' => $this->year,

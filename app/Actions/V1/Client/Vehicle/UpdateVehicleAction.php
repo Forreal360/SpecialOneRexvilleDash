@@ -25,7 +25,6 @@ class UpdateVehicleAction extends Action
      */
     public function handle($data): ActionResult
     {
-
         $validated = $this->validateData($data, [
             'vehicle_id' => 'required|exists:client_vehicles,id',
             'client_id' => 'required|exists:clients,id',

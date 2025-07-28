@@ -11,6 +11,7 @@ use App\Models\VehicleMake;
 use App\Models\VehicleModel;
 use App\Models\ClientVehicle;
 use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 class UpdateVehicleComponent extends Component
 {
@@ -53,7 +54,6 @@ class UpdateVehicleComponent extends Component
         $this->buy_date = $vehicle->buy_date ? \Carbon\Carbon::parse($vehicle->buy_date)->format('m/d/Y') : null;
         $this->insurance = $vehicle->insurance;
         $this->status = $vehicle->status;
-        $this->image = $vehicle->image_path;
     }
 
     public function render()
@@ -77,6 +77,8 @@ class UpdateVehicleComponent extends Component
 
     public function updateVehicle()
     {
+        $this->buy_date = Carbon::parse($this->buy_date)->format('Y-m-d');
+
         $result = $this->executeAction($this->updateVehicleAction, [
             'vehicle_id' => $this->vehicleId,
             'client_id' => $this->clientId,

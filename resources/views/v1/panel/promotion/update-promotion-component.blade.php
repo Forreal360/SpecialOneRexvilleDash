@@ -75,7 +75,7 @@
                     {{ __('panel.cancel') }}
                 </flux:button>
                 <flux:button
-                    type="submit"
+                    wire:click="updatePromotion"
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                     wire:target="updatePromotion"

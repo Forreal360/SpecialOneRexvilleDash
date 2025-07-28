@@ -37,6 +37,9 @@ class CreateClientComponent extends Component
     public function createClient()
     {
 
+        $this->phone_code = str_replace('+', '', $this->phone_code);
+        
+
         $result = $this->executeAction($this->createClientAction, [
             'name' => $this->name,
             'last_name' => $this->last_name,

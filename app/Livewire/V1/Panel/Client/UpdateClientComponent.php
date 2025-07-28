@@ -61,6 +61,8 @@ class UpdateClientComponent extends Component
 
     public function updateClient()
     {
+        $this->phone_code = str_replace('+', '', $this->phone_code);
+        
         $result = $this->executeAction($this->updateClientAction, [
             'id' => $this->client_id,
             'name' => $this->name,
