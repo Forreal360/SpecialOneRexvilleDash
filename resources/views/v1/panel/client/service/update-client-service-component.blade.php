@@ -49,6 +49,7 @@
                     name="date"
                     wire:model="date"
                     dateFormat="m/d/Y"
+                    maxDate="today"
                     placeholder="{{ __('panel.service_date') }}"
                     error="{{ $errors->first('date') }}"
                     required
