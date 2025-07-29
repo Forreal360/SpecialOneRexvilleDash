@@ -111,7 +111,7 @@
                 </x-table.colum>
 
                 <x-table.colum>
-                    {{ __('panel.service') }}
+                    {{ __('panel.services') }}
                 </x-table.colum>
 
                 <x-table.colum
@@ -160,7 +160,12 @@
                         </x-table.cell>
 
                         <x-table.cell>
-                            {{ $appointment->service->name }}
+                            @foreach($appointment->services as $service)
+                                <div class="text-sm flex items-center space-x-2">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-[#002c5f] dark:bg-gray-500"></span>
+                                    <span class="font-medium">{{ $service->name }}</span>
+                                </div>
+                            @endforeach
                         </x-table.cell>
 
                         <x-table.cell>

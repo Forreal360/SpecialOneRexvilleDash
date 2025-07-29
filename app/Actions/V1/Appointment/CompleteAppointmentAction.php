@@ -82,27 +82,23 @@ class CompleteAppointmentAction extends Action
             $clientServiceData = [
                 'client_id' => $appointment->client_id,
                 'vehicle_id' => $appointment->vehicle_id,
-                'service_id' => $appointment->service_id,
                 'date' => $appointmentDate->format('m/d/Y'), // Format required by CreateClientServiceAction
             ];
-
-            // Execute CreateClientServiceAction
-            $clientServiceResult = $this->createClientServiceAction->execute($clientServiceData);
-
-            if (!$clientServiceResult->isSuccess()) {
-                // If client service creation fails, we still want to complete the appointment
-                // but log the error for visibility
-                \Log::warning('Failed to create ClientService after completing appointment', [
-                    'appointment_id' => $validated['id'],
-                    'client_service_data' => $clientServiceData,
-                    'error' => $clientServiceResult->getMessage(),
-                    'errors' => $clientServiceResult->getErrors()
-                ]);
+            
+            foreach ($appointment->services as $service) {
+                $clientServiceData['service_id'] = $service->id;
+                $clientServiceResult = $this->createClientServiceAction->execute($clientServiceData);
+                if (!$clientServiceResult->isSuccess()) {
+                    return $this->errorResult(
+                        message: 'Error al crear el servicio del cliente',
+                        statusCode: 500
+                    );
+                }
             }
 
             // Get updated appointment with relationships
             $updatedAppointment = $this->appointmentService->findByIdOrFail($validated['id']);
-            $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'service']);
+            $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'services']);
 
             // Send notification to client about status change
             try {

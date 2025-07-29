@@ -64,7 +64,7 @@ class ConfirmAppointmentAction extends Action
 
             // Get updated appointment with relationships
             $updatedAppointment = $this->appointmentService->findByIdOrFail($validated['id']);
-            $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'service']);
+            $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'services']);
 
             // Send notification to client about status change
             try {

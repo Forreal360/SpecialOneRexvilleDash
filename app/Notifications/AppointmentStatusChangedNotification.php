@@ -51,7 +51,7 @@ class AppointmentStatusChangedNotification extends Notification implements Shoul
             ->line('**Estado anterior:** ' . $this->getStatusText($this->previousStatus))
             ->line('**Estado actual:** ' . $statusText)
             ->line('**Fecha y hora:** ' . $this->appointment->getFormattedDateTimeAttribute())
-            ->line('**Servicio:** ' . $this->appointment->service->name)
+            ->line('**Servicios:** ' . $this->appointment->services->pluck('name')->implode(', '))
             ->line('**Vehículo:** ' . $this->appointment->vehicle->make->name . ' ' . $this->appointment->vehicle->model->name . ' ' . $this->appointment->vehicle->year)
             ->when($this->appointment->notes, function ($message) {
                 return $message->line('**Notas:** ' . $this->appointment->notes);

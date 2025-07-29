@@ -18,7 +18,7 @@
 
         <p><strong>Fecha y hora:</strong> {{ $appointment->getFormattedDateTimeAttribute() }}</p>
 
-        <p><strong>Servicio:</strong> {{ $appointment->service->name }}</p>
+        <p><strong>Servicios:</strong> {{ $appointment->services->pluck('name')->implode(', ') }}</p>
 
         <p><strong>Vehículo:</strong> {{ $appointment->vehicle->make->name ?? '' }} {{ $appointment->vehicle->model->name ?? '' }} {{ $appointment->vehicle->year }}</p>
 

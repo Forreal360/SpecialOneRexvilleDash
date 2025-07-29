@@ -65,7 +65,7 @@ class UpdateAppointmentComponent extends Component
     public function loadAppointment()
     {
         $this->appointment = $this->appointmentService->findByIdOrFail($this->appointmentId);
-        $this->appointment->load(['client', 'vehicle.make', 'vehicle.model', 'service']);
+        $this->appointment->load(['client', 'vehicle.make', 'vehicle.model', 'services']);
 
         // Check if appointment can be updated
         if (!in_array($this->appointment->status, ['pending', 'confirmed'])) {
@@ -86,7 +86,7 @@ class UpdateAppointmentComponent extends Component
         $this->vehicle_info = ($this->appointment->vehicle->make->name ?? '') . ' ' .
                              ($this->appointment->vehicle->model->name ?? '') . ' ' .
                              $this->appointment->vehicle->year;
-        $this->service_name = $this->appointment->service->name;
+        $this->service_name = $this->appointment->services->pluck('name')->implode(', ');
         $this->current_status = $this->appointment->status;
     }
 

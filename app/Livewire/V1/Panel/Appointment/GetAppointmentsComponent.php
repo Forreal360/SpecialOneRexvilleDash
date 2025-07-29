@@ -146,7 +146,7 @@ class GetAppointmentsComponent extends Component
     public function render()
     {
         $appointments = Appointment::query()
-            ->with(['client', 'vehicle.make', 'vehicle.model', 'service'])
+            ->with(['client', 'vehicle.make', 'vehicle.model', 'services'])
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->where('notes', 'like', '%' . $this->search . '%')
@@ -154,7 +154,7 @@ class GetAppointmentsComponent extends Component
                           $clientQuery->whereRaw("CONCAT(name, ' ', last_name) LIKE ?", ['%' . $this->search . '%'])
                                      ->orWhere('email', 'like', '%' . $this->search . '%');
                       })
-                      ->orWhereHas('service', function ($serviceQuery) {
+                      ->orWhereHas('services', function ($serviceQuery) {
                           $serviceQuery->where('name', 'like', '%' . $this->search . '%');
                       });
                 });

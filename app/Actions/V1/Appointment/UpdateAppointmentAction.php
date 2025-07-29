@@ -71,7 +71,7 @@ class UpdateAppointmentAction extends Action
             }
 
             // Load relationships for response
-            $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'service']);
+            $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'services']);
 
             return $this->successResult(
                 data: $updatedAppointment,

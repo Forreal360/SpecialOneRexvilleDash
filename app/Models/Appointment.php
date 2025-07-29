@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Carbon\Carbon;
 
 class Appointment extends Model
@@ -46,9 +47,9 @@ class Appointment extends Model
     /**
      * Get the service associated with the appointment.
      */
-    public function service(): BelongsTo
+    public function services(): BelongsToMany
     {
-        return $this->belongsTo(VehicleService::class, 'service_id');
+        return $this->belongsToMany(VehicleService::class, 'appointment_services', 'appointment_id', 'service_id');
     }
 
     /**

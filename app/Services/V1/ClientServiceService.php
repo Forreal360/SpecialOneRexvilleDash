@@ -131,4 +131,6 @@ class ClientServiceService extends Service
             'this_year' => $query->whereYear('date', now()->year)->count(),
         ];
     }
+
+    
 } 
