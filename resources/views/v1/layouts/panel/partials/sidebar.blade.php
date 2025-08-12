@@ -1,7 +1,11 @@
 <flux:sidebar sticky stashable class="bg-zinc-50 dark:bg-zinc-900 border-r rtl:border-r-0 rtl:border-l border-zinc-200 dark:border-zinc-700">
     <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
-    <flux:brand href="#" logo="{{asset('assets/images/logo.png')}}" name="Hyundai de Rexville" class="px-2 dark:hidden" />
-    <flux:brand href="#" logo="{{asset('assets/images/logo.png')}}" name="Hyundai de Rexville" class="px-2 hidden dark:flex" />
+    <div class="flex justify-center items-center">
+        {{-- <flux:brand href="#" logo="{{asset('assets/images/rex.png')}}" class="px-2 dark:hidden" />
+        <flux:brand href="#" logo="{{asset('assets/images/rex-white.png')}}" class="px-2 hidden dark:flex" /> --}}
+        <img src="{{ asset('assets/images/rex.png') }}" alt="Hyundai de Rexville" class="w-30 dark:hidden">
+        <img src="{{ asset('assets/images/rex-white.png') }}" alt="Hyundai de Rexville" class="w-20 hidden dark:flex">
+    </div>
 
     <flux:navlist variant="outline">
         <flux:navlist.item icon="home"  href="{{ route('v1.panel.home') }}" :current="request()->is('*panel/home*')">{{ __('panel.home') }}</flux:navlist.item>

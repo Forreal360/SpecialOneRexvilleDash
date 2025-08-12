@@ -61,12 +61,9 @@
                 </flux:dropdown>
             </div>
             <div class="flex justify-center">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="Hyundai de Rexville" class="w-50 ">
-            </div>
-            <div class="flex justify-center opacity-50">
-                <a href="/" class="group flex items-center gap-3">
-                    <span class="text-xl font-semibold text-zinc-800 dark:text-white">Hyundai de Rexville</span>
-                </a>
+                <img src="{{ asset('assets/images/rex.png') }}" alt="Hyundai de Rexville" class="w-50 dark:hidden">
+                <img src="{{ asset('assets/images/rex-white.png') }}" alt="Hyundai de Rexville" class="w-50 hidden dark:flex">
+
             </div>
 
             {{ $slot ?? ''}}
