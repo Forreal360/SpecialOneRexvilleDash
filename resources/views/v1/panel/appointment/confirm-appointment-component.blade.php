@@ -59,11 +59,33 @@
                         {{ __('panel.select_services_description') }}
                     </p>
 
+                    <!-- Botones de selección masiva -->
+                    <div class="flex space-x-3 mb-4">
+                        <flux:button 
+                            wire:click="selectAllServices" 
+                            type="button" 
+                            variant="ghost" 
+                            size="sm"
+                            icon="check"
+                        >
+                            {{ __('panel.select_all_services') }}
+                        </flux:button>
+                        <flux:button 
+                            wire:click="deselectAllServices" 
+                            type="button" 
+                            variant="ghost" 
+                            size="sm"
+                            icon="x-mark"
+                        >
+                            {{ __('panel.deselect_all_services') }}
+                        </flux:button>
+                    </div>
+
                     <div class="space-y-3">
                         @foreach($appointment->services as $service)
                             <div class="flex items-center p-4 border border-gray-200 dark:border-zinc-600 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700">
                                 <flux:checkbox
-                                    wire:model="selectedServices.{{ $service->id }}"
+                                    wire:model.live="selectedServices.{{ $service->id }}"
                                     id="service_{{ $service->id }}"
                                     class="mr-3"
                                 />
@@ -96,7 +118,7 @@
                     <p class="text-sm text-blue-700 dark:text-blue-300">
                         {{ __('panel.selected_services') }}:
                         <span class="font-medium">
-                            {{ collect($selectedServices)->filter()->count() }} {{ __('panel.of') }} {{ $appointment->services->count() }}
+                            {{ $this->selectedServicesCount }} {{ __('panel.of') }} {{ $appointment->services->count() }}
                         </span>
                     </p>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Livewire\V1\Panel\Appointment;
 
 use Livewire\Component;
+use Livewire\Attributes\Computed;
 use App\Livewire\Concerns\HandlesActionResults;
 use App\Services\V1\AppointmentService;
 use App\Actions\V1\Appointment\CompleteAppointmentAction;
@@ -90,6 +91,26 @@ class CompleteAppointmentComponent extends Component
         } catch (\Exception $e) {
             session()->flash('error', 'Error al completar el agendamiento');
         }
+    }
+
+    public function selectAllServices()
+    {
+        foreach ($this->appointment->services as $service) {
+            $this->selectedServices[$service->id] = true;
+        }
+    }
+
+    public function deselectAllServices()
+    {
+        foreach ($this->appointment->services as $service) {
+            $this->selectedServices[$service->id] = false;
+        }
+    }
+
+    #[Computed]
+    public function selectedServicesCount()
+    {
+        return collect($this->selectedServices)->filter()->count();
     }
 
     public function cancel()

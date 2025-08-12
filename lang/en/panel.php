@@ -454,6 +454,8 @@ return [
     'selected_services' => 'Selected services',
     'of' => 'of',
     'confirm_appointment_button' => 'Confirm Appointment',
+    'select_all_services' => 'Select All',
+    'deselect_all_services' => 'Deselect All',
 
     // Complete appointment
     'complete_appointment_title' => 'Complete Appointment',

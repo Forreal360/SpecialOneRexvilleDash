@@ -59,11 +59,33 @@
                         {{ __('panel.services_performed_description') }}
                     </p>
 
+                    <!-- Botones de selección masiva -->
+                    <div class="flex space-x-3 mb-4">
+                        <flux:button
+                            wire:click="selectAllServices"
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            icon="check"
+                        >
+                            {{ __('panel.select_all_services') }}
+                        </flux:button>
+                        <flux:button
+                            wire:click="deselectAllServices"
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            icon="x-mark"
+                        >
+                            {{ __('panel.deselect_all_services') }}
+                        </flux:button>
+                    </div>
+
                     <div class="space-y-3">
                         @foreach($appointment->services as $service)
                             <div class="flex items-center p-4 border border-gray-200 dark:border-zinc-600 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700">
                                 <flux:checkbox
-                                    wire:model="selectedServices.{{ $service->id }}"
+                                    wire:model.live="selectedServices.{{ $service->id }}"
                                     id="service_{{ $service->id }}"
                                     class="mr-3"
                                 />
@@ -96,16 +118,21 @@
                 </div>
 
                 <!-- Notas de finalización -->
-                <div class="px-6">
-                    <x-forms.form-field label="{{ __('panel.completion_notes') }}" for="completionNotes">
-                        <flux:textarea
-                            wire:model="completionNotes"
-                            placeholder="{{ __('panel.completion_notes_placeholder') }}"
-                            rows="4"
-                        />
-                    </x-forms.form-field>
+                <x-forms.form-field
+                label="{{ __('panel.notes') }}"
+                for="notes"
+                :error="$errors->first('notes')"
+                >
+
+                    <flux:textarea
+                        wire:model="completionNotes"
+                        placeholder="{{ __('panel.completion_notes_placeholder') }}"
+                        rows="4"
+                    />
                     <p class="text-xs text-gray-500 dark:text-zinc-400 mt-1">{{ __('panel.max_characters') }}</p>
-                </div>
+
+                </x-forms.form-field>
+
 
                 <!-- Resumen de servicios realizados -->
                 <div class="rounded-lg px-6">
@@ -113,7 +140,7 @@
                     <p class="text-sm text-green-700 dark:text-green-300">
                         {{ __('panel.services_performed_count') }}:
                         <span class="font-medium">
-                            {{ collect($selectedServices)->filter()->count() }} {{ __('panel.of') }} {{ $appointment->services->count() }}
+                            {{ $this->selectedServicesCount }} {{ __('panel.of') }} {{ $appointment->services->count() }}
                         </span>
                     </p>
                 </div>

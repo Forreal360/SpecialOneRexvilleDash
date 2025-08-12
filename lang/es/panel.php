@@ -491,6 +491,8 @@ return [
     'selected_services' => 'Servicios seleccionados',
     'of' => 'de',
     'confirm_appointment_button' => 'Confirmar Agendamiento',
+    'select_all_services' => 'Seleccionar Todos',
+    'deselect_all_services' => 'Deseleccionar Todos',
 
     // Completar agendamiento
     'complete_appointment_title' => 'Completar Agendamiento',
