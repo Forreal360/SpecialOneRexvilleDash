@@ -16,7 +16,7 @@
         <div class="flex-1 space-y-6">
 
             <!-- Appointment Information Card -->
-            <div class=" rounded-lg px-6">
+            <div class="rounded-lg px-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('panel.appointment_information') }}</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -133,6 +133,7 @@
                 <flux:button
                     href="{{ route('v1.panel.appointments.index') }}"
                     type="button"
+                    variant="danger"
                 >
                     {{ __('panel.cancel') }}
                 </flux:button>
@@ -141,6 +142,7 @@
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                     wire:target="updateAppointment"
+                    variant="primary"
                 >
                     <span wire:loading.remove wire:target="updateAppointment">{{ __('panel.update_appointment') }}</span>
                     <span wire:loading wire:target="updateAppointment">{{ __('panel.updating') }}</span>

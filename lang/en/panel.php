@@ -440,6 +440,37 @@ return [
     'appointment_cancelled_message' => 'Your appointment has been cancelled. If you need to reschedule, please contact us.',
     'appointment_completed_message' => 'Thank you for visiting us! Your service has been completed successfully.',
 
+    // Confirm appointment - service selection
+    'confirm_appointment_title' => 'Confirm Appointment',
+    'appointment_information' => 'Appointment Information',
+    'client' => 'Client',
+    'vehicle' => 'Vehicle',
+    'date_time' => 'Date & Time',
+    'status' => 'Status',
+    'notes' => 'Notes',
+    'select_services_to_perform' => 'Select Services to Perform',
+    'select_services_description' => 'Check the services that will actually be performed in this appointment. Unchecked services will be marked as inactive.',
+    'summary' => 'Summary',
+    'selected_services' => 'Selected services',
+    'of' => 'of',
+    'confirm_appointment_button' => 'Confirm Appointment',
+
+    // Complete appointment
+    'complete_appointment_title' => 'Complete Appointment',
+    'services_performed' => 'Services Performed',
+    'services_performed_description' => 'Check the services that were actually performed. Unchecked services will be marked as not performed.',
+    'scheduled_to_perform' => 'Scheduled to perform',
+    'not_scheduled' => 'Not scheduled',
+    'completion_notes' => 'Completion Notes',
+    'completion_notes_placeholder' => 'Add notes about services performed, observations, recommendations, etc.',
+    'max_characters' => 'Maximum 1000 characters',
+    'services_performed_count' => 'Services performed',
+    'complete_appointment_button' => 'Complete Appointment',
+
+    // Breadcrumbs
+    'breadcrumb_confirm' => 'Confirm',
+    'breadcrumb_complete' => 'Complete',
+
     // Tickets
     'ticket' => 'Ticket',
     'tickets' => 'Tickets',

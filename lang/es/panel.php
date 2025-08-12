@@ -476,4 +476,35 @@ return [
     'send_message_button' => 'Enviar Mensaje',
     'appointment_cancelled_message' => 'Tu agendamiento ha sido cancelado. Si necesitas reagendar, puedes contactarnos.',
     'appointment_completed_message' => '¡Gracias por visitarnos! Tu servicio ha sido completado exitosamente.',
+
+    // Confirmar agendamiento - selección de servicios
+    'confirm_appointment_title' => 'Confirmar Agendamiento',
+    'appointment_information' => 'Información del Agendamiento',
+    'client' => 'Cliente',
+    'vehicle' => 'Vehículo',
+    'date_time' => 'Fecha y Hora',
+    'status' => 'Estado',
+    'notes' => 'Notas',
+    'select_services_to_perform' => 'Seleccionar Servicios a Realizar',
+    'select_services_description' => 'Marque los servicios que se realizarán realmente en esta cita. Los servicios no marcados se marcarán como inactivos.',
+    'summary' => 'Resumen',
+    'selected_services' => 'Servicios seleccionados',
+    'of' => 'de',
+    'confirm_appointment_button' => 'Confirmar Agendamiento',
+
+    // Completar agendamiento
+    'complete_appointment_title' => 'Completar Agendamiento',
+    'services_performed' => 'Servicios Realizados',
+    'services_performed_description' => 'Marque los servicios que se realizaron efectivamente. Los servicios no marcados se marcarán como no realizados.',
+    'scheduled_to_perform' => 'Programado para realizar',
+    'not_scheduled' => 'No programado',
+    'completion_notes' => 'Notas de Finalización',
+    'completion_notes_placeholder' => 'Agregue notas sobre los servicios realizados, observaciones, recomendaciones, etc.',
+    'max_characters' => 'Máximo 1000 caracteres',
+    'services_performed_count' => 'Servicios realizados',
+    'complete_appointment_button' => 'Completar Agendamiento',
+
+    // Breadcrumbs
+    'breadcrumb_confirm' => 'Confirmar',
+    'breadcrumb_complete' => 'Completar',
 ];

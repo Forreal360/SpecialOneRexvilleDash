@@ -65,6 +65,8 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
     /* ----------------- Appointments ----------------- */
     Route::get('/appointments', GetAppointmentsComponent::class)->name('appointments.index');
     Route::get('/appointments/{id}/edit', UpdateAppointmentComponent::class)->name('appointments.edit');
+    Route::get('/appointments/{id}/confirm', \App\Livewire\V1\Panel\Appointment\ConfirmAppointmentComponent::class)->name('appointments.confirm');
+    Route::get('/appointments/{id}/complete', \App\Livewire\V1\Panel\Appointment\CompleteAppointmentComponent::class)->name('appointments.complete');
 
     /* ----------------- Tickets ----------------- */
     Route::get('/tickets', GetTicketsComponent::class)->name('tickets.index');

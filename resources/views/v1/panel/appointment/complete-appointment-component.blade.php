@@ -1,0 +1,134 @@
+@section('title', __('panel.appointments'))
+@section('description', __('panel.complete_appointment_title'))
+
+@section('breadcrumbs')
+<flux:breadcrumbs.item href="{{route('v1.panel.home')}}" separator="slash">
+    {{ __('panel.breadcrumb_home') }}
+</flux:breadcrumbs.item>
+<flux:breadcrumbs.item href="{{route('v1.panel.appointments.index')}}" separator="slash">
+    {{ __('panel.appointments') }}
+</flux:breadcrumbs.item>
+<flux:breadcrumbs.item separator="slash">
+    {{ __('panel.breadcrumb_complete') }}
+</flux:breadcrumbs.item>
+@endsection
+
+<x-containers.card-container>
+    @if($appointment)
+        <form wire:submit.prevent="completeAppointment">
+            <div class="flex-1 space-y-6">
+                <!-- Información del agendamiento -->
+                <div class="rounded-lg px-6">
+                    <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-zinc-100">{{ __('panel.appointment_information') }}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ __('panel.client') }}</label>
+                            <p class="mt-1 text-sm text-gray-900 dark:text-zinc-100">{{ $appointment->client->name }}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ __('panel.vehicle') }}</label>
+                            <p class="mt-1 text-sm text-gray-900 dark:text-zinc-100">
+                                {{ $appointment->vehicle->make->name }} {{ $appointment->vehicle->model->name }} - {{ $appointment->vehicle->year }}
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ __('panel.date_time') }}</label>
+                            <p class="mt-1 text-sm text-gray-900 dark:text-zinc-100">{{ $appointment->formatted_date_time }}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ __('panel.status') }}</label>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                {{ __('panel.appointment_status_' . $appointment->status) }}
+                            </span>
+                        </div>
+                    </div>
+                    @if($appointment->notes)
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ __('panel.notes') }}</label>
+                            <p class="mt-1 text-sm text-gray-900 dark:text-zinc-100">{{ $appointment->notes }}</p>
+                        </div>
+                    @endif
+                </div>
+
+                <flux:separator />
+
+                <!-- Selección de servicios realizados -->
+                <div class="px-6 py-6 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-zinc-100">{{ __('panel.services_performed') }}</h3>
+                    <p class="text-sm text-gray-600 dark:text-zinc-400 mb-4">
+                        {{ __('panel.services_performed_description') }}
+                    </p>
+
+                    <div class="space-y-3">
+                        @foreach($appointment->services as $service)
+                            <div class="flex items-center p-4 border border-gray-200 dark:border-zinc-600 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700">
+                                <flux:checkbox
+                                    wire:model="selectedServices.{{ $service->id }}"
+                                    id="service_{{ $service->id }}"
+                                    class="mr-3"
+                                />
+                                <label for="service_{{ $service->id }}" class="flex-1 cursor-pointer">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="text-sm font-medium text-gray-900 dark:text-zinc-100">{{ $service->name }}</h4>
+                                            @if($service->description)
+                                                <p class="text-sm text-gray-500 dark:text-zinc-400">{{ $service->description }}</p>
+                                            @endif
+                                            @if(isset($service->pivot->status))
+                                                <p class="text-xs {{ $service->pivot->status === 'A' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }}">
+                                                    {{ $service->pivot->status === 'A' ? __('panel.scheduled_to_perform') : __('panel.not_scheduled') }}
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="text-right">
+                                            @if($service->price)
+                                                <p class="text-sm font-medium text-gray-900 dark:text-zinc-100">${{ number_format($service->price, 2) }}</p>
+                                            @endif
+                                            @if($service->estimated_duration)
+                                                <p class="text-xs text-gray-500 dark:text-zinc-400">{{ $service->estimated_duration }} min</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Notas de finalización -->
+                <div class="px-6">
+                    <x-forms.form-field label="{{ __('panel.completion_notes') }}" for="completionNotes">
+                        <flux:textarea
+                            wire:model="completionNotes"
+                            placeholder="{{ __('panel.completion_notes_placeholder') }}"
+                            rows="4"
+                        />
+                    </x-forms.form-field>
+                    <p class="text-xs text-gray-500 dark:text-zinc-400 mt-1">{{ __('panel.max_characters') }}</p>
+                </div>
+
+                <!-- Resumen de servicios realizados -->
+                <div class="rounded-lg px-6">
+                    <h4 class="text-sm font-medium text-green-900 dark:text-green-400 mb-2">{{ __('panel.summary') }}</h4>
+                    <p class="text-sm text-green-700 dark:text-green-300">
+                        {{ __('panel.services_performed_count') }}:
+                        <span class="font-medium">
+                            {{ collect($selectedServices)->filter()->count() }} {{ __('panel.of') }} {{ $appointment->services->count() }}
+                        </span>
+                    </p>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="flex justify-end space-x-3 pt-0 px-6 pb-6">
+                    <flux:button wire:click="cancel" type="button" variant="danger">
+                        {{ __('panel.cancel') }}
+                    </flux:button>
+                    <flux:button type="submit" variant="primary" wire:loading.attr="disabled">
+                        <span wire:loading.remove>{{ __('panel.complete_appointment_button') }}</span>
+                        <span wire:loading>{{ __('panel.loading') }}</span>
+                    </flux:button>
+                </div>
+            </div>
+        </form>
+    @endif
+</x-containers.card-container>

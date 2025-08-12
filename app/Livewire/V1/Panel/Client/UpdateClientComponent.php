@@ -61,8 +61,23 @@ class UpdateClientComponent extends Component
 
     public function updateClient()
     {
+        $this->validate([
+            'phone_code' => 'required',
+            'phone' => 'required',
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'license_number' => 'required',
+            'status' => 'required',
+        ]);
+
         $this->phone_code = str_replace('+', '', $this->phone_code);
-        
+        $this->phone = str_replace('(', '', $this->phone);
+        $this->phone = str_replace(')', '', $this->phone);
+        $this->phone = str_replace('-', '', $this->phone);
+        $this->phone = str_replace(' ', '', $this->phone);
+
+
         $result = $this->executeAction($this->updateClientAction, [
             'id' => $this->client_id,
             'name' => $this->name,

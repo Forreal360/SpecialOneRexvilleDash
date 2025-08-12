@@ -55,7 +55,7 @@
                     id="model_id"
                     wire:model.live="model_id"
                     error="{{ $errors->first('model_id') }}"
-                    
+
                 >
                     <flux:select.option value="">{{ $make_id ? __('panel.select_model') : __('panel.select_make_first') }}</flux:select.option>
                     @foreach($models as $model)
@@ -108,6 +108,7 @@
                 <flux:button
                     href="{{route('v1.panel.vehicles.index', $clientId)}}"
                     type="button"
+                    variant="danger"
                 >
                     {{ __('panel.cancel') }}
                 </flux:button>
@@ -116,6 +117,7 @@
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                     wire:target="updateVehicle"
+                    variant="primary"
                 >
                     <span wire:loading.remove wire:target="updateVehicle">{{ __('panel.update_vehicle') }}</span>
                     <span wire:loading wire:target="updateVehicle">{{ __('panel.loading') }}</span>
@@ -123,4 +125,4 @@
             </div>
         </div>
     </form>
-</x-containers.card-container> 
+</x-containers.card-container>

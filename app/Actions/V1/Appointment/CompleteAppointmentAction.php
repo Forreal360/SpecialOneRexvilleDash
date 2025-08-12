@@ -44,7 +44,7 @@ class CompleteAppointmentAction extends Action
         // Business logic with transaction
         return DB::transaction(function () use ($validated) {
             // Find the appointment
-            $appointment = $this->appointmentService->findByIdOrFail($validated['id']);
+            $appointment = $this->appointmentService->findByIdOrFail((int)$validated['id']);
 
             // Check if appointment can be completed (only confirmed can be completed)
             if ($appointment->status !== 'confirmed') {
@@ -68,7 +68,7 @@ class CompleteAppointmentAction extends Action
             }
 
             // Update the appointment
-            $updated = $this->appointmentService->update($validated['id'], $updateData);
+            $updated = $this->appointmentService->update((int)$validated['id'], $updateData);
 
             if (!$updated) {
                 return $this->errorResult(
@@ -77,27 +77,36 @@ class CompleteAppointmentAction extends Action
                 );
             }
 
-            // Create ClientService record when appointment is completed
+            // Create ClientService record only for active services (status 'A')
             $appointmentDate = \Carbon\Carbon::parse($appointment->appointment_datetime);
             $clientServiceData = [
                 'client_id' => $appointment->client_id,
                 'vehicle_id' => $appointment->vehicle_id,
                 'date' => $appointmentDate->format('m/d/Y'), // Format required by CreateClientServiceAction
             ];
-            
-            foreach ($appointment->services as $service) {
-                $clientServiceData['service_id'] = $service->id;
-                $clientServiceResult = $this->createClientServiceAction->execute($clientServiceData);
-                if (!$clientServiceResult->isSuccess()) {
-                    return $this->errorResult(
-                        message: 'Error al crear el servicio del cliente',
-                        statusCode: 500
-                    );
+
+            // Get updated appointment with fresh pivot data
+            $updatedAppointment = $this->appointmentService->findByIdOrFail((int)$validated['id']);
+            $updatedAppointment->load(['services' => function($query) {
+                $query->withPivot('status');
+            }]);
+
+            foreach ($updatedAppointment->services as $service) {
+                // Only create ClientService for services with status 'A' (active)
+                if ($service->pivot->status === 'A') {
+                    $clientServiceData['service_id'] = $service->id;
+                    $clientServiceResult = $this->createClientServiceAction->execute($clientServiceData);
+                    if (!$clientServiceResult->isSuccess()) {
+                        return $this->errorResult(
+                            message: 'Error al crear el servicio del cliente',
+                            statusCode: 500
+                        );
+                    }
                 }
             }
 
             // Get updated appointment with relationships
-            $updatedAppointment = $this->appointmentService->findByIdOrFail($validated['id']);
+            $updatedAppointment = $this->appointmentService->findByIdOrFail((int)$validated['id']);
             $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'services']);
 
             // Send notification to client about status change

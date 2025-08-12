@@ -29,6 +29,11 @@ class CreateClientComponent extends Component
         $this->createClientAction = $createClientAction;
     }
 
+    public function mount()
+    {
+        $this->phone_code = '58';
+    }
+
     public function render()
     {
         return view('v1.panel.client.create-client-component');
@@ -37,8 +42,22 @@ class CreateClientComponent extends Component
     public function createClient()
     {
 
+        $this->validate([
+            'phone_code' => 'required',
+            'phone' => 'required',
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'license_number' => 'required',
+            'status' => 'required',
+        ]);
+
         $this->phone_code = str_replace('+', '', $this->phone_code);
-        
+        $this->phone = str_replace('(', '', $this->phone);
+        $this->phone = str_replace(')', '', $this->phone);
+        $this->phone = str_replace('-', '', $this->phone);
+        $this->phone = str_replace(' ', '', $this->phone);
+
 
         $result = $this->executeAction($this->createClientAction, [
             'name' => $this->name,

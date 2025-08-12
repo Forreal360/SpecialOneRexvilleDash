@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\ClientVehicle;
 use App\Models\VehicleMake;
 use App\Models\VehicleModel;
+use Carbon\Carbon;
 
 class GetVehiclesComponent extends Component
 {
@@ -122,7 +123,7 @@ class GetVehiclesComponent extends Component
                 ->orderBy('name')
                 ->get();
         }
-        
+
         return collect(); // Retorna colección vacía si no hay marca seleccionada
     }
 
@@ -151,7 +152,8 @@ class GetVehiclesComponent extends Component
                 $query->where('year', $this->year);
             })
             ->when($this->buy_date, function ($query) {
-                $query->whereDate('buy_date', $this->buy_date);
+                $buy_date = Carbon::parse($this->buy_date)->format('Y-m-d');
+                $query->where('buy_date', $buy_date);
             })
             ->when($this->vin, function ($query) {
                 $query->where('vin', 'like', '%' . $this->vin . '%');

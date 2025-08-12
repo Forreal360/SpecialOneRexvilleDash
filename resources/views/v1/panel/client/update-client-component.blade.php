@@ -52,22 +52,23 @@
                 />
             </x-forms.form-field>
 
-            <x-forms.form-field label="{{ __('panel.phone_code') }}*" for="phone_code" :error="$errors->first('phone_code')">
-                <flux:input
-                    id="phone_code"
-                    wire:model="phone_code"
-                    placeholder="+1"
-                    error="{{ $errors->first('phone_code') }}"
-                />
-            </x-forms.form-field>
-
             <x-forms.form-field label="{{ __('panel.phone') }}*" for="phone" :error="$errors->first('phone')">
-                <flux:input
-                    id="phone"
-                    wire:model="phone"
-                    placeholder="555-123-4567"
-                    error="{{ $errors->first('phone') }}"
-                />
+
+                <flux:input.group>
+                    <flux:select class="max-w-fit" id="phone_code"
+                    wire:model.live="phone_code">
+                        <flux:select.option value="1">+1</flux:select.option>
+                        <flux:select.option value="52">+52</flux:select.option>
+                        <flux:select.option value="58">+58</flux:select.option>
+                    </flux:select>
+                    <flux:input
+                        id="phone"
+                        wire:model.live="phone"
+                        placeholder="(555)-123-4567"
+                        mask="(999) 999-9999"
+                        error="{{ $errors->first('phone') }}"  />
+                </flux:input.group>
+
             </x-forms.form-field>
 
             <x-forms.form-field label="{{ __('panel.status') }}*" for="status" :error="$errors->first('status')">
@@ -85,6 +86,7 @@
                 <flux:button
                     href="{{route('v1.panel.clients.index')}}"
                     type="button"
+                    variant="danger"
                 >
                     {{ __('panel.cancel') }}
                 </flux:button>
@@ -93,6 +95,7 @@
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                     wire:target="updateClient"
+                    variant="primary"
                 >
                     <span wire:loading.remove wire:target="updateClient">{{ __('panel.update_client') }}</span>
                     <span wire:loading wire:target="updateClient">{{ __('panel.loading') }}</span>

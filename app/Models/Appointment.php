@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Carbon\Carbon;
 
 class Appointment extends Model
@@ -49,7 +50,30 @@ class Appointment extends Model
      */
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(VehicleService::class, 'appointment_services', 'appointment_id', 'service_id');
+        return $this->belongsToMany(VehicleService::class, 'appointment_services', 'appointment_id', 'service_id')
+            ->withPivot('status')
+            ->withTimestamps();
+    }
+
+    public function appointmentServices(): HasMany
+    {
+        return $this->hasMany(AppointmentService::class, 'appointment_id', 'id');
+    }
+
+    /**
+     * Get only active services for the appointment.
+     */
+    public function activeServices(): BelongsToMany
+    {
+        return $this->services()->wherePivot('status', 'A');
+    }
+
+    /**
+     * Get only inactive services for the appointment.
+     */
+    public function inactiveServices(): BelongsToMany
+    {
+        return $this->services()->wherePivot('status', 'I');
     }
 
     /**

@@ -71,6 +71,7 @@
                 <flux:button
                     href="{{route('v1.panel.promotions.index')}}"
                     type="button"
+                    variant="danger"
                 >
                     {{ __('panel.cancel') }}
                 </flux:button>
@@ -79,6 +80,7 @@
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                     wire:target="updatePromotion"
+                    variant="primary"
                 >
                     <span wire:loading.remove wire:target="updatePromotion">{{ __('panel.update_promotion') }}</span>
                     <span wire:loading wire:target="updatePromotion">{{ __('panel.loading') }}</span>

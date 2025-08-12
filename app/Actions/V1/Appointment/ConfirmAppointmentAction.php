@@ -39,7 +39,7 @@ class ConfirmAppointmentAction extends Action
         // Business logic with transaction
         return DB::transaction(function () use ($validated) {
             // Find the appointment
-            $appointment = $this->appointmentService->findByIdOrFail($validated['id']);
+            $appointment = $this->appointmentService->findByIdOrFail( (int) $validated['id']);
 
             // Check if appointment can be confirmed (only pending can be confirmed)
             if ($appointment->status !== 'pending') {
@@ -53,7 +53,7 @@ class ConfirmAppointmentAction extends Action
             $previousStatus = $appointment->status;
 
             // Confirm the appointment
-            $confirmed = $this->appointmentService->confirm($validated['id']);
+            $confirmed = $this->appointmentService->confirm((int)$validated['id']);
 
             if (!$confirmed) {
                 return $this->errorResult(
@@ -63,7 +63,7 @@ class ConfirmAppointmentAction extends Action
             }
 
             // Get updated appointment with relationships
-            $updatedAppointment = $this->appointmentService->findByIdOrFail($validated['id']);
+            $updatedAppointment = $this->appointmentService->findByIdOrFail((int)$validated['id']);
             $updatedAppointment->load(['client', 'vehicle.make', 'vehicle.model', 'services']);
 
             // Send notification to client about status change

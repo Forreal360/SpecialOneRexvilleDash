@@ -39,6 +39,7 @@
                 <flux:button
                     href="{{route('v1.panel.vehicle-services.index')}}"
                     type="button"
+                    variant="danger"
                 >
                     {{ __('panel.cancel') }}
                 </flux:button>
@@ -47,6 +48,7 @@
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                     wire:target="updateVehicleService"
+                    variant="primary"
                 >
                     <span wire:loading.remove wire:target="updateVehicleService">{{ __('panel.update_vehicle_service') }}</span>
                     <span wire:loading wire:target="updateVehicleService">{{ __('panel.loading') }}</span>
@@ -54,4 +56,4 @@
             </div>
         </div>
     </form>
-</x-containers.card-container> 
+</x-containers.card-container>

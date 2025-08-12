@@ -41,7 +41,11 @@
                     </flux:menu.item>
                 </flux:menu>
             </flux:dropdown>
-            <flux:dropdown x-data align="end">
+
+            <flux:button x-data x-on:click="$flux.dark = ! $flux.dark" icon="moon" variant="subtle" aria-label="Toggle dark mode" />
+
+
+            {{-- <flux:dropdown x-data align="end">
                 <flux:button variant="subtle" square class="group" aria-label="{{ __('panel.color_scheme_selector') }}">
                     <flux:icon.sun x-show="$flux.appearance === 'light'" variant="mini" class="text-zinc-500 dark:text-white" />
                     <flux:icon.moon x-show="$flux.appearance === 'dark'" variant="mini" class="text-zinc-500 dark:text-white" />
@@ -52,7 +56,8 @@
                     <flux:menu.item icon="sun" x-on:click="$flux.appearance = 'light'">{{ __('panel.light_mode') }}</flux:menu.item>
                     <flux:menu.item icon="moon" x-on:click="$flux.appearance = 'dark'">{{ __('panel.dark_mode') }}</flux:menu.item>
                 </flux:menu>
-            </flux:dropdown>
+            </flux:dropdown> --}}
+
             <flux:dropdown align="end">
                 <flux:button variant="subtle" square class="group relative" aria-label="{{ __('panel.notifications_selector') }}">
                     <flux:icon.bell variant="mini" class="text-zinc-500 dark:text-white" />

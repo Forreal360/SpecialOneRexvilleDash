@@ -59,7 +59,7 @@
                 wire:model.live="buy_date"
                 size="sm"
                 label="{{ __('panel.buy_date') }}"
-                dateFormat="d/m/Y"
+                dateFormat="m/d/Y"
                 placeholder="{{ __('panel.buy_date') }}"
                 locale="{{ app()->getLocale() }}"
             />

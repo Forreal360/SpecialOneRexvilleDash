@@ -160,10 +160,10 @@
                         </x-table.cell>
 
                         <x-table.cell>
-                            @foreach($appointment->services as $service)
+                            @foreach($appointment->appointmentServices as $service)
                                 <div class="text-sm flex items-center space-x-2">
                                     <span class="inline-block w-2 h-2 rounded-full bg-[#002c5f] dark:bg-gray-500"></span>
-                                    <span class="font-medium">{{ $service->name }}</span>
+                                    <span class="font-medium" @if($service->status == 'I') style="text-decoration: line-through;" @endif>{{ $service->service->name }}</span>
                                 </div>
                             @endforeach
                         </x-table.cell>
@@ -213,8 +213,7 @@
                                             size="sm"
                                             icon="check-circle"
                                             icon:variant="outline"
-                                            wire:click="confirmAppointment({{ $appointment->id }})"
-                                            wire:confirm="{{ __('panel.confirm_appointment_message') }}"
+                                            href="{{ route('v1.panel.appointments.confirm', $appointment->id) }}"
                                         ></flux:button>
                                     </flux:tooltip>
                                 @endif
@@ -239,8 +238,7 @@
                                             size="sm"
                                             icon="check-badge"
                                             icon:variant="outline"
-                                            wire:click="completeAppointment({{ $appointment->id }})"
-                                            wire:confirm="{{ __('panel.complete_appointment_message') }}"
+                                            href="{{ route('v1.panel.appointments.complete', $appointment->id) }}"
                                         ></flux:button>
                                     </flux:tooltip>
                                 @endif

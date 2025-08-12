@@ -60,6 +60,7 @@
                 <flux:button
                     href="{{route('v1.panel.client-services.index', $clientId)}}"
                     type="button"
+                    variant="danger"
                 >
                     {{ __('panel.cancel') }}
                 </flux:button>
@@ -68,6 +69,7 @@
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
                     wire:target="updateClientService"
+                    variant="primary"
                 >
                     <span wire:loading.remove wire:target="updateClientService">{{ __('panel.update_client_service') }}</span>
                     <span wire:loading wire:target="updateClientService">{{ __('panel.loading') }}</span>
@@ -75,4 +77,4 @@
             </div>
         </div>
     </form>
-</x-containers.card-container> 
+</x-containers.card-container>

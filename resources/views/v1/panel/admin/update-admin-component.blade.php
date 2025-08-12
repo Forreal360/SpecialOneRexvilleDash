@@ -70,6 +70,7 @@
                     href="{{route('v1.panel.admins.index')}}"
                     type="button"
                     wire:click="cancel"
+                    variant="danger"
                 >
                     {{ __('panel.cancel') }}
                 </flux:button>
@@ -77,6 +78,7 @@
                     type="submit"
                     wire:loading.attr="disabled"
                     wire:loading.class="opacity-50 cursor-not-allowed"
+                    variant="primary"
                 >
                     <span wire:loading.remove>{{ __('panel.update_admin') }}</span>
                     <span wire:loading>{{ __('panel.loading') }}</span>
