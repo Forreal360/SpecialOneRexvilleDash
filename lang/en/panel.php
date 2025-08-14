@@ -67,7 +67,7 @@ return [
     'password_confirmation' => 'Confirm Password',
     'phone' => 'Phone',
     'phone_code' => 'Country Code',
-    'license_number' => 'License Number',
+    'license_number' => 'Client Number',
     'address' => 'Address',
     'city' => 'City',
     'state' => 'State',

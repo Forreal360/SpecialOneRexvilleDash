@@ -10,24 +10,16 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Password;
 use App\Models\Client;
 use App\Notifications\ClientRegisterNotification;
+use App\Models\Appointment;
 
 class TestController extends Controller
 {
     public function index(){
 
-        $client = Client::where('email', 'joanmilla21@gmail.com')->first();
+        $appointment = Appointment::find(22);
 
-        return view('v1.mails.client.register-mail', [
-            'notifiable' => $client,
-            'password' => '123456'
-        ]);
-        
+        $appointment = $appointment->appointmentServices->where('status', 'A')->pluck('service.name')->implode(', ');
 
-        $client->notify(new ClientRegisterNotification($client, '123456'));
-
-        dd('Notification sent successfully.');
-
-
-        return view('v1.dev.test');
+        dd($appointment);
     }
 }

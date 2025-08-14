@@ -67,7 +67,7 @@ return [
     'password_confirmation' => 'Confirmar contraseña',
     'phone' => 'Teléfono',
     'phone_code' => 'Código de país',
-    'license_number' => 'Número de licencia',
+    'license_number' => 'N° Cliente',
     'address' => 'Dirección',
     'city' => 'Ciudad',
     'state' => 'Estado',

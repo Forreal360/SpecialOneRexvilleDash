@@ -35,7 +35,7 @@
               <strong>Hyundai de Rexville - Plataforma de Gestión para Concesionarios</strong>
             </div>
             <div style="color:#64748b; font-size:13px; margin-bottom:12px;">
-              Puerto Rico &nbsp;|&nbsp; +1 787 488 8080 &nbsp;|&nbsp; info@rexville.com
+              Puerto Rico &nbsp;|&nbsp; +1 787 488 8080 &nbsp;|&nbsp; info@hyundairexvilleapp.com
             </div>
             <div style="margin-top:10px; font-size:12px;">
               <a href="#"
