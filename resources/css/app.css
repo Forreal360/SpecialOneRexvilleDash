@@ -33,7 +33,7 @@
 
 @layer theme {
     .dark {
-        --color-accent: #003468;
+        --color-accent: #0080FF;
         --color-accent-content: #0080FF;
         --color-accent-foreground: #ffffff;
     }

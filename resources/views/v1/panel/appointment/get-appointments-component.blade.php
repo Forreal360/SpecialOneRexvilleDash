@@ -43,9 +43,9 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-600 dark:text-zinc-200">{{ __('panel.appointment_status_completed') }}</p>
-                    <p class="text-2xl font-bold text-blue-600">{{ $statusCounts['completed'] }}</p>
+                    <p class="text-2xl font-bold text-accent-content">{{ $statusCounts['completed'] }}</p>
                 </div>
-                <flux:icon.check-badge class="h-8 w-8 text-blue-600" />
+                <flux:icon.check-badge class="h-8 w-8 text-accent-content" />
             </div>
         </div>
     </div>
@@ -184,11 +184,11 @@
 
                         <x-table.cell>
                             @if($appointment->notes)
-                                <div class="text-sm text-gray-600 truncate max-w-32" title="{{ $appointment->notes }}">
+                                <div class="text-sm font-medium truncate max-w-32" title="{{ $appointment->notes }}">
                                     {{ $appointment->notes }}
                                 </div>
                             @else
-                                <span class="text-gray-400">-</span>
+                                <span class="font-medium">-</span>
                             @endif
                         </x-table.cell>
 

@@ -4,8 +4,8 @@
         @if($unread_notifications > 0)
             <div
                 id="unread_notifications"
-                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-medium py-1 px-2 rounded-full min-w-5 h-5 flex items-center justify-center"
-                style="font-size: 9px;">
+                class="absolute  bg-red-500 text-white text-xs font-medium py-1 px-1 rounded-full min-w-5 h-5 flex items-center justify-center"
+                style="font-size: 9px;top: calc(var(--spacing) * -0.5);right: calc(var(--spacing) * -0.1);">
                 {{ $unread_notifications > 99 ? '99+' : $unread_notifications }}
             </div>
         @else
@@ -41,7 +41,7 @@
             <!-- Loading Spinner -->
             <div
                 id="notification-spinner"
-                class="flex justify-center items-center py-2 hidden">
+                class="justify-center items-center py-2 hidden">
                 <flux:icon.arrow-path class="w-4 h-4 animate-spin" />
                 <span class="ml-2 text-sm text-zinc-500">{{ __('panel.loading') }}...</span>
             </div>
@@ -252,6 +252,9 @@
         if (unread_notifications > 0) {
             counter.textContent = unread_notifications > 99 ? '99+' : unread_notifications;
             counter.classList.remove('hidden');
+            // Añadir las clases de estilo del contador original
+            counter.className = 'absolute bg-red-500 text-white text-xs font-medium py-1 px-1 rounded-full min-w-5 h-5 flex items-center justify-center';
+            counter.style.cssText = 'font-size: 9px;top: calc(var(--spacing) * -0.5);right: calc(var(--spacing) * -0.1);';
         } else {
             counter.classList.add('hidden');
         }

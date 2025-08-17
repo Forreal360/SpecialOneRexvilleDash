@@ -8,6 +8,9 @@ use App\Console\Commands\MakeServiceCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Models\Client;
 use App\Models\Admin;
+use App\Models\Appointment;
+use App\Models\Ticket;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,5 +37,12 @@ class AppServiceProvider extends ServiceProvider
             'client' => Client::class,
             'admin' => Admin::class,
         ]);
+
+        View::composer('v1.layouts.panel.partials.sidebar', function ($view) {
+            $view->with('pending_appointments', Appointment::where('status', 'pending')->count());
+            $view->with('pending_tickets', Ticket::where('status', 'pending')->count());
+        });
+
+
     }
 }
