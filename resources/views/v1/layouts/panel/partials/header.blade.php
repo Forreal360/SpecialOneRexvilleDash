@@ -58,81 +58,8 @@
                 </flux:menu>
             </flux:dropdown> --}}
 
-            <flux:dropdown align="end">
-                <flux:button variant="subtle" square class="group relative" aria-label="{{ __('panel.notifications_selector') }}">
-                    <flux:icon.bell variant="mini" class="text-zinc-500 dark:text-white" />
-                    <flux:badge variant="danger" size="sm" class="absolute -top-1 -right-1" >2</flux:badge>
-                </flux:button>
-                <flux:menu class="p-0">
-                    <div class="p-4 border-b border-zinc-200 dark:border-zinc-700">
-                        <div class="flex items-center justify-between">
-                            <flux:heading size="sm">{{ __('panel.notifications') }}</flux:heading>
-                            <flux:button variant="subtle" size="xs" class="text-xs">
-                                {{ __('panel.mark_all_as_read') }}
-                            </flux:button>
-                        </div>
-                    </div>
+            <livewire:panel.notification.get-notifications-component />
 
-                    <div class="max-h-80 overflow-y-auto">
-                        @php
-                            $notifications = [
-                                ['id' => 1, 'title' => __('panel.new_order_received'), 'message' => __('panel.order_received_message', ['order_id' => '12345']), 'time' => '2 min', 'read' => false, 'type' => 'order'],
-                                ['id' => 2, 'title' => __('panel.system_update'), 'message' => __('panel.system_update_message', ['time' => '30 minutos']), 'time' => '1 hora', 'read' => false, 'type' => 'system'],
-                                ['id' => 3, 'title' => __('panel.client_registered'), 'message' => __('panel.client_registered_message', ['name' => 'Juan Pérez']), 'time' => '3 horas', 'read' => true, 'type' => 'user'],
-                                ['id' => 4, 'title' => __('panel.low_stock'), 'message' => __('panel.low_stock_message', ['product' => 'Laptop HP']), 'time' => '5 horas', 'read' => true, 'type' => 'inventory'],
-                                ['id' => 5, 'title' => __('panel.backup_completed'), 'message' => __('panel.backup_completed_message'), 'time' => '1 día', 'read' => true, 'type' => 'system']
-                            ];
-                        @endphp
-
-                        @foreach($notifications as $notification)
-                            <div class="px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 cursor-pointer border-b border-zinc-100 dark:border-zinc-700 last:border-b-0 {{ !$notification['read'] ? 'bg-blue-50 dark:bg-blue-900/20' : '' }}">
-                                <div class="flex items-start gap-3">
-                                    <div class="flex-shrink-0 mt-1">
-                                        @php
-                                            $icon = match($notification['type']) {
-                                                'order' => 'shopping-cart',
-                                                'system' => 'cog',
-                                                'user' => 'user',
-                                                default => 'cube'
-                                            };
-                                        @endphp
-                                        <flux:icon
-                                            icon="{{ $icon }}"
-                                            variant="mini"
-                                            class="{{ $notification['read'] ? 'text-zinc-400' : 'text-blue-500' }}"
-                                        />
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <div class="flex items-center justify-between">
-                                            <flux:text
-                                                size="sm"
-                                                class="{{ $notification['read'] ? 'text-zinc-600 dark:text-zinc-300' : 'font-medium text-zinc-900 dark:text-white' }}"
-                                            >
-                                                {{ $notification['title'] }}
-                                            </flux:text>
-                                            <flux:text size="xs" class="text-zinc-400">{{ $notification['time'] }}</flux:text>
-                                        </div>
-                                        <flux:text size="sm" class="text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">
-                                            {{ $notification['message'] }}
-                                        </flux:text>
-                                    </div>
-                                    @if(!$notification['read'])
-                                        <div class="flex-shrink-0 mt-1">
-                                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <div class="p-4 border-t border-zinc-200 dark:border-zinc-700">
-                        <flux:button variant="subtle" class="w-full" size="sm">
-                            {{ __('panel.view_all_notifications') }}
-                        </flux:button>
-                    </div>
-                </flux:menu>
-            </flux:dropdown>
             <flux:dropdown position="top" align="end" >
                 <flux:profile avatar="https://fluxui.dev/img/demo/user.png"/>
                 <flux:menu>

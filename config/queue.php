@@ -106,7 +106,7 @@ return [
     'failed' => [
         'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
         'database' => env('DB_CONNECTION', 'sqlite'),
-        'table' => 'failed_jobs',
+        'table' => env('DB_QUEUE_FAILED_TABLE', 'failed_jobs'),
     ],
 
 ];
