@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('v1.layouts.panel.partials.sidebar', function ($view) {
             $view->with('pending_appointments', Appointment::where('status', 'pending')->count());
-            $view->with('pending_tickets', Ticket::where('status', 'pending')->count());
+            $view->with('pending_tickets', Ticket::where('status', 'open')->count());
         });
 
 
