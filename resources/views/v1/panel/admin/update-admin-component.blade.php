@@ -65,6 +65,19 @@
                 </flux:select>
             </x-forms.form-field>
 
+            <!-- Asignación de rol -->
+            @if($roles && count($roles) > 0)
+            <x-forms.form-field label="{{ __('panel.assign_role') }}" for="selectedRole">
+                <flux:select wire:model="selectedRole" placeholder="{{ __('panel.select_role') }}" class="w-full">
+                    <flux:select.option value="">{{ __('panel.no_role') }}</flux:select.option>
+                    @foreach($roles as $role)
+                        <flux:select.option value="{{ $role->id }}">{{ $role->alias }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+                <flux:description>{{ __('panel.role_description') }}</flux:description>
+            </x-forms.form-field>
+            @endif
+
             <div class="flex justify-end space-x-3 pt-0 px-6 pb-6">
                 <flux:button
                     href="{{route('v1.panel.admins.index')}}"

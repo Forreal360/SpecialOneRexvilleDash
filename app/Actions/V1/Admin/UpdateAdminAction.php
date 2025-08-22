@@ -35,23 +35,35 @@ class UpdateAdminAction extends Action
             "email" => "required|email|unique:admins,email," . $data['id'],
             "password" => "nullable|string|min:8|confirmed",
             "status" => "nullable|string|in:A,I",
+            "role" => "nullable|exists:roles,id"
         ]);
 
         // Business logic with transaction
         return DB::transaction(function () use ($validated) {
             $adminId = $validated['id'];
+            $role = $validated['role'] ?? null;
 
-            // Remove id from data to update
-            unset($validated['id']);
+            // Remove id and role from data to update
+            unset($validated['id'], $validated['role']);
 
             // Remove password if not provided
             if (empty($validated['password'])) {
                 unset($validated['password']);
             }
 
-            $this->adminService->update((int) $adminId, $validated);
+            $admin = $this->adminService->update((int) $adminId, $validated);
 
-            return $this->successResult();
+            // Sincronizar rol (un solo rol)
+            if ($role) {
+                $roleModel = \App\Models\Role::find($role);
+                if ($roleModel) {
+                    $admin->syncRoles([$roleModel->name]); // Usar nombre del rol, no ID
+                }
+            } else {
+                $admin->syncRoles([]); // Remover todos los roles si no se seleccionó ninguno
+            }
+
+            return $this->successResult(data: $admin);
 
         });
     }

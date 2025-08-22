@@ -16,10 +16,9 @@ class TestController extends Controller
 {
     public function index(){
 
-        $appointment = Appointment::find(22);
-
-        $appointment = $appointment->appointmentServices->where('status', 'A')->pluck('service.name')->implode(', ');
-
-        dd($appointment);
+        $roles = \Spatie\Permission\Models\Permission::where('guard_name', 'panel')
+            ->get()
+            ->groupBy('module');
+        dd($roles);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\V1\Dev\TestController;
 use App\Livewire\V1\Panel\Admin\{GetAdminsComponent, CreateAdminComponent, UpdateAdminComponent};
 use App\Livewire\V1\Auth\{ForgotPasswordComponent, ResetPasswordComponent};
 use App\Livewire\V1\Panel\Promotion\{GetPromotionsComponent, CreatePromotionComponent, UpdatePromotionComponent};
+use App\Livewire\V1\Panel\Role\{GetRolesComponent, CreateRoleComponent, EditRoleComponent};
 use App\Livewire\V1\Panel\Client\{GetClientsComponent, CreateClientComponent, UpdateClientComponent};
 use App\Livewire\V1\Panel\Client\Vehicle\{GetVehiclesComponent, CreateVehicleComponent, UpdateVehicleComponent};
 use App\Livewire\V1\Panel\Client\Service\{GetClientServicesComponent, CreateClientServiceComponent, UpdateClientServiceComponent};
@@ -41,6 +42,11 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
     Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index');
     Route::get('/promotions/create', CreatePromotionComponent::class)->name('promotions.create');
     Route::get('/promotions/{id}/edit', UpdatePromotionComponent::class)->name('promotions.edit');
+
+    /* ----------------- Roles ----------------- */
+    Route::get('/roles', GetRolesComponent::class)->name('roles.index');
+    Route::get('/roles/create', CreateRoleComponent::class)->name('roles.create');
+    Route::get('/roles/{id}/edit', EditRoleComponent::class)->name('roles.edit');
 
     /* ----------------- Clients ----------------- */
     Route::get('/clients', GetClientsComponent::class)->name('clients.index');

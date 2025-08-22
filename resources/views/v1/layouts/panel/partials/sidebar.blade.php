@@ -12,6 +12,9 @@
 
         <flux:navlist.item icon="users"  href="{{ route('v1.panel.admins.index') }}" :current="request()->is('*panel/admins*')">{{ __('panel.admins') }}</flux:navlist.item>
 
+        <flux:navlist.item icon="shield-check"  href="{{ route('v1.panel.roles.index') }}" :current="request()->is('*panel/roles*')">{{ __('roles.roles') }}</flux:navlist.item>
+
+
         <flux:navlist.item icon="ticket" href="{{ route('v1.panel.promotions.index') }}" :current="request()->is('*panel/promotions*')">{{ __('panel.promotions') }}</flux:navlist.item>
 
         <flux:navlist.item icon="list-bullet" href="{{ route('v1.panel.vehicle-services.index') }}" :current="request()->is('*panel/vehicle-services*')">{{ __('panel.services') }}</flux:navlist.item>

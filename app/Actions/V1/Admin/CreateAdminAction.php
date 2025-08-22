@@ -34,13 +34,22 @@ class CreateAdminAction extends Action
             "last_name" => "required|string|max:255",
             "email" => "required|email|unique:admins,email",
             "password" => "required|string|min:8|confirmed",
+            "role" => "nullable|exists:roles,id"
         ]);
 
         // Business logic with transaction
         return DB::transaction(function () use ($validated) {
-            $this->adminService->create($validated);
+            $admin = $this->adminService->create($validated);
 
-            return $this->successResult();
+            // Asignar rol si se proporcionó
+            if (!empty($validated['role'])) {
+                $role = \App\Models\Role::find($validated['role']);
+                if ($role) {
+                    $admin->syncRoles([$role->name]); // Usar nombre del rol, no ID
+                }
+            }
+
+            return $this->successResult(data: $admin);
 
         });
     }

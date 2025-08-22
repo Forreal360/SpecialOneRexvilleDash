@@ -512,4 +512,8 @@ return [
     'conversation' => 'Conversation',
     'write_response' => 'Write your response...',
     'send_message_button' => 'Send Message',
+    'assign_role' => 'Assign Role',
+    'role_description' => 'Select the role this administrator will have.',
+    'select_role' => 'Select role',
+    'no_role' => 'No role assigned',
 ];

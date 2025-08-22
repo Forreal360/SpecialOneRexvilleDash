@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Actions\V1\Admin\UpdateAdminAction;
 use App\Livewire\Concerns\HandlesActionResults;
 use App\Services\V1\AdminService;
+use App\Models\Role;
 
 class UpdateAdminComponent extends Component
 {
@@ -18,6 +19,7 @@ class UpdateAdminComponent extends Component
     public $password;
     public $password_confirmation;
     public $status;
+    public $selectedRole = null;
 
     private $updateAdminAction;
     private $adminService;
@@ -42,11 +44,15 @@ class UpdateAdminComponent extends Component
         $this->last_name = $admin->last_name;
         $this->email = $admin->email;
         $this->status = $admin->status;
+        
+        // Cargar rol asignado al admin (solo el primero si tiene varios)
+        $this->selectedRole = $admin->roles->first()?->id;
     }
 
     public function render()
     {
-        return view('v1.panel.admin.update-admin-component');
+        $roles = Role::where('guard_name', 'admin')->get();
+        return view('v1.panel.admin.update-admin-component', compact('roles'));
     }
 
     public function updateAdmin()
@@ -57,6 +63,7 @@ class UpdateAdminComponent extends Component
             'last_name' => $this->last_name,
             'email' => $this->email,
             'status' => $this->status,
+            'role' => $this->selectedRole,
         ];
 
         // Solo incluir password si se proporciona

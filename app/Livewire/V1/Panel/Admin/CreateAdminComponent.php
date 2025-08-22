@@ -5,6 +5,7 @@ namespace App\Livewire\V1\Panel\Admin;
 use Livewire\Component;
 use App\Actions\V1\Admin\CreateAdminAction;
 use App\Livewire\Concerns\HandlesActionResults;
+use App\Models\Role;
 
 class CreateAdminComponent extends Component
 {
@@ -17,6 +18,7 @@ class CreateAdminComponent extends Component
     public $password;
     public $password_confirmation;
     public $status;
+    public $selectedRole = null;
 
     private $createAdminAction;
 
@@ -26,7 +28,8 @@ class CreateAdminComponent extends Component
 
     public function render()
     {
-        return view('v1.panel.admin.create-admin-component');
+        $roles = Role::where('guard_name', 'admin')->get();
+        return view('v1.panel.admin.create-admin-component', compact('roles'));
     }
 
     public function createAdmin()
@@ -38,6 +41,7 @@ class CreateAdminComponent extends Component
             'email' => $this->email,
             'password' => $this->password,
             'password_confirmation' => $this->password_confirmation,
+            'role' => $this->selectedRole,
         ], true);
 
         if ($createAdminResult->isSuccess()) {
