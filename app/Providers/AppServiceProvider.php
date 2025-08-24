@@ -11,6 +11,8 @@ use App\Models\Admin;
 use App\Models\Appointment;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Gate;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('pending_tickets', Ticket::where('status', 'open')->count());
         });
 
+
+        Gate::before(function ($user, $ability) {
+            return $user->super_admin == 'Y' ? true : null;
+        });
 
     }
 }

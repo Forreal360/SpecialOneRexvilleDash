@@ -8,11 +8,16 @@
     </div>
 
     <flux:navlist variant="outline">
+
         <flux:navlist.item icon="home"  href="{{ route('v1.panel.home') }}" :current="request()->is('*panel/home*')">{{ __('panel.home') }}</flux:navlist.item>
 
+        @can('administrators.create')
         <flux:navlist.item icon="users"  href="{{ route('v1.panel.admins.index') }}" :current="request()->is('*panel/admins*')">{{ __('panel.admins') }}</flux:navlist.item>
+        @endcan
 
+        @can('roles.create')
         <flux:navlist.item icon="shield-check"  href="{{ route('v1.panel.roles.index') }}" :current="request()->is('*panel/roles*')">{{ __('roles.roles') }}</flux:navlist.item>
+        @endcan
 
 
         <flux:navlist.item icon="ticket" href="{{ route('v1.panel.promotions.index') }}" :current="request()->is('*panel/promotions*')">{{ __('panel.promotions') }}</flux:navlist.item>
