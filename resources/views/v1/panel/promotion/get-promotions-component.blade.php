@@ -7,12 +7,14 @@
 @endsection
 
 @section('actions')
+@can('promotions.create')
 <x-buttons.button-module
     icon="plus"
     href="{{ route('v1.panel.promotions.create') }}"
     label="{{ __('panel.new_promotion') }}"
     variant="primary"
 />
+@endcan
 @endsection
 
 <x-containers.card-container>

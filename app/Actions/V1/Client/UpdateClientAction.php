@@ -31,6 +31,10 @@ class UpdateClientAction extends Action
      */
     public function handle($data): ActionResult
     {
+        $this->validatePermissions([
+            "clients.update"
+        ]);
+
         $validated = $this->validateData($data, [
             "id" => "required|exists:clients,id",
             "name" => "required|string|max:255",

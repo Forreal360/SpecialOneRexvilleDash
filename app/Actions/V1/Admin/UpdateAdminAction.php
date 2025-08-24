@@ -27,6 +27,10 @@ class UpdateAdminAction extends Action
      */
     public function handle($data): ActionResult
     {
+        $this->validatePermissions([
+            "administrators.update"
+        ]);
+
         // Validate input data
         $validated = $this->validateData($data, [
             "id" => "required|integer|exists:admins,id",

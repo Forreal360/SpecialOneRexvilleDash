@@ -56,7 +56,7 @@
 <script>
     @if(session('success'))
         Toastify({
-            text: "Operación completada exitosamente",
+            text: "{{ session('success') }}",
             duration: 3000,
             close: false,
             gravity: "bottom",
@@ -73,6 +73,28 @@
             }
         }).showToast();
     @endif
+    // Listener para toast de error via Livewire event
+    document.addEventListener('livewire:init', function () {
+        Livewire.on('show-error-toast', (data) => {
+            Toastify({
+                text: data.message,
+                duration: 3000,
+                close: false,
+                gravity: "bottom",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "rgb(239 68 68)",
+                    color: "white",
+                    borderRadius: "8px",
+                    padding: "12px 16px",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06)",
+                }
+            }).showToast();
+        });
+    });
 </script>
 </body>
 </html>

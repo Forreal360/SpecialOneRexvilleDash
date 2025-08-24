@@ -30,6 +30,10 @@ class CreatePromotionAction extends Action
     public function handle($data): ActionResult
     {
 
+        $this->validatePermissions([
+            "promotions.create"
+        ]);
+
         // Validate input data
         $validated = $this->validateData($data, [
             'title' => 'required|string|max:255',

@@ -49,6 +49,6 @@ class CreateAdminComponent extends Component
             return redirect()->route('v1.panel.admins.index');
         }
 
-        session()->flash('error', __('panel.error_creating_admin'));
+        session()->flash('error', $createAdminResult->getMessage());
     }
 }

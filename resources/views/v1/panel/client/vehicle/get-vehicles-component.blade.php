@@ -10,12 +10,14 @@
 
 
 @section('actions')
+@can('clients-vehicles.create')
 <x-buttons.button-module
     icon="plus"
     href="{{route('v1.panel.vehicles.create', $clientId)}}"
     label="{{ __('panel.new_vehicle') }}"
     variant="primary"
 />
+@endcan
 @endsection
 
 <x-containers.card-container>

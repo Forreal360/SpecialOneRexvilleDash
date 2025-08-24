@@ -25,6 +25,12 @@ class SendMessageAction extends Action
      */
     public function handle($data): ActionResult
     {
+
+        $this->validatePermissions([
+            "tickets.respond"
+        ]);
+
+
         $validated = $this->validateData($data, [
             "ticket_id" => "required|exists:tickets,id",
             "message" => "required|string|max:1000",

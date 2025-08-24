@@ -25,6 +25,10 @@ class CloseTicketAction extends Action
      */
     public function handle($data): ActionResult
     {
+        $this->validatePermissions([
+            "tickets.update-status"
+        ]);
+
         $validated = $this->validateData($data, [
             "id" => "required|exists:tickets,id",
         ]);

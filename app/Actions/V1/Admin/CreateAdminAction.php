@@ -28,6 +28,10 @@ class CreateAdminAction extends Action
     public function handle($data): ActionResult
     {
 
+        $this->validatePermissions([
+            "administrators.create"
+        ]);
+
         // Validate input data
         $validated = $this->validateData($data, [
             "name" => "required|string|max:255",

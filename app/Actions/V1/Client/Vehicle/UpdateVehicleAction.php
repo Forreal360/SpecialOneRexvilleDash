@@ -25,6 +25,12 @@ class UpdateVehicleAction extends Action
      */
     public function handle($data): ActionResult
     {
+
+        $this->validatePermissions([
+            "clients-vehicles.update"
+        ]);
+
+
         $validated = $this->validateData($data, [
             'vehicle_id' => 'required|exists:client_vehicles,id',
             'client_id' => 'required|exists:clients,id',
@@ -50,4 +56,4 @@ class UpdateVehicleAction extends Action
             return $this->successResult();
         });
     }
-} 
+}

@@ -7,12 +7,14 @@
 @endsection
 
 @section('actions')
+@can('vehicles-services.create')
 <x-buttons.button-module
     icon="plus"
     href="{{route('v1.panel.vehicle-services.create')}}"
     label="{{ __('panel.new_vehicle_service') }}"
     variant="primary"
 />
+@endcan
 @endsection
 
 <x-containers.card-container>
@@ -38,7 +40,7 @@
         </x-slot>
 
         <x-slot name="colums">
-            
+
 
             <x-table.colum
                 sortable="true"
@@ -58,7 +60,7 @@
                 {{ __('panel.status') }}
             </x-table.colum>
 
-            
+
 
             <x-table.colum>{{ __('panel.actions') }}</x-table.colum>
         </x-slot>
@@ -66,16 +68,16 @@
         <x-slot name="rows">
             @foreach($vehicleServices as $vehicleService)
                 <x-table.row>
-                    
+
                     <x-table.cell>{{ $vehicleService->name }}</x-table.cell>
-                    
+
                     <x-table.cell>
                         <flux:badge color="{{$vehicleService->status == 'A' ? 'lime' : 'red'}}">
                             {{$vehicleService->status == 'A' ? __('panel.active') : __('panel.inactive') }}
                         </flux:badge>
                     </x-table.cell>
-                    
-                    
+
+
                     <x-table.cell>
                         <flux:button.group>
                             <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.vehicle-services.edit', $vehicleService->id) }}"></flux:button>
@@ -97,4 +99,4 @@
 
     </x-table.table>
 
-</x-containers.card-container> 
+</x-containers.card-container>

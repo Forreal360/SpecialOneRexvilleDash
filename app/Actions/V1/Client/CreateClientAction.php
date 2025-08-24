@@ -29,6 +29,10 @@ class CreateClientAction extends Action
     public function handle($data): ActionResult
     {
 
+        $this->validatePermissions([
+            "clients.create"
+        ]);
+
         $validated = $this->validateData($data, [
             "name" => "required|string|max:255",
             "last_name" => "required|string|max:255",

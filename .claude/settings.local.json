@@ -5,7 +5,9 @@
       "Bash(php artisan:*)",
       "WebFetch(domain:fluxui.dev)",
       "Bash(mv:*)",
-      "Bash(composer:*)"
+      "Bash(composer:*)",
+      "Bash(php:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []

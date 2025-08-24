@@ -26,6 +26,10 @@ class CreateClientServiceAction extends Action
     public function handle($data): ActionResult
     {
 
+        $this->validatePermissions([
+            "clients-vehicles-services.create"
+        ]);
+
         $validated = $this->validateData($data, [
             'client_id' => 'required|exists:clients,id',
             'vehicle_id' => 'required|exists:client_vehicles,id',
@@ -44,4 +48,4 @@ class CreateClientServiceAction extends Action
             return $this->successResult();
         });
     }
-} 
+}

@@ -9,12 +9,14 @@
 
 
 @section('actions')
+@can('administrators.create')
 <x-buttons.button-module
     icon="plus"
     href="{{route('v1.panel.admins.create')}}"
     label="{{ __('panel.new_admin') }}"
     variant="primary"
 />
+@endcan
 @endsection
 
 <x-containers.card-container>

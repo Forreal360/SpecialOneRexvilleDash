@@ -11,12 +11,14 @@
 @endsection
 
 @section('actions')
+@can('roles.create')
 <x-buttons.button-module
     icon="plus"
     href="{{ route('v1.panel.roles.create') }}"
     label="{{ __('roles.create_role') }}"
     variant="primary"
 />
+@endcan
 @endsection
 
 <x-containers.card-container>

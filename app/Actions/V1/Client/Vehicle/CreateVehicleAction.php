@@ -26,6 +26,10 @@ class CreateVehicleAction extends Action
     public function handle($data): ActionResult
     {
 
+        $this->validatePermissions([
+            "clients-vehicles.create"
+        ]);
+
         $validated = $this->validateData($data, [
             'client_id' => 'required|exists:clients,id',
             'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),

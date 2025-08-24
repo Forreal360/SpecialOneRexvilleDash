@@ -34,47 +34,47 @@ Route::group(["prefix" => "v1/panel", "middleware" => "auth:admin", "as" => "v1.
     Route::get('/home', HomeComponent::class)->name("home");
 
     /* ----------------- Admins ----------------- */
-    Route::get('/admins', GetAdminsComponent::class)->name('admins.index');
-    Route::get('/admins/create', CreateAdminComponent::class)->name('admins.create');
-    Route::get('/admins/{id}/edit', UpdateAdminComponent::class)->name('admins.edit');
+    Route::get('/admins', GetAdminsComponent::class)->name('admins.index')->middleware('can:administrators.get');
+    Route::get('/admins/create', CreateAdminComponent::class)->name('admins.create')->middleware('can:administrators.create');
+    Route::get('/admins/{id}/edit', UpdateAdminComponent::class)->name('admins.edit')->middleware('can:administrators.update');
 
     /* ----------------- Promotions ----------------- */
-    Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index');
-    Route::get('/promotions/create', CreatePromotionComponent::class)->name('promotions.create');
-    Route::get('/promotions/{id}/edit', UpdatePromotionComponent::class)->name('promotions.edit');
+    Route::get('/promotions', GetPromotionsComponent::class)->name('promotions.index')->middleware('can:promotions.get');
+    Route::get('/promotions/create', CreatePromotionComponent::class)->name('promotions.create')->middleware('can:promotions.create');
+    Route::get('/promotions/{id}/edit', UpdatePromotionComponent::class)->name('promotions.edit')->middleware('can:promotions.update');
 
     /* ----------------- Roles ----------------- */
-    Route::get('/roles', GetRolesComponent::class)->name('roles.index');
-    Route::get('/roles/create', CreateRoleComponent::class)->name('roles.create');
-    Route::get('/roles/{id}/edit', EditRoleComponent::class)->name('roles.edit');
+    Route::get('/roles', GetRolesComponent::class)->name('roles.index')->middleware('can:roles.get');
+    Route::get('/roles/create', CreateRoleComponent::class)->name('roles.create')->middleware('can:roles.create');
+    Route::get('/roles/{id}/edit', EditRoleComponent::class)->name('roles.edit')->middleware('can:roles.update');
 
     /* ----------------- Clients ----------------- */
-    Route::get('/clients', GetClientsComponent::class)->name('clients.index');
-    Route::get('/clients/create', CreateClientComponent::class)->name('clients.create');
-    Route::get('/clients/{id}/edit', UpdateClientComponent::class)->name('clients.edit');
+    Route::get('/clients', GetClientsComponent::class)->name('clients.index')->middleware('can:clients.get');
+    Route::get('/clients/create', CreateClientComponent::class)->name('clients.create')->middleware('can:clients.create');
+    Route::get('/clients/{id}/edit', UpdateClientComponent::class)->name('clients.edit')->middleware('can:clients.update');
 
     /* ----------------- Vehicles ----------------- */
-    Route::get('/clients/{clientId}/vehicles', GetVehiclesComponent::class)->name('vehicles.index');
-    Route::get('/clients/{clientId}/vehicles/create', CreateVehicleComponent::class)->name('vehicles.create');
-    Route::get('/clients/{clientId}/vehicles/{id}/edit', UpdateVehicleComponent::class)->name('vehicles.edit');
+    Route::get('/clients/{clientId}/vehicles', GetVehiclesComponent::class)->name('vehicles.index')->middleware('can:clients-vehicles.get');
+    Route::get('/clients/{clientId}/vehicles/create', CreateVehicleComponent::class)->name('vehicles.create')->middleware('can:clients-vehicles.create');
+    Route::get('/clients/{clientId}/vehicles/{id}/edit', UpdateVehicleComponent::class)->name('vehicles.edit')->middleware('can:clients-vehicles.update');
 
     /* ----------------- Client Services ----------------- */
-    Route::get('/clients/{clientId}/services', GetClientServicesComponent::class)->name('client-services.index');
-    Route::get('/clients/{clientId}/services/create', CreateClientServiceComponent::class)->name('client-services.create');
-    Route::get('/clients/{clientId}/services/{id}/edit', UpdateClientServiceComponent::class)->name('client-services.edit');
+    Route::get('/clients/{clientId}/services', GetClientServicesComponent::class)->name('client-services.index')->middleware('can:clients-vehicles-services.get');
+    Route::get('/clients/{clientId}/services/create', CreateClientServiceComponent::class)->name('client-services.create')->middleware('can:clients-vehicles-services.create');
+    Route::get('/clients/{clientId}/services/{id}/edit', UpdateClientServiceComponent::class)->name('client-services.edit')->middleware('can:clients-vehicles-services.update');
 
     /* ----------------- Vehicle Services ----------------- */
-    Route::get('/vehicle-services', GetVehicleServicesComponent::class)->name('vehicle-services.index');
-    Route::get('/vehicle-services/create', CreateVehicleServiceComponent::class)->name('vehicle-services.create');
-    Route::get('/vehicle-services/{id}/edit', UpdateVehicleServiceComponent::class)->name('vehicle-services.edit');
+    Route::get('/vehicle-services', GetVehicleServicesComponent::class)->name('vehicle-services.index')->middleware('can:vehicle-services.get');
+    Route::get('/vehicle-services/create', CreateVehicleServiceComponent::class)->name('vehicle-services.create')->middleware('can:vehicle-services.create');
+    Route::get('/vehicle-services/{id}/edit', UpdateVehicleServiceComponent::class)->name('vehicle-services.edit')->middleware('can:vehicle-services.update');
 
     /* ----------------- Appointments ----------------- */
-    Route::get('/appointments', GetAppointmentsComponent::class)->name('appointments.index');
-    Route::get('/appointments/{id}/edit', UpdateAppointmentComponent::class)->name('appointments.edit');
-    Route::get('/appointments/{id}/confirm', \App\Livewire\V1\Panel\Appointment\ConfirmAppointmentComponent::class)->name('appointments.confirm');
-    Route::get('/appointments/{id}/complete', \App\Livewire\V1\Panel\Appointment\CompleteAppointmentComponent::class)->name('appointments.complete');
+    Route::get('/appointments', GetAppointmentsComponent::class)->name('appointments.index')->middleware('can:appointments.get');
+    Route::get('/appointments/{id}/edit', UpdateAppointmentComponent::class)->name('appointments.edit')->middleware('can:appointments.update');
+    Route::get('/appointments/{id}/confirm', \App\Livewire\V1\Panel\Appointment\ConfirmAppointmentComponent::class)->name('appointments.confirm')->middleware('can:appointments.update-status');
+    Route::get('/appointments/{id}/complete', \App\Livewire\V1\Panel\Appointment\CompleteAppointmentComponent::class)->name('appointments.complete')->middleware('can:appointments.update-status');
 
     /* ----------------- Tickets ----------------- */
-    Route::get('/tickets', GetTicketsComponent::class)->name('tickets.index');
-    Route::get('/tickets/{ticketId}/view', ViewTicketComponent::class)->name('tickets.view');
+    Route::get('/tickets', GetTicketsComponent::class)->name('tickets.index')->middleware('can:tickets.get');
+    Route::get('/tickets/{ticketId}/view', ViewTicketComponent::class)->name('tickets.view')->middleware('can:tickets.get');
 });

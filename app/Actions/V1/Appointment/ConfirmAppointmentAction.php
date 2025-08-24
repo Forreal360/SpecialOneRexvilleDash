@@ -28,6 +28,10 @@ class ConfirmAppointmentAction extends Action
      */
     public function handle($data): ActionResult
     {
+        $this->validatePermissions([
+            "appointments.update-status"
+        ]);
+
         // Validate input data
         $validated = $this->validateData($data, [
             'id' => 'required|integer|exists:appointments,id',

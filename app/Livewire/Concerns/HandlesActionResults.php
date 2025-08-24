@@ -63,15 +63,21 @@ trait HandlesActionResults
         $this->resetErrorBag();
         $result = $action->execute($data);
 
-        if ($isForm) {
-            switch ($result->getStatusCode() < 200 || $result->getStatusCode() > 300) {
+        if ($isForm && !$result->isSuccess()) {
+            switch ($result->getStatusCode()) {
                 case 422:
+                    // Errores de validación - mostrar en campos
                     foreach ($result->getErrors() as $field => $messages) {
                         $this->addError($field, $messages);
                     }
                     break;
+                case 403:
+                    // Error de permisos - mostrar toast
+                    $this->dispatch('show-error-toast', message: $result->getMessage());
+                    break;
                 default:
-                    session()->flash('error', "Internal error");
+                    // Otros errores - mostrar toast
+                    $this->dispatch('show-error-toast', message: $result->getMessage());
                     break;
             }
         }

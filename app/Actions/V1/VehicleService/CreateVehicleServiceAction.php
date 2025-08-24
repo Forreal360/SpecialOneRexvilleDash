@@ -26,6 +26,10 @@ class CreateVehicleServiceAction extends Action
     public function handle($data): ActionResult
     {
 
+        $this->validatePermissions([
+            "vehicle-services.create"
+        ]);
+
         $validated = $this->validateData($data, [
             'name' => 'required|string|max:255|unique:vehicle_services,name',
             'status' => 'required|in:A,I',
@@ -38,4 +42,4 @@ class CreateVehicleServiceAction extends Action
             return $this->successResult();
         });
     }
-} 
+}

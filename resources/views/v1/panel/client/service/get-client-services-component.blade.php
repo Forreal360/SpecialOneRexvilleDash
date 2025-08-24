@@ -8,12 +8,14 @@
 @endsection
 
 @section('actions')
+@can('clients-vehicles-services.create')
 <x-buttons.button-module
     icon="plus"
     href="{{route('v1.panel.client-services.create', $clientId)}}"
     label="{{ __('panel.new_client_service') }}"
     variant="primary"
 />
+@endcan
 @endsection
 
 <x-containers.card-container>

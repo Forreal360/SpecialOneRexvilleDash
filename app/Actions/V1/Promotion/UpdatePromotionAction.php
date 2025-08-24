@@ -28,6 +28,12 @@ class UpdatePromotionAction extends Action
      */
     public function handle($data): ActionResult
     {
+
+        $this->validatePermissions([
+            "promotions.update"
+        ]);
+
+
         $validated = $this->validateData($data, [
             'title' => 'required|string|max:255',
             'start_date' => 'required',

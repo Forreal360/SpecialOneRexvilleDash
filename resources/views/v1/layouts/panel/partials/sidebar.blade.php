@@ -11,26 +11,34 @@
 
         <flux:navlist.item icon="home"  href="{{ route('v1.panel.home') }}" :current="request()->is('*panel/home*')">{{ __('panel.home') }}</flux:navlist.item>
 
-        @can('administrators.create')
+        @can('administrators.get')
         <flux:navlist.item icon="users"  href="{{ route('v1.panel.admins.index') }}" :current="request()->is('*panel/admins*')">{{ __('panel.admins') }}</flux:navlist.item>
         @endcan
 
-        @can('roles.create')
+        @can('roles.get')
         <flux:navlist.item icon="shield-check"  href="{{ route('v1.panel.roles.index') }}" :current="request()->is('*panel/roles*')">{{ __('roles.roles') }}</flux:navlist.item>
         @endcan
 
 
+        @can('promotions.get')
         <flux:navlist.item icon="ticket" href="{{ route('v1.panel.promotions.index') }}" :current="request()->is('*panel/promotions*')">{{ __('panel.promotions') }}</flux:navlist.item>
+        @endcan
 
+        @can('vehicle-services.get')
         <flux:navlist.item icon="list-bullet" href="{{ route('v1.panel.vehicle-services.index') }}" :current="request()->is('*panel/vehicle-services*')">{{ __('panel.services') }}</flux:navlist.item>
+        @endcan
 
+        @can('clients.get')
         <flux:navlist.item icon="users" href="{{ route('v1.panel.clients.index') }}" :current="request()->is('*panel/clients*')">{{ __('panel.clients') }}</flux:navlist.item>
+        @endcan
 
+        @can('appointments.get')
         <flux:navlist.item icon="calendar" badge="{{$pending_appointments}}" href="{{ route('v1.panel.appointments.index') }}" :current="request()->is('*panel/appointments*')">{{ __('panel.appointments') }}</flux:navlist.item>
+        @endcan
 
+        @can('tickets.get')
         <flux:navlist.item icon="chat-bubble-left-right" badge="{{$pending_tickets}}" href="{{ route('v1.panel.tickets.index') }}" :current="request()->is('*panel/tickets*')">{{ __('panel.tickets') }}</flux:navlist.item>
-
-
+        @endcan
 
         {{-- <flux:navlist.group expandable heading="Favorites" class="hidden lg:grid">
             <flux:navlist.item href="#">Marketing site</flux:navlist.item>
