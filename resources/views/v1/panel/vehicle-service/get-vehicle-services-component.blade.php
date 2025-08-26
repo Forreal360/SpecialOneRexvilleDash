@@ -7,7 +7,7 @@
 @endsection
 
 @section('actions')
-@can('vehicles-services.create')
+@can('vehicle-services.create')
 <x-buttons.button-module
     icon="plus"
     href="{{route('v1.panel.vehicle-services.create')}}"
@@ -80,8 +80,11 @@
 
                     <x-table.cell>
                         <flux:button.group>
+                            @can('vehicle-services.update')
                             <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.vehicle-services.edit', $vehicleService->id) }}"></flux:button>
+                            @endcan
 
+                            @can('vehicle-services.update-status')
                             @if($vehicleService->status == 'A')
                             <flux:tooltip content="{{ __('panel.tooltip_deactivate') }}">
                                 <flux:button size="sm" icon="hand-thumb-down" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$vehicleService->id}}, 'I')" wire:confirm="{{ __('panel.confirm_deactivate') }} {{ __('panel.vehicle_service') }}"></flux:button>
@@ -91,6 +94,7 @@
                                 <flux:button size="sm" icon="hand-thumb-up" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$vehicleService->id}}, 'A')" wire:confirm="{{ __('panel.confirm_activate') }} {{ __('panel.vehicle_service') }}"></flux:button>
                             </flux:tooltip>
                             @endif
+                            @endcan
                         </flux:button.group>
                     </x-table.cell>
                 </x-table.row>

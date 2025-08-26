@@ -101,9 +101,11 @@
                 <x-table.cell>
 
                     <flux:button.group>
+                        @can('administrators.update')
                         <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.admins.edit', $admin->id) }}"></flux:button>
+                        @endcan
 
-
+                        @can('administrators.update-status')
                         @if($admin->status == 'A')
                         <flux:tooltip content="{{ __('panel.tooltip_deactivate') }}">
                             <flux:button size="sm" icon="hand-thumb-down" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$admin->id}}, 'I')" wire:confirm="{{ __('panel.confirm_deactivate') }} {{ __('panel.admin') }}"></flux:button>
@@ -113,6 +115,7 @@
                             <flux:button size="sm" icon="hand-thumb-up" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$admin->id}}, 'A')" wire:confirm="{{ __('panel.confirm_activate') }} {{ __('panel.admin') }}"></flux:button>
                         </flux:tooltip>
                         @endif
+                        @endcan
 
                     </flux:button.group>
 

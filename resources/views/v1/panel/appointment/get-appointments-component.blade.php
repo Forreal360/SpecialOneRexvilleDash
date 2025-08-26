@@ -195,6 +195,7 @@
                         <x-table.cell>
                             <flux:button.group>
                                 <!-- Edit button - only for pending and confirmed -->
+                                @can('appointments.update')
                                 @if(in_array($appointment->status, ['pending', 'confirmed']))
                                     <flux:tooltip content="{{ __('panel.edit_appointment') }}">
                                         <flux:button
@@ -205,8 +206,10 @@
                                         ></flux:button>
                                     </flux:tooltip>
                                 @endif
+                                @endcan
 
                                 <!-- Confirm button - only for pending -->
+                                @can('appointments.update-status')
                                 @if($appointment->status === 'pending')
                                     <flux:tooltip content="{{ __('panel.confirm_appointment') }}">
                                         <flux:button
@@ -242,6 +245,7 @@
                                         ></flux:button>
                                     </flux:tooltip>
                                 @endif
+                                @endcan
                             </flux:button.group>
                         </x-table.cell>
                     </x-table.row>

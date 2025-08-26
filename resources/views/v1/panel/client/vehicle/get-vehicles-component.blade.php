@@ -175,8 +175,11 @@
                 </x-table.cell>
                 <x-table.cell>
                     <flux:button.group>
+                        @can('clients-vehicles.update')
                         <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.vehicles.edit', [$clientId, $vehicle->id]) }}"></flux:button>
+                        @endcan
 
+                        @can('clients-vehicles.update-status')
                         @if($vehicle->status == 'A')
                             <flux:tooltip content="{{ __('panel.tooltip_deactivate') }}">
                                 <flux:button size="sm" icon="hand-thumb-down" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$vehicle->id}}, 'I')" wire:confirm="{{ __('panel.confirm_deactivate') }} {{ __('panel.vehicle') }}"></flux:button>
@@ -186,10 +189,13 @@
                                 <flux:button size="sm" icon="hand-thumb-up" icon:variant="outline" class="cursor-pointer" wire:click="updateStatus({{$vehicle->id}}, 'A')" wire:confirm="{{ __('panel.confirm_activate') }} {{ __('panel.vehicle') }}"></flux:button>
                             </flux:tooltip>
                         @endif
+                        @endcan
 
+                        @can('clients-vehicles-services.get')
                         <flux:tooltip content="{{ __('panel.tooltip_vehicle_services') }}">
                             <flux:button size="sm" icon="wrench-screwdriver" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.client-services.index', ['clientId' => $clientId, 'vehicle_id' => $vehicle->id]) }}"></flux:button>
                         </flux:tooltip>
+                        @endcan
 
                     </flux:button.group>
                 </x-table.cell>

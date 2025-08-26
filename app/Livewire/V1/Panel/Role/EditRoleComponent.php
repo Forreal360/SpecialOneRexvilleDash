@@ -72,7 +72,8 @@ class EditRoleComponent extends Component
             'alias' => $this->alias
         ]);
 
-        $this->role->syncPermissions($this->selectedPermissions ?? []);
+        $permissions = Permission::whereIn('id', $this->selectedPermissions ?? [])->pluck('name');
+        $this->role->syncPermissions($permissions);
 
         session()->flash('success', 'Rol actualizado exitosamente');
         return redirect()->route('v1.panel.roles.index');

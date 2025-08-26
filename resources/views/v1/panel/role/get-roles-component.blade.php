@@ -66,6 +66,7 @@
                     </x-table.cell>
                     <x-table.cell>
                         <flux:button.group>
+                            @can('roles.update')
                             <flux:button
                                 size="sm"
                                 icon="pencil"
@@ -73,7 +74,9 @@
                                 class="cursor-pointer"
                                 href="{{ route('v1.panel.roles.edit', $role->id) }}"
                             ></flux:button>
+                            @endcan
 
+                            @can('roles.update-status')
                             @if($this->canDeleteRole($role->id))
                                 <flux:tooltip content="{{ __('roles.delete') }}">
                                     <flux:button
@@ -86,6 +89,7 @@
                                     ></flux:button>
                                 </flux:tooltip>
                             @endif
+                            @endcan
                         </flux:button.group>
                     </x-table.cell>
                 </x-table.row>

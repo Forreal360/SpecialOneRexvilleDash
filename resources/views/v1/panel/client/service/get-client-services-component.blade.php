@@ -127,7 +127,9 @@
 
                     <x-table.cell>
                         <flux:button.group>
+                            @can('clients-vehicles-services.update')
                             <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.client-services.edit', [$clientId, $clientService->id]) }}"></flux:button>
+                            @endcan
                         </flux:button.group>
                     </x-table.cell>
                 </x-table.row>

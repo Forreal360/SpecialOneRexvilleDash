@@ -125,6 +125,7 @@
 
                     <x-table.cell>
                         <flux:button.group>
+                            @can('tickets.get')
                             <flux:tooltip content="{{ __('panel.view_ticket') }}">
                                 <flux:button
                                     href="{{ route('v1.panel.tickets.view', $ticket->id) }}"
@@ -134,7 +135,9 @@
                                 >
                                 </flux:button>
                             </flux:tooltip>
+                            @endcan
 
+                            @can('tickets.update-status')
                             @if($ticket->status !== 'closed')
                                 <flux:tooltip content="{{ __('panel.close_ticket_tooltip') }}">
                                     <flux:button
@@ -147,6 +150,7 @@
                                     </flux:button>
                                 </flux:tooltip>
                             @endif
+                            @endcan
                         </flux:button.group>
                     </x-table.cell>
 

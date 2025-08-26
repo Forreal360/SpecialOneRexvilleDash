@@ -59,7 +59,8 @@ class CreateRoleComponent extends Component
         ]);
 
         if (!empty($this->selectedPermissions)) {
-            $role->syncPermissions($this->selectedPermissions);
+            $permissions = Permission::whereIn('id', $this->selectedPermissions)->pluck('name');
+            $role->syncPermissions($permissions);
         }
 
         session()->flash('success', 'Rol creado exitosamente');

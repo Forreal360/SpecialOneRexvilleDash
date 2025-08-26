@@ -147,8 +147,11 @@
                 </x-table.cell>
                 <x-table.cell>
                     <flux:button.group>
+                        @can('promotions.update')
                         <flux:button size="sm" icon="pencil" icon:variant="outline" class="cursor-pointer" href="{{ route('v1.panel.promotions.edit', $promotion->id) }}"></flux:button>
+                        @endcan
 
+                        @can('promotions.update-status')
                         @if($now->lessThan($end_date))
                             @if($promotion->status == 'A')
                             <flux:tooltip content="{{ __('panel.tooltip_deactivate') }}">
@@ -162,6 +165,7 @@
                             </flux:tooltip>
                             @endif
                         @endif
+                        @endcan
                     </flux:button.group>
                 </x-table.cell>
             </x-table.row>
